@@ -48,11 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
+$db['default']['hostname'] = '122.255.120.139';
+$db['default']['username'] = 'sa';
+$db['default']['password'] = 'oi62it2a2o';
 $db['default']['database'] = '';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['dbdriver'] = 'sqlsrv';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
@@ -64,6 +64,21 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+$db['HSDB']['hostname'] = '122.255.120.139';
+$db['HSDB']['username'] = 'sa';
+$db['HSDB']['password'] = 'oi62it2a2o';
+$db['HSDB']['database'] = 'HSDB';
+$db['HSDB']['dbdriver'] = 'sqlsrv';
+$db['HSDB']['dbprefix'] = '';
+$db['HSDB']['pconnect'] = FALSE;
+$db['HSDB']['db_debug'] = TRUE;
+$db['HSDB']['cache_on'] = FALSE;
+$db['HSDB']['cachedir'] = '';
+$db['HSDB']['char_set'] = 'utf8';
+$db['HSDB']['dbcollat'] = 'utf8_general_ci';
+$db['HSDB']['swap_pre'] = '';
+$db['HSDB']['autoinit'] = TRUE;
+$db['HSDB']['stricton'] = FALSE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
