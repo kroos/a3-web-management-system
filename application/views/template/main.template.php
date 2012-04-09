@@ -221,7 +221,7 @@ function clearText(field)
 				<?php end_block_marker(); ?>
 
         </ul>
-    
+<h6>Page rendered in <strong>{elapsed_time}</strong> seconds using <strong>{memory_usage}</strong></h6>
         Copyright © 2012 <?=$this->config->item('homepage')?> Private Server | 
         Designed by <a href="http://forum.ragezone.com/members/294574.html" target="_blank">Zaugola</a> | 
         Validate <a href="http://validator.w3.org/check?uri=referer">XHTML</a> &amp; 
