@@ -4,7 +4,7 @@ class A3 extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('template/main.template.php');
+		$this->load->view('template/base.template.php');
 	}
 }
 
