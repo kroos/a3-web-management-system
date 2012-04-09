@@ -5,8 +5,8 @@
 <title>Pro Teal - free website template</title>
 <meta name="keywords" content="free website templates, pro teal, web design, 2-column" />
 <meta name="description" content="Pro Teal - free website template (2-column layout) from templatemo.com" />
-<link href="css/templatemo_style.css" rel="stylesheet" type="text/css" />
-<link href="css/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection" />
+<link href="<?=base_url()?>css/templatemo_style.css" rel="stylesheet" type="text/css" />
+<link href="<?=base_url()?>css/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection" />
 <script language="javascript" type="text/javascript">
 function clearText(field)
 {
