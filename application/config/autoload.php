@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database', 'session', 'form_validation');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('template_inheritance', 'url', 'form', 'date', 'captcha', 'phpmailer');
+$autoload['helper'] = array('template_inheritance', 'url', 'form', 'date', 'captcha', 'phpmailer', 'MY_date', 'password');
 
 
 /*
@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array();
+$autoload['model'] = array('a3web_html', 'account', 'temp_account');
 
 
 /* End of file autoload.php */
