@@ -1,5 +1,5 @@
 RewriteEngine on
-RewriteBase /a3-web-management-system/
+RewriteBase /a3-web-management-system/trunk/
 
 RewriteCond $1 !^(index\.php|images|robots\.txt|css|js|swf)
-RewriteRule ^(.*)$ /a3-web-management-system/index.php/$1 [L]
+RewriteRule ^(.*)$ /a3-web-management-system/trunk/index.php/$1 [L]
