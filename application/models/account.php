@@ -25,6 +25,15 @@ class Account extends CI_Model
 			return $this->db->get_where('Account', array('c_id' => $username, 'c_headerb' => $email));
 		}
 
+	function account_cid($username)
+		{
+			return $this->db->get_where('Account', array('c_id' => $username));
+		}
+
+		function account_cheaderb($email)
+			{
+				return $this->db->get_where('Account', array('c_headerb' => $email));
+			}
 //UPDATE
 	function update_pasword($username, $password)
 		{
@@ -32,7 +41,7 @@ class Account extends CI_Model
 		}
 
 //INSERT
-	function insert_account($author, $subject, $html, $date)
+	function insert_account($username, $password, $email)
 		{
 			$array = array
 							(

@@ -31,10 +31,10 @@ h1, h2, h3, h4, h5, h6 { font-weight: normal; }
 
 h1 { font-size: 30px; color: #000; }
 h2 { font-size: 24px; color: #000; margin: 0 0 20px 0; padding: 0; }
-h3 { font-size: 20px; color: #ccc; margin: 0 0 20px 0; padding: 0; }
-h4 { font-size: 18px; color: #000; margin: 0 0 10px 0; padding: 0; }
-h5 { font-size: 16px; color: #000; margin: 0 0 10px 0; padding: 0; }
-h6 { font-size: 14px; margin: 0 0 5px 0; padding: 0;}
+h3 { font-size: 18px; color: #ccc; margin: 0 0 20px 0; padding: 0; }
+h4 { font-size: 16px; color: #000; margin: 0 0 10px 0; padding: 0; }
+h5 { font-size: 14px; color: #000; margin: 0 0 10px 0; padding: 0; }
+h6 { font-size: 12px; margin: 0 0 5px 0; padding: 0;}
 
 .cleaner { clear: both; width: 100%; height: 0px; font-size: 0px;  }
 
@@ -262,7 +262,7 @@ h6 { font-size: 14px; margin: 0 0 5px 0; padding: 0;}
 	display: block;
 	letter-spacing: 5px;
 }
-/*
+
 .rss a {
 	background: url(../images/rss.png) right bottom no-repeat;
 }
@@ -270,7 +270,7 @@ h6 { font-size: 14px; margin: 0 0 5px 0; padding: 0;}
 .twitter a {
 	background: url(../images/twitter.png) right bottom no-repeat;
 }
-*/
+
 #sidebar_featured_project {
 	margin: 0 0 40px 0;
 	padding: 0;

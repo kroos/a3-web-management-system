@@ -15,12 +15,20 @@ Welcome to <?=$this->config->item('homepage')?> Account Management Tools
 
 <?php startblock('service_box_float_l'); ?>
 <h5>Account</h5>
-<p>ghjghjghjghjghj ghjghjghjghjghjghjgh jghjghjghjg jhghjghj ghjgfhfghf ghfhgfgh</p>
+<?if($this->account->account()->num_rows() == 0):?>
+<p>No Player Registered</p>
+<?else:?>
+<p><?=$this->account->account()->num_rows()?> Accounts</p>
+<?endif?>
 <?php endblock(); ?>
 
 <?php startblock('service_box_float_r'); ?>
 <h5>Character</h5>
-<p>&nbsp;</p>
+<?if($this->charac0->char()->num_rows() == 0):?>
+<p>No Character Created</p>
+<?else:?>
+<p><?=$this->charac0->char()->num_rows()?> Characters</p>
+<?endif?>
 <?php endblock(); ?>
 
 <?php startblock('cleaner_h40a'); ?>
@@ -55,7 +63,11 @@ Welcome to <?=$this->config->item('homepage')?> Account Management Tools
 	</ul>
 <?php endblock(); ?>
 
-<?php startblock('news_box'); ?>
+<?php startblock('news_box1'); ?>
+&nbsp;
+<?php endblock(); ?>
+
+<?php startblock('news_box2'); ?>
 &nbsp;
 <?php endblock(); ?>
 

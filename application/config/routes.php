@@ -38,8 +38,8 @@
 |
 */
 
-$route['default_controller'] = "a3";
-$route['404_override'] = '';
+$route['default_controller'] = 'a3';
+$route['404_override'] = 'a3/page_missing';
 
 
 /* End of file routes.php */

@@ -10,9 +10,9 @@ class Captcha extends CI_Model
 #############################################################################################################################
 //CRUD for temp_account
 //SELECT
-	function captcha($verify, $ip_address, $expiration)
+	function captcha($verify, $expiration)
 		{
-			return $this->db->get_where('Captcha', array('word' => $verify, 'ip_address' => $ip_address, 'captcha_time >' => $expiration ));
+			return $this->db->get_where('Captcha', array('word' => $verify, 'ip_address' => $this->input->ip_address(), 'captcha_time >' => $expiration ));
 		}
 
 //UPDATE

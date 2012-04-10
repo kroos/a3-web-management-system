@@ -189,9 +189,13 @@ function clearText(field)
 			<h3>Menu</h3>
 		<div class="news_box">
 
-			<?php start_block_marker('news_box'); ?>
-				<a href="#">Lorem ipsum dolor sit amet consectetur</a>
-				<p>Quisque id lacus in nunc porttitor</p>
+			<?php start_block_marker('news_box1'); ?>
+			<?php end_block_marker(); ?>
+
+		</div>
+		<div class="news_box">
+
+			<?php start_block_marker('news_box2'); ?>
 			<?php end_block_marker(); ?>
 
 		</div>

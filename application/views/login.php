@@ -1,17 +1,15 @@
 <?extend('template/base.template.php')?>
 
 <?php startblock('cleaner_h40a'); ?>
-<h2>News and Announcement</h2>
-<?if($news->num_rows() == 0):?>
-<p>No news or announcement has been created</p>
-<?else:?>
-<?foreach($news->result() as $newss):?>
-<p><b><?=ucwords($newss->Subject)?></b></p>
-<p><?=date_my($newss->Date)?></p>
-<?=$newss->HTML?>
-<p>Regards<br /><b><font color="#008080"><?=ucwords($newss->Author)?></font></b></p>
-<?endforeach?>
-<?endif?>
+<h2>Login</h2>
+
+<p><font color="#FF0000"><blink><?=@$info?></blink></font></p>
+
+<?=form_open()?>
+<p>Username : <?=form_input(array('name' => 'login', 'value' => set_value('login'), 'maxlength' => '12', 'size' => '12'))?>&nbsp;&nbsp;&nbsp;<?=form_error('login')?></p>
+<p>Password : <?=form_password(array('name' => 'passwd', 'value' => set_value('passwd'), 'maxlength' => '10', 'size' => '12'))?>&nbsp;&nbsp;&nbsp;<?=form_error('passwd')?></p>
+<p><?=form_submit('sign-in', 'Login')?></p>
+<?=form_close()?>
 <?php endblock(); ?>
 
 <?php startblock('cleaner_h40b'); ?>
