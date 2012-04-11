@@ -6,7 +6,7 @@ class A3 extends CI_Controller {
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{
@@ -19,7 +19,7 @@ class A3 extends CI_Controller {
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{
@@ -32,7 +32,7 @@ class A3 extends CI_Controller {
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{
@@ -45,7 +45,7 @@ class A3 extends CI_Controller {
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{
@@ -78,7 +78,7 @@ class A3 extends CI_Controller {
 											$this->session->set_userdata($user);
 											if ($row->c_sheaderc == 'SM' || $row->c_sheaderc == 'BM' || $row->c_sheaderc == 'GoldM' || $row->c_sheaderc == 'Normal' || $row->c_sheaderc == 'GM')
 												{
-													redirect('/user/home', 'location');
+													redirect('/user/index', 'location');
 												}
 										}
 										else
@@ -92,11 +92,11 @@ class A3 extends CI_Controller {
 				}
 		}
 
-	function register()
+	public function register()
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{
@@ -202,11 +202,11 @@ class A3 extends CI_Controller {
 				}
 		}
 
-	function password_retrieve()
+	public function password_retrieve()
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{
@@ -274,11 +274,11 @@ class A3 extends CI_Controller {
 				}
 		}
 
-	function server_status()
+	public function server_status()
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{
@@ -286,11 +286,11 @@ class A3 extends CI_Controller {
 				}
 		}
 
-	function popup_board_of_heroes()
+	public function popup_board_of_heroes()
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{
@@ -300,11 +300,11 @@ class A3 extends CI_Controller {
 				}
 		}
 
-	function popup_board_of_mercenaries()
+	public function popup_board_of_mercenaries()
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{
@@ -314,11 +314,11 @@ class A3 extends CI_Controller {
 				}
 		}
 
-	function popup_player_online()
+	public function popup_player_online()
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{
@@ -327,73 +327,73 @@ class A3 extends CI_Controller {
 				}
 		}
 
-		public function activate()
-			{
-				if ($this->session->userdata('logged_in') == TRUE)
-					{
-						redirect('/user/home', 'location');
-					}
-					else
-					{
-						$activate = $this->uri->segment(3, 0);
-						$y = $this->temp_account->temp_account($activate);
-						$yr = $y->num_rows();
-						$date = mssqldate();
-						//echo $date.' = date<br />';
-						//echo $yr.' = yr<br />';
-						if ($yr == 0)
-							{
-								$data['info'] = 'Sorry, i can\'t find your activation code, probably your account have been activated or you didn\'t register at all';
-								$this->load->view('activate', $data);
-							}
-							else
-							{
-								if ($yr == 1)
-									{
-										$yt = $y->row();
-										$username = $yt->username;
-										$password = $yt->password;
-										$email = $yt->email;
+	public function activate()
+		{
+			if ($this->session->userdata('logged_in') == TRUE)
+				{
+					redirect('/user/index', 'location');
+				}
+				else
+				{
+					$activate = $this->uri->segment(3, 0);
+					$y = $this->temp_account->temp_account($activate);
+					$yr = $y->num_rows();
+					$date = mssqldate();
+					//echo $date.' = date<br />';
+					//echo $yr.' = yr<br />';
+					if ($yr == 0)
+						{
+							$data['info'] = 'Sorry, i can\'t find your activation code, probably your account have been activated or you didn\'t register at all';
+							$this->load->view('activate', $data);
+						}
+						else
+						{
+							if ($yr == 1)
+								{
+									$yt = $y->row();
+									$username = $yt->username;
+									$password = $yt->password;
+									$email = $yt->email;
 
-										//echo $username.' = username<br />';
-										$u = $this->account->account_cid($username);
-										$ur = $u->num_rows();
-										//echo $ur.' = ur num_rows<br />';
-										if ($ur == 1)
-											{
-												$data['info'] = 'Your username '.$username.' have been registered';
-												$this->load->view('activate', $data);
-											}
-											else
-											{
-												$i = $this->account->account_cheaderb($email);
-												$io = $i->num_rows();
-												//echo $io.' = io num_rows<br />';
-												if ($io ==  1)
-													{
-														$data['info'] = 'Your email '.$email.' have been registered';
-														$this->load->view('activate', $data);
-													}
-													else
-													{
-														$p = $this->account->insert_account($username, $password, $email);
-														if (!$p)
-															{
-																$data['info'] = 'Error creating account account, please try again later';
-																$this->load->view('activate', $data);
-															}
-															else
-															{
-																$this->temp_account->delete_temp_account($activate);
-																$data['info'] = 'Congratulations!! Your account have been activated.<br>Have fun in our server!';
-																$this->load->view('activate', $data);
-															}
-													}
-											}
-									}
-							}
-					}
-			}
+									//echo $username.' = username<br />';
+									$u = $this->account->account_cid($username);
+									$ur = $u->num_rows();
+									//echo $ur.' = ur num_rows<br />';
+									if ($ur == 1)
+										{
+											$data['info'] = 'Your username '.$username.' have been registered';
+											$this->load->view('activate', $data);
+										}
+										else
+										{
+											$i = $this->account->account_cheaderb($email);
+											$io = $i->num_rows();
+											//echo $io.' = io num_rows<br />';
+											if ($io ==  1)
+												{
+													$data['info'] = 'Your email '.$email.' have been registered';
+													$this->load->view('activate', $data);
+												}
+												else
+												{
+													$p = $this->account->insert_account($username, $password, $email);
+													if (!$p)
+														{
+															$data['info'] = 'Error creating account account, please try again later';
+															$this->load->view('activate', $data);
+														}
+														else
+														{
+															$this->temp_account->delete_temp_account($activate);
+															$data['info'] = 'Congratulations!! Your account have been activated.<br>Have fun in our server!';
+															$this->load->view('activate', $data);
+														}
+												}
+										}
+								}
+						}
+				}
+		}
 
 #############################################################################################################################
 //error 404
@@ -409,7 +409,7 @@ class A3 extends CI_Controller {
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
-					redirect('/user/home', 'location');
+					redirect('/user/index', 'location');
 				}
 				else
 				{

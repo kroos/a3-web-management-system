@@ -1,7 +1,8 @@
-<?extend('template/base.template.php')?>
+<?extend('template/user.template.php')?>
 
 <?php startblock('cleaner_h40a'); ?>
 <h2>News and Announcement</h2>
+
 <?if($news->num_rows() == 0):?>
 <p>No news or announcement has been created</p>
 <?else:?>
@@ -10,6 +11,7 @@
 <p><?=date_my($newss->Date)?></p>
 <?=$newss->HTML?>
 <p>Regards<br /><b><font color="#008080"><?=ucwords($newss->Author)?></font></b></p>
+<p><?=anchor('user/comment/'.$newss->Bil, 'Comment', array('title' => 'Comment'))?></p>
 <hr>
 <?endforeach?>
 <?endif?>

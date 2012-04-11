@@ -1,21 +1,15 @@
 <?php
 extend('template/main.template.php');
 
-startblock('div_header');
+startblock('templatemo_menu');
 ?>
-	<h1><?php echo $this->config->item('homepage'); ?><span class="off">Online</span></h1><p>&nbsp;</p>
-<?php
-endblock();
-
-startblock('top_menu');
-?>
-	<li class="menuitem"><?=anchor('', 'Home', 'title="Home"');?></li>
+	&nbsp;
 <?php
 endblock();
 
 
 
-startblock('leftmenu_main');
+startblock('templatemo_menu_side');
 ?>
 	<ul>
 		<li><?=anchor('', 'Home', 'title="Home"')?></li>

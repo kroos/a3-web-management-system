@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database', 'session', 'form_validation');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('template_inheritance', 'url', 'form', 'date', 'captcha', 'phpmailer', 'MY_date', 'password');
+$autoload['helper'] = array('template_inheritance', 'url', 'form', 'date', 'captcha', 'phpmailer', 'MY_date', 'password', 'mbody_string');
 
 
 /*

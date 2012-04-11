@@ -10,6 +10,7 @@
 <p><?=date_my($events->Date)?></p>
 <?=$events->HTML?>
 <p>Regards<br /><b><font color="#008080"><?=ucwords($events->Author)?></font></b></p>
+<hr>
 <?endforeach?>
 <?endif?>
 <?php endblock(); ?>

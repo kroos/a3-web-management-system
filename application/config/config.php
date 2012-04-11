@@ -245,14 +245,14 @@ $config['encryption_key'] = 'dhiauddin';
 |
 */
 $config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 300;
+$config['sess_expiration']		= 1800;
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= FALSE;
 $config['sess_use_database']	= FALSE;
 $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;
 $config['sess_match_useragent']	= TRUE;
-$config['sess_time_to_update']	= 150;
+$config['sess_time_to_update']	= 600;
 
 /*
 |--------------------------------------------------------------------------
@@ -296,7 +296,7 @@ $config['global_xss_filtering'] = TRUE;
 $config['csrf_protection'] = TRUE;
 $config['csrf_token_name'] = 'a3csrf';
 $config['csrf_cookie_name'] = 'a3csrf_cookie';
-$config['csrf_expire'] = 3600;
+$config['csrf_expire'] = 1800;
 
 /*
 |--------------------------------------------------------------------------
@@ -328,7 +328,7 @@ $config['compress_output'] = FALSE;
 | regarding date handling.
 |
 */
-$config['time_reference'] = 'gmt';
+$config['time_reference'] = 'local';
 
 
 /*

@@ -1,28 +1,151 @@
-<?php
-extend('template/main.template.php');
+<?extend('template/main.template.php')?>
 
-startblock('div_header');
-?>
-	<h1><?php echo $this->config->item('homepage'); ?><span class="off">Online</span></h1>
-	<p>&nbsp;</p>
-<?php
-endblock();
-
-startblock('top_menu');
-?>
+<?php startblock('templatemo_menu'); ?>
 <ul>
-	<li class="menuitem"><?=anchor('user/home', 'Home', 'title="Home"');?></li>
-	<li class="menuitem"><?=anchor('user/event', 'Event', 'title="Event"');?></li>
-	<li class="menuitem"><?=anchor('user/download', 'Download', 'title="Download"');?></li>
-	<li class="menuitem"><?=anchor('user/logout', 'Logout', 'title="Logout"');?></li>
+	<li><?=anchor('user/index', 'Home', 'title="Home"');?></li>
+	<li><?=anchor('user/event', 'Event', 'title="Event"');?></li>
+	<li><?=anchor('user/download', 'Download', 'title="Download"');?></li>
+	<li><?=anchor('user/logout', 'Logout', 'title="Logout"');?></li>
 </ul>
+<?php endblock(); ?>
+
+<?php startblock('page_title'); ?>
+Welcome to <?=$this->config->item('homepage')?> Account Management Tools
+<?php endblock(); ?>
+
+<?php startblock('service_box_float_l'); ?>
+<h5>Account</h5>
 <?php
-endblock();
-
-
-
-startblock('leftmenu_main');
+###################################################################################################################################################
+//starting to count membership tricky part
+	switch ($this->session->userdata('group'))
+		{
+			case 'BM':
+			$laptop = $this->config->item('BM');
+			$payment = $this->config->item('BMP');
+			break;
+			case 'SM':
+			$laptop = $this->config->item('SM');
+			$payment = $this->config->item('SMP');
+			break;
+			case 'GoldM':
+			$laptop = $this->config->item('GoldM');
+			$payment = $this->config->item('GoldMP');
+			break;
+			case 'GM':
+			$laptop = 'Game Master';
+			break;
+			case 'Normal':
+			$laptop = 'Normal';
+			break;
+		};
+	
+	$sql2 = $this->account->account_user($this->session->userdata('username'), $this->session->userdata('password'))->row();
+	//echo $sql2->last_salary.' last salary<br />';
+	//echo $sql2->salary.' salary<br />';
+	
+	##################################################
+	//convert to unix time stamp
+	$timeu = human_to_unix($sql2->last_salary);
+	$timespan = timespan(now(), $timeu);
+	##################################################
+	
+	$datediff = $this->db->select("DATEDIFF(month, '".$sql2->last_salary."', '".$sql2->salary."') AS monthdatediff")->get()->row();
+	//echo $datediff->monthdatediff.' monthdate salary->last salary<br />';
+	
+	$datediff1 = $this->db->select("DATEDIFF(month, '".$sql2->last_salary."', GETDATE()) AS monthdate")->get()->row();
+	//echo $datediff1->monthdate.' monthdate now->last salary<br />';
+	
+	//check curernt date
+	$cdate = mssqldate();
+	//echo $cdate.' current date<br />';
+	
+	$sql3 = $this->db->select("DATEADD(month, ".$datediff->monthdatediff."+1, '".$sql2->last_salary."') AS monthdateadd")->get()->row();
+	//echo $sql3->monthdateadd.' month<br />';
+	$i = 0;
+	if ($cdate > $sql3->monthdateadd)
+		{
+			$i++;
+		}
+	$sql4 = $this->db->select("DATEADD(month, ".$datediff->monthdatediff."+1+".$i.", '".$sql2->last_salary."') AS monthdateadd")->get()->row();
+	//echo $sql4->monthdateadd.' month after process<br />';
+	
+	if ($cdate > $sql3->monthdateadd)
+		{
+			$legalDate = $sql3->monthdateadd;
+		}
+		else
+		{
+			$legalDate = $sql4->monthdateadd;
+		}
+	//echo $legalDate.' legal date<br />';
+	
+	##################################################
+	//convert to unix time stamp
+	$temp = explode(' ', $legalDate);
+	$tempdate = explode('-', $temp[0]);
+	$temptime = explode(':', $temp[1]);
+	$year = $tempdate[0];
+	$month = $tempdate[1];
+	$day = $tempdate[2];
+	$hour = $temptime[0];
+	$minute = $temptime[1];
+	$sec = $temptime[2];
+	$mktime = mktime($hour, $minute, $sec, $month, $day, $year);
+	$legalDate = mdate("%Y-%m-%d %H:%i:%s", $mktime);
+	$timeu1 = human_to_unix($legalDate);
+	//echo $timeu1.' unix legal date<br />';
+	$timespan1 = timespan(now(), $timeu1);
+	##################################################
+###################################################################################################################################################
 ?>
+<p>You are our <font color='#0000FF'><?php echo $laptop; ?></font> user.</p>
+<?php
+if ($this->session->userdata('group') == 'BM' || $this->session->userdata('group') == 'SM' || $this->session->userdata('group') == 'GoldM')
+	{
+		echo "<p><font color='#0000FF'>$laptop</font> will expire in <font color='#0000FF'>$timespan</font>.<br />";
+		echo "Salary available on : <font color='#0000FF'>".date_my($legalDate)."</font><br />";
+		if ($timespan1 < 2)
+			{
+				echo "Please claim your salary right away<br />";
+			}
+			else
+			{
+				echo "You can claim your salary in <font color='#0000FF'>$timespan1</font><br />";
+			}
+		echo "You were entitle to get <font color='#0000FF'>$payment</font> Wz per month.</p>";
+	}
+?>
+<?php endblock(); ?>
+
+<?php startblock('service_box_float_r'); ?>
+<h5>Character</h5>
+<?$sql = $this->charac0->charac_char($this->session->userdata('username'))?>
+<?if($sql->num_rows() > 0):?>
+<?foreach($sql->result() as $item):?>
+<ul>
+<?php echo "<li>".$item->c_id."</li>"; ?>
+</ul>
+<?endforeach?>
+</td>
+<?else:?>
+No character created.
+<?endif?>
+<?php endblock(); ?>
+
+<?php startblock('cleaner_h40a'); ?>
+<h2>What we do?</h2>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<?php endblock(); ?>
+
+<?php startblock('cleaner_h40b'); ?>
+<h2>What we do?</h2>
+<p>&nbsp;</p>
+<p>&nbsp;</p> 
+<?php endblock(); ?>
+
+<?php startblock('templatemo_menu_side'); ?>
 	<ul>
 		<li><?=anchor('user/change_password', 'Change Password', 'title="Change Password"')?></li>
 		<li><?=anchor('user/offline_town_portal', 'Offline Town Portal', 'title="Offline Town Portal"');?></li>
@@ -66,148 +189,22 @@ startblock('leftmenu_main');
 		<li><?=anchor('user/inserting_items_manually', 'Inserting Items Manually', 'title="Inserting Items Manually"');?></li>
 		<li><?=anchor('user/database_back_up', 'Database Back Up', 'title="Database Back Up"');?></li>
 	</ul>
-<?php
-endblock();
+<?php endblock(); ?>
 
-startblock('content_info');
-?>
-	<table border="0" cellpadding="2" cellspacing="2" width="100%">
-		<tr>
-			<td width="50%" align="center">
-			<h3>User Account</h3>
-			</td>
-			<td width="50%" align="center">
-			<h3>User Character</h3>
-			</td>
-		</tr>
-		<tr>
-<?php
-###################################################################################################################################################
-//starting to count membership tricky part
-								$sql = $this->db->select('Charac0.c_id')->from('Account')->join('Charac0', 'Account.c_id = Charac0.c_sheadera', 'INNER')->where("(Account.c_headera = '".$this->session->userdata('password')."') AND (Charac0.c_sheadera = '".$this->session->userdata('username')."') AND (Charac0.c_status = 'A')")->order_by('Charac0.c_id')->get();
-								switch ($this->session->userdata('group'))
-									{
-										case 'BM':
-										$laptop = $this->config->item('BM');
-										$payment = $this->config->item('BMP');
-										break;
-										case 'SM':
-										$laptop = $this->config->item('SM');
-										$payment = $this->config->item('SMP');
-										break;
-										case 'GoldM':
-										$laptop = $this->config->item('GoldM');
-										$payment = $this->config->item('GoldMP');
-										break;
-										case 'GM':
-										$laptop = 'Game Master';
-										break;
-										case 'Normal':
-										$laptop = 'Normal';
-										break;
-									};
-								
-								$sql2 = $this->db->get_where('Account', array('c_id' => $this->session->userdata('username'), 'c_headera' => $this->session->userdata('password')))->row();
-								//echo $sql2->last_salary.' last salary<br />';
-								//echo $sql2->salary.' salary<br />';
-								
-								##################################################
-								//convert to unix time stamp
-								$timeu = human_to_unix($sql2->last_salary);
-								$timespan = timespan(now(), $timeu);
-								##################################################
-								
-								$datediff = $this->db->select("DATEDIFF(month, '".$sql2->last_salary."', '".$sql2->salary."') AS monthdatediff")->get()->row();
-								//echo $datediff->monthdatediff.' monthdate salary->last salary<br />';
-								
-								$datediff1 = $this->db->select("DATEDIFF(month, '".$sql2->last_salary."', GETDATE()) AS monthdate")->get()->row();
-								//echo $datediff1->monthdate.' monthdate now->last salary<br />';
-								
-								//check curernt date
-								$cdate = mdate('%Y-%m-%d %H:%i:%s', now());
-								//echo $cdate.' current date<br />';
-								
-								$sql3 = $this->db->select("DATEADD(month, ".$datediff->monthdatediff."+1, '".$sql2->last_salary."') AS monthdateadd")->get()->row();
-								//echo $sql3->monthdateadd.' month<br />';
-								$i = 0;
-								if ($cdate > $sql3->monthdateadd)
-									{
-										$i++;
-									}
-								$sql4 = $this->db->select("DATEADD(month, ".$datediff->monthdatediff."+1+".$i.", '".$sql2->last_salary."') AS monthdateadd")->get()->row();
-								//echo $sql4->monthdateadd.' month after process<br />';
-								
-								if ($cdate > $sql3->monthdateadd)
-									{
-										$legalDate = $sql3->monthdateadd;
-									}
-									else
-									{
-										$legalDate = $sql4->monthdateadd;
-									}
-								//echo $legalDate.' legal date<br />';
-								
-								##################################################
-								//convert to unix time stamp
-								$temp = explode(' ', $legalDate);
-								$tempdate = explode('-', $temp[0]);
-								$temptime = explode(':', $temp[1]);
-								$year = $tempdate[0];
-								$month = $tempdate[1];
-								$day = $tempdate[2];
-								$hour = $temptime[0];
-								$minute = $temptime[1];
-								$sec = $temptime[2];
-								$mktime = mktime($hour, $minute, $sec, $month, $day, $year);
-								$legalDate = mdate("%Y-%m-%d %H:%i:%s", $mktime);
-								$timeu1 = human_to_unix($legalDate);
-								//echo $timeu1.' unix legal date<br />';
-								$timespan1 = timespan(now(), $timeu1);
-								##################################################
-###################################################################################################################################################
-?>
-			<td width="50%" align="center">
-			<p>You are our <font color='#0000FF'><?php echo $laptop; ?></font> user.</p>
-			<?php
-			if ($this->session->userdata('group') == 'BM' || $this->session->userdata('group') == 'SM' || $this->session->userdata('group') == 'GoldM')
-				{
-					echo "<p align='center'><font color='#0000FF'>$laptop</font> will expire in <font color='#0000FF'>$timespan</font>.<br />";
-					echo "<align='center'>Salary available on : <font color='#0000FF'>".date_my($legalDate)."</font><br />";
-					if ($timespan1 < 2)
-						{
-							echo "<align='center'>Please claim your salary right away<br />";
-						}
-						else
-						{
-							echo "<align='center'>You can claim your salary in <font color='#0000FF'>$timespan1</font><br />";
-						}
-					echo "<align='center'>You were entitle to get <font color='#0000FF'>$payment</font> Wz per month.</p>";
-				}
-			?>
-			</td>
+<?php startblock('news_box1'); ?>
+&nbsp;
+<?php endblock(); ?>
+
+<?php startblock('news_box2'); ?>
+&nbsp;
+<?php endblock(); ?>
 
 
-			<td width="50%" align="center">
-			<?if($sql->num_rows() > 0):?>
-			<?foreach($sql->result() as $item):?>
-			<ul>
-			<?php echo "<li>".$item->c_id."</li>"; ?>
-			</ul>
-			<?endforeach?>
-			</td>
-			<?else:?>
-			No character created.
-			<?endif?>
-			</td>
-		</tr>
-	</table>
-<?php
+<?php startblock('footer_menu'); ?>
+	<li><?=anchor('user/index', 'Home', 'title="Home"');?></li>
+	<li><?=anchor('user/event', 'Event', 'title="Event"');?></li>
+	<li><?=anchor('user/download', 'Download', 'title="Download"');?></li>
+	<li><?=anchor('user/logout', 'Logout', 'title="Logout"');?></li>
+<?php endblock(); ?>
 
-endblock();
-
-//user container
-//startblock('content_main');
-//endblock();
-
-end_extend();
-?>
+<?end_extend()?>
