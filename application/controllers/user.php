@@ -68,7 +68,7 @@ class User extends CI_Controller
 								$change_password = $this->input->post('change_password', TRUE);
 								if ($old_password != $password2)
 									{
-										$r = $this->account->update_pasword($this->session->userdata('username'), $password2);
+										$r = $this->account->update_password($password2);
 										if (!$r)
 											{
 												$data['info'] = 'Cant change the password right now. Please try again';
@@ -103,7 +103,7 @@ class User extends CI_Controller
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->charac0->charac_char($this->session->userdata('username'));
+								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/offline_town_portal', $data);
 							}
 							else
@@ -111,7 +111,7 @@ class User extends CI_Controller
 								//form processor
 								$char = $this->input->post('character', TRUE);
 								$town = $this->input->post('town', TRUE);
-								$data['query'] = $this->charac0->charac_char($this->session->userdata('username'));
+								$data['query'] = $this->charac0->charac_char();
 								$r = $this->charac0->update_tele($char, $town);
 								if ($r)
 									{
@@ -140,13 +140,13 @@ class User extends CI_Controller
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->charac0->charac_char($this->session->userdata('username'));
+								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/acquire_super_shue', $data);
 							}
 							else
 							{
 								//form processor
-								$data['query'] = $this->charac0->charac_char($this->session->userdata('username'));
+								$data['query'] = $this->charac0->charac_char();
 								$char = $this->input->post('character', TRUE);
 								$y = $this->charac0->charac_cid($char);
 								$char_type = $y->row()->c_sheaderb;
@@ -165,10 +165,26 @@ class User extends CI_Controller
 											$PETACT[1] = "1015;76028709;4152360961;4294160367";
 											break;
 									};
+
 								$charstring = $y->row()->m_body;
-								echo m_body_string('WAR', 'jadi dak?', $charstring);
+
+								//echo mbody_insert('PETACT', 'jadi dak?', $charstring).' mbody<br />';
 								
-								//$this->load->view('user/acquire_super_shue', $data);
+								//echo mbody_part('RESRV1', $charstring);
+
+								$newString = mbody_insert('PETACT', $PETACT[1], $charstring);
+								$f = $this->charac0->update_mbody($char, $newString);
+								if (!$f)
+									{
+										$data['info'] = 'Sorry, we cant equip yet your super shue, please try again later';
+										$this->load->view('user/acquire_super_shue', $data);
+									}
+									else
+									{
+										$data['info'] = 'Successfully equipped super shue';
+										$this->load->view('user/acquire_super_shue', $data);
+										$this->db->where('c_id', $this->session->userdata('username'))->update('Account', array('d_udate' => mdate('%Y-%m-%d %H:%i:%s', now())) );
+									};
 							}
 					}
 					else

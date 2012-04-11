@@ -35,11 +35,15 @@ class Account extends CI_Model
 				return $this->db->get_where('Account', array('c_headerb' => $email));
 			}
 //UPDATE
-	function update_pasword($username, $password)
+	function update_password($password)
 		{
-			return $this->db->where(array('c_id' => $username))->update('Account', array('c_headera' => $password, 'd_udate' => mssqldate()));
+			return $this->db->where(array('c_id' => $this->session->userdata('username')))->update('Account', array('c_headera' => $password, 'd_udate' => mssqldate()));
 		}
 
+	function update_activity()
+		{
+			return $this->db->where('c_id', $this->session->userdata('username'))->update('Account', array('d_udate' => mssqldate()) );
+		}
 //INSERT
 	function insert_account($username, $password, $email)
 		{

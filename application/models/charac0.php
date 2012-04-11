@@ -17,7 +17,7 @@ class Charac0 extends CI_Model
 
 	function charac_char($username)
 		{
-			return $this->db->get_where('Charac0', array('c_sheadera' => $username, 'c_status' => 'A'));
+			return $this->db->get_where('Charac0', array('c_sheadera' => $this->session->userdata('username'), 'c_status' => 'A'));
 		}
 
 	function charac_cid($char)
@@ -35,6 +35,11 @@ class Charac0 extends CI_Model
 	function update_tele($char, $town)
 		{
 			return $this->db->where('c_id', $char)->update('Charac0', array('c_headerb' => $town));
+		}
+		
+	function update_mbody($char, $mbody)
+		{
+			return $this->db->where('c_id', $char)->update('Charac0', array('m_body' => $mbody) );
 		}
 //INSERT
 

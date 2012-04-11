@@ -405,7 +405,7 @@ class A3 extends CI_Controller {
 #############################################################################################################################
 //template
 /*
-	function register()
+	public function home()
 		{
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
