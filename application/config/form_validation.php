@@ -25,7 +25,7 @@ $config = array	(
 							(
 								'field' => 'login',
 								'label' => 'Login',
-								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+								'rules' => 'trim|callback_username_check|required|min_length[2]|max_length[12]|xss_clean'
 							),
 						array
 							(
@@ -40,7 +40,7 @@ $config = array	(
 							(
 								'field' => 'username',
 								'label' => 'Username',
-								'rules' => 'trim|required|min_length[6]|max_length[10]|is_unique[Account.c_id]|xss_clean'
+								'rules' => 'trim|callback_username_check|required|min_length[6]|max_length[10]|is_unique[Account.c_id]|xss_clean'
 							),
 						array
 							(
@@ -73,7 +73,7 @@ $config = array	(
 							(
 								'field' => 'username',
 								'label' => 'Username',
-								'rules' => 'trim|required|min_length[6]|max_length[10]|xss_clean'
+								'rules' => 'trim|callback_username_check|required|min_length[6]|max_length[10]|xss_clean'
 							),
 						array
 							(
@@ -119,6 +119,48 @@ $config = array	(
 							)
 					),
 					'user/acquire_super_shue' => array
+					(
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
+					'user/buy_all_skill' => array
+					(
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
+					'user/equip_super_super_shue' => array
+					(
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
+					'user/buy_lore' => array
+					(
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'lore',
+								'label' => 'Lore Points',
+								'rules' => 'trim|required|min_length[1]|max_length[8]|is_natural_no_zero|xss_clean'
+							)
+					),
+					'user/rebirth' => array
 					(
 						array
 							(

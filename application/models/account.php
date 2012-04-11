@@ -17,7 +17,7 @@ class Account extends CI_Model
 
 	function account()
 		{
-			return $this->db->get('Account');
+			return $this->db->get_where('Account', array('c_status' => 'A'));
 		}
 
 	function account_get_password($username, $email)

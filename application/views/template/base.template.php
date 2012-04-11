@@ -18,7 +18,7 @@ Welcome to <?=$this->config->item('homepage')?> Account Management Tools
 <?if($this->account->account()->num_rows() == 0):?>
 <p>No Player Registered</p>
 <?else:?>
-<p><?=$this->account->account()->num_rows()?> Accounts</p>
+<p><?=$this->account->account()->num_rows()?> Active Accounts</p>
 <?endif?>
 <?php endblock(); ?>
 
@@ -27,7 +27,7 @@ Welcome to <?=$this->config->item('homepage')?> Account Management Tools
 <?if($this->charac0->char()->num_rows() == 0):?>
 <p>No Character Created</p>
 <?else:?>
-<p><?=$this->charac0->char()->num_rows()?> Characters</p>
+<p><?=$this->charac0->char()->num_rows()?> Active Characters</p>
 <?endif?>
 <?php endblock(); ?>
 

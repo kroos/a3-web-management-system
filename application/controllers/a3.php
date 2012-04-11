@@ -58,12 +58,11 @@ class A3 extends CI_Controller {
 						{
 							$login = $this->input->post('login', TRUE);
 							$passwd = $this->input->post('passwd', TRUE);
-							$sign_in = $this->input->post('sign-in', TRUE);
-							if(isset($login) && isset($passwd) && isset($sign_in))
+							if($this->input->post('sign-in', TRUE))
 								{
 									$data['query'] = $this->account->account_user($login, $passwd);
 									$rows = $data['query']->num_rows();
-		
+
 									if ($rows == 1)
 										{
 											$row = $data['query']->row();
@@ -141,61 +140,63 @@ class A3 extends CI_Controller {
 							$data['cap'] = create_captcha($vals);
 							$this->captcha->insert_captcha($data['cap']['time'], $data['cap']['word']);
 
-							//we need to check the capthca
-							$expiration = time()-1800; // Two hour limit
-							//delete captcha 2 hours ago
-							$this->captcha->delete_captcha($expiration);
-
-							//check the new 1
-							$check = $this->captcha->captcha($verify, $expiration)->num_rows();
-
-							if ($check == 0)
+							if ($this->input->post('create_acc', TRUE))
 								{
-									$data['info'] = 'You must submit the word that appears in the image';
-									$this->load->view('register', $data);
-								}
-								else
-								{
+									//we need to check the capthca
+									$expiration = time()-1800; // Two hour limit
+									//delete captcha 2 hours ago
+									$this->captcha->delete_captcha($expiration);
 
-									$passkey = md5(uniqid(rand()));
-									$date = mssqldate();
-									$subject = $this->config->item('homepage').' Activation Link For '.$username.' Account';
-									$message = "<html>
-												<head>
-												<meta http-equiv='Content-Language' content='en-us'>
-												<meta name='GENERATOR' content='Microsoft FrontPage 6.0'>
-												<meta name='ProgId' content='FrontPage.Editor.Document'>
-												<meta http-equiv='Content-Type' content='text/html; charset=windows-1252'>
-												<title>".$this->config->item('homepage')." Activation Link.</title>
-												</head>
-												<body>
-												<p align='center'>Your username : $username</p>";
-									$message .= "<p align='center'>This is your password : $password1</p>";
-									$message .=	"<p align='center'><a href='".$this->config->item('forum_url')."'>".$this->config->item('homepage')." Forum</a></p>
-												<p align='center'><a href='".site_url()."'>".$this->config->item('homepage')." Account Management Tools</a></p>
-												<p align='center'><a href='".site_url("a3/activate/$passkey")."'>Click Here To Activate Your Account.</a></p>
-												<p align='center'>You are receiving this e-mail because a user with an IP address of ".$_SERVER['REMOTE_ADDR']." signed up on <a href='http://".site_url()."'>".$this->config->item('homepage')." Account Management Tools</a> using your e-mail address. If this was not you, simply ignore this e-mail, and no further messages will be sent.</p>
-												</body></html>";
-							
-									$email = send_email($email, $username, $subject, $message, $this->config->item('pop3_server'), $this->config->item('pop3_port'), $this->config->item('username'), $this->config->item('password'), $this->config->item('SMTP_auth'), $this->config->item('smtp_server'), $this->config->item('smtp_port'), $this->config->item('SMTP_Secure'), $this->config->item('addreplyto_email'), $this->config->item('addreplyto_name'), $this->config->item('from'), $this->config->item('from_name'));
-									if ($email == TRUE)
+									//check the new 1
+									$check = $this->captcha->captcha($verify, $expiration)->num_rows();
+
+									if ($check == 0)
 										{
-											$query = $this->temp_account->insert_temp_account($username, $password1, $email, $passkey);
-											if($query)
-												{
-													$data['info'] = 'Please check activation email<br />If the email is not in the inbox, please check your JUNK folder and add it into white list';
-													$this->load->view('register', $data);
-												}
-												else
-												{
-													$data['info'] = 'Please check activation email<br />Please try again later. We are sorry for the inconvenience';
-													$this->load->view('register', $data);
-												}
+											$data['info'] = 'You must submit the word that appears in the image';
+											$this->load->view('register', $data);
 										}
 										else
 										{
-											$data['info'] = 'Activation email cant be send right now<br />Please try again later';
-											$this->load->view('register', $data);
+											$passkey = md5(uniqid(rand()));
+											$date = mssqldate();
+											$subject = $this->config->item('homepage').' Activation Link For '.$username.' Account';
+											$message = "<html>
+														<head>
+														<meta http-equiv='Content-Language' content='en-us'>
+														<meta name='GENERATOR' content='Microsoft FrontPage 6.0'>
+														<meta name='ProgId' content='FrontPage.Editor.Document'>
+														<meta http-equiv='Content-Type' content='text/html; charset=windows-1252'>
+														<title>".$this->config->item('homepage')." Activation Link.</title>
+														</head>
+														<body>
+														<p align='center'>Your username : $username</p>";
+											$message .= "<p align='center'>This is your password : $password1</p>";
+											$message .=	"<p align='center'><a href='".$this->config->item('forum_url')."'>".$this->config->item('homepage')." Forum</a></p>
+														<p align='center'><a href='".site_url()."'>".$this->config->item('homepage')." Account Management Tools</a></p>
+														<p align='center'><a href='".site_url("a3/activate/$passkey")."'>Click Here To Activate Your Account.</a></p>
+														<p align='center'>You are receiving this e-mail because a user with an IP address of ".$_SERVER['REMOTE_ADDR']." signed up on <a href='http://".site_url()."'>".$this->config->item('homepage')." Account Management Tools</a> using your e-mail address. If this was not you, simply ignore this e-mail, and no further messages will be sent.</p>
+														</body></html>";
+		
+											$email = send_email($email, $username, $subject, $message, $this->config->item('pop3_server'), $this->config->item('pop3_port'), $this->config->item('username'), $this->config->item('password'), $this->config->item('SMTP_auth'), $this->config->item('smtp_server'), $this->config->item('smtp_port'), $this->config->item('SMTP_Secure'), $this->config->item('addreplyto_email'), $this->config->item('addreplyto_name'), $this->config->item('from'), $this->config->item('from_name'));
+											if ($email == TRUE)
+												{
+													$query = $this->temp_account->insert_temp_account($username, $password1, $email, $passkey);
+													if($query)
+														{
+															$data['info'] = 'Please check activation email<br />If the email is not in the inbox, please check your JUNK folder and add it into white list';
+															$this->load->view('register', $data);
+														}
+														else
+														{
+															$data['info'] = 'Please check activation email<br />Please try again later. We are sorry for the inconvenience';
+															$this->load->view('register', $data);
+														}
+												}
+												else
+												{
+													$data['info'] = 'Activation email cant be send right now<br />Please try again later';
+													$this->load->view('register', $data);
+												}
 										}
 								}
 						}
@@ -417,17 +418,77 @@ class A3 extends CI_Controller {
 					if ($this->form_validation->run() == FALSE)
 						{
 							//form
+							
 						}
 						else
 						{
 							//form process
+							
 						}
 				}
 		}
 */
 #############################################################################################################################
+	public function username_check($str)
+	{
+		switch ($str)
+			{
+				default:
+					return TRUE;
+				break;
 
+				case 'a3gm1':
+					$this->form_validation->set_message('username_check', 'The %s field can not be the word "a3gm1"');
+					return FALSE;
+				break;
+
+				case 'a3gm2':
+					$this->form_validation->set_message('username_check', 'The %s field can not be the word "a3gm2"');
+					return FALSE;
+				break;
+
+				case 'a3gm3':
+					$this->form_validation->set_message('username_check', 'The %s field can not be the word "a3gm3"');
+					return FALSE;
+				break;
+
+				case 'a3gm4':
+					$this->form_validation->set_message('username_check', 'The %s field can not be the word "a3gm4"');
+					return FALSE;
+				break;
+
+				case 'a3gm5':
+					$this->form_validation->set_message('username_check', 'The %s field can not be the word "a3gm5"');
+					return FALSE;
+				break;
+
+				case 'a3gm6':
+					$this->form_validation->set_message('username_check', 'The %s field can not be the word "a3gm6"');
+					return FALSE;
+				break;
+
+				case 'a3gm7':
+					$this->form_validation->set_message('username_check', 'The %s field can not be the word "a3gm7"');
+					return FALSE;
+				break;
+
+				case 'a3gm8':
+					$this->form_validation->set_message('username_check', 'The %s field can not be the word "a3gm8"');
+					return FALSE;
+				break;
+			}
+
+		/*if ($str == 'a3gm1')
+		{
+			$this->form_validation->set_message('username_check', 'The %s field can not be the word "a3gm1"');
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}*/
+	}
+#############################################################################################################################
 }
-
 /* End of file welcome.php */
 /* Location: ./application/controllers/welcome.php */
