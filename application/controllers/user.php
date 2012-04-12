@@ -771,7 +771,7 @@ class User extends CI_Controller
 																		//initialize reset rb times
 																		$resetrb = $rblvltimes + 1;
 
-																		$rson = $this->charac0->update_reset_rebirth($char, $wz, $resetrb)
+																		$rson = $this->charac0->update_reset_rebirth($char, $wz, $resetrb);
 																		if (!$rson)
 																			{
 																				$data['info'] = 'Sorry, internal server error, please try again later';
