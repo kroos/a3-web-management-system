@@ -730,28 +730,29 @@ class User extends CI_Controller
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->db->get_where('Charac0', array('c_sheadera' => $this->session->userdata('username')));
+								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/reset_rebirth', $data);
 							}
 							else
 							{
 								//form processor
-								if ($this->input->post('rebirth'))
+								$data['query'] = $this->charac0->charac_char();
+								$char = $this->input->post('character', TRUE);
+								if ($this->input->post('reset_rebirth', TRUE))
 									{
-										$char = $this->input->post('character');
-										$data['query'] = $this->db->get_where('Charac0', array('c_sheadera' => $this->session->userdata('username'), 'c_id' => $this->input->post('character')));
-										if ($data['query']->num_rows() == 1)
+										$t = $this->charac0->charac_cid($char);
+										if ($t->num_rows() == 1)
 											{
 												//--------------------check level rebirth----------------------------
-												$rblvl = $data['query']->row()->rb;
+												$rblvl = $t->row()->rb;
 												//echo "<p align='center'>$char rebirth level is $rblvl.</p>";
 
 												//--------------------check wz----------------------------------
-												$rbwz = $data['query']->row()->c_headerc;
+												$rbwz = $t->row()->c_headerc;
 												//echo "<p align='center'>In $char inventory have $rbwz wz.</p>";
 
 												//--------------------check rebirth times----------------------------
-												$rblvltimes = $data['query']->row()->times_rb;
+												$rblvltimes = $t->row()->times_rb;
 												//echo "<p align='center'>$char reset rebirth for $rblvltimes times.</p>";
 
 												//---------------------------reset rebirth operation----------------------------------------------------
@@ -770,39 +771,36 @@ class User extends CI_Controller
 																		//initialize reset rb times
 																		$resetrb = $rblvltimes + 1;
 
-																		//sql parts
-																		$sqlon = "update charac0 set c_headerc = '$wz', rb = '0', times_rb = '$resetrb' where c_id = '$char'";
-																		$rson = $this->db->where('c_id', $char)->update('Charac0', array('c_headerc' => $wz, 'rb' => '0', 'times_rb' => $resetrb ) );
+																		$rson = $this->charac0->update_reset_rebirth($char, $wz, $resetrb)
 																		if (!$rson)
 																			{
 																				$data['info'] = 'Sorry, internal server error, please try again later';
-																				$this->load->view('user/rebirth', $data);
+																				$this->load->view('user/reset_rebirth', $data);
 																			}
 																			else
 																			{
 																				$data['info'] = 'Successful reset rebirth';
-																				$this->load->view('user/rebirth', $data);
-																				$this->db->where('c_id', $this->session->userdate('username'))->update('Account', array('d_udate' => mdate('%Y-%m-%d %H:%i:%s', now())));
+																				$this->load->view('user/reset_rebirth', $data);
+																				$this->account->update_activity();
 																			};
 																	}
 																	else
 																	{
 																		$data['info'] = "Insufficient wz, your $char only have $rbwz wz";
-																		$this->load->view('user/rebirth', $data);
+																		$this->load->view('user/reset_rebirth', $data);
 																	};
 															}
 															else
 															{
 																$data['info'] = "$char rebirth level is $rblvl, $char need to have at least rebirth level ".$this->config->item('rebirth_count')." to reset its rebirth";
-																$this->load->view('user/rebirth', $data);
+																$this->load->view('user/reset_rebirth', $data);
 															};
 													}
 													else
 													{
-														echo "<p align='center'>You are now a god in this server, you cant reset rb anymore</p>";
 														$data['info'] = 'You are now a god in this server, you cant reset rb anymore';
-														$this->load->view('user/rebirth', $data);
-													};
+														$this->load->view('user/reset_rebirth', $data);
+													}
 											}
 									}
 							}

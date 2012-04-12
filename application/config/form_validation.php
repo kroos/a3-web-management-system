@@ -168,6 +168,15 @@ $config = array	(
 								'label' => 'Character',
 								'rules' => 'trim|required|xss_clean'
 							)
+					),
+					'user/reset_rebirth' => array
+					(
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
 					)
 
 
@@ -204,5 +213,5 @@ $config = array	(
 
 
 
-				)
+				);
 ?>

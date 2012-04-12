@@ -55,6 +55,11 @@ class Charac0 extends CI_Model
 		{
 			return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_sheaderc' => '1', 'c_headerc' => $wz, 'm_body' => $mbody, 'rb' => $rb));
 		}
+
+	function update_reset_rebirth($char, $wz, $times_rb)
+	{
+		return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_headerc' => $wz, 'rb' => '0', 'times_rb' => $times_rb ) );
+	}
 //INSERT
 
 //DELETE
