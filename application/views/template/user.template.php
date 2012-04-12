@@ -122,12 +122,11 @@ if ($this->session->userdata('group') == 'BM' || $this->session->userdata('group
 <h5>Character</h5>
 <?$sql = $this->charac0->charac_char($this->session->userdata('username'))?>
 <?if($sql->num_rows() > 0):?>
-<?foreach($sql->result() as $item):?>
 <ul>
+<?foreach($sql->result() as $item):?>
 <?php echo "<li>".$item->c_id."</li>"; ?>
-</ul>
 <?endforeach?>
-</td>
+</ul>
 <?else:?>
 No character created.
 <?endif?>

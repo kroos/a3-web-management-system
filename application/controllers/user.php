@@ -811,7 +811,30 @@ class User extends CI_Controller
 					}
 			}
 
-
+		public function mercenary_rebirth()
+			{
+				if ($this->session->userdata('logged_in') == TRUE)
+					{
+						//process
+						$this->load->database('HSDB', TRUE);
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$data['query'] = $this->charac0->charac_char();
+								$this->load->view('user/mercenary_rebirth', $data);
+							}
+							else
+							{
+								//form processor
+								$data['query'] = $this->charac0->charac_char();
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
 
 
 

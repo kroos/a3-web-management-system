@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('a3web_html', 'account', 'temp_account', 'captcha', 'charac0', 'charac0_account_view', 'hsdb_hstable_merc_view');
+$autoload['model'] = array('a3web_html', 'account', 'temp_account', 'captcha', 'charac0', 'charac0_account_view', 'hsdb_hstable_merc_view', 'hstable');
 
 
 /* End of file autoload.php */

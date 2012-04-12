@@ -177,6 +177,21 @@ $config = array	(
 								'label' => 'Character',
 								'rules' => 'trim|required|xss_clean'
 							)
+					),
+					'user/mercenary_rebirth' => array
+					(
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'merc',
+								'label' => 'Mercenary',
+								'rules' => 'trim|required|xss_clean'
+							)
 					)
 
 
