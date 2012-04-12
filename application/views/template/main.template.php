@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/popup.css" media="screen" />
 <script type="text/javascript" src="<?=base_url()?>js/popups.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/popupbox.js"></script>
-<link rel="icon" href="<?=site_url()?>images/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="<?=base_url()?>images/favicon.ico" type="image/x-icon" />
 <title><?=$this->config->item('homepage')?> Account Management Tools</title>
 
 <script language="javascript" type="text/javascript">
@@ -91,6 +91,8 @@ function clearText(field)
 				<script type="text/javascript">
 												$(function() {
 												$('#one').ContentSlider({
+												leftBtn : '<?=base_url()?>images/cs_leftImg.png',
+												rightBtn : '<?=base_url()?>images/cs_rightImg.png',
 												width : '600px',
 												height : '240px',
 												speed : 600,
@@ -98,7 +100,9 @@ function clearText(field)
 												});
 												});
 				</script>
+<script type="text/javascript">
 
+</script>
 				<div class="cleaner"></div>
 			</div>
 			<!-- end of templatemo_slider -->  

@@ -8,12 +8,16 @@ class Hstable extends CI_Model
 				parent::__construct();
 			}
 #############################################################################################################################
-//CRUD for temp_account
+//CRUD for hstable
 	function hstable_merc($char)
 		{
 			return $this->db->get_where('HSDB.dbo.HSTABLE', array('MasterName' => $char, 'HSState' => 0));
 		}
 
+	function hstable_id($char, $id)
+		{
+			return $this->db->get_where('HSDB.dbo.HSTABLE', array('MasterName' => $char, 'HSState' => 0, 'HSID' => $id));
+		}
 //UPDATE
 
 //INSERT

@@ -190,7 +190,7 @@ $config = array	(
 							(
 								'field' => 'merc',
 								'label' => 'Mercenary',
-								'rules' => 'trim|required|xss_clean'
+								'rules' => 'trim|required|is_natural|xss_clean'
 							)
 					)
 

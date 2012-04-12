@@ -93,6 +93,20 @@ class A3 extends CI_Controller {
 
 	public function register()
 		{
+			//initiate var for captcha helper
+			$vals = array
+				(
+					'word' => rand(10000, 99999),
+					'img_path' => './images/captcha/',
+					'img_url' => base_url().'images/captcha/',
+					//'font_path' => './path/to/fonts/texb.ttf',
+					'img_width' => 150,
+					'img_height' => 30,
+					'expiration' => 1800
+				);
+			$data['cap'] = create_captcha($vals);
+			$this->captcha->insert_captcha($data['cap']['time'], $data['cap']['word']);
+
 			if ($this->session->userdata('logged_in') == TRUE)
 				{
 					redirect('/user/index', 'location');
@@ -103,19 +117,6 @@ class A3 extends CI_Controller {
 					if ($this->form_validation->run() == FALSE)
 						{
 							//form
-							//initiate var for captcha helper
-							$vals = array
-								(
-									'word' => rand(10000, 99999),
-									'img_path' => './images/captcha/',
-									'img_url' => base_url().'images/captcha/',
-									//'font_path' => './path/to/fonts/texb.ttf',
-									'img_width' => 150,
-									'img_height' => 30,
-									'expiration' => 1800
-								);
-							$data['cap'] = create_captcha($vals);
-							$this->captcha->insert_captcha($data['cap']['time'], $data['cap']['word']);
 							$this->load->view('register', $data);
 						}
 						else
@@ -125,20 +126,6 @@ class A3 extends CI_Controller {
 							$password1 = $this->input->post('password1', TRUE);
 							$verify = $this->input->post('verify', TRUE);
 							$email = $this->input->post('email', TRUE);
-
-							//initiate var for captcha helper
-							$vals = array
-								(
-									'word' => rand(10000, 99999),
-									'img_path' => './images/captcha/',
-									'img_url' => base_url().'images/captcha/',
-									//'font_path' => './path/to/fonts/texb.ttf',
-									'img_width' => 150,
-									'img_height' => 30,
-									'expiration' => 1800
-								);
-							$data['cap'] = create_captcha($vals);
-							$this->captcha->insert_captcha($data['cap']['time'], $data['cap']['word']);
 
 							if ($this->input->post('create_acc', TRUE))
 								{

@@ -100,6 +100,7 @@ class User extends CI_Controller
 
 		public function offline_town_portal()
 			{
+				$data['query'] = $this->charac0->charac_char();
 				if ($this->session->userdata('logged_in') == TRUE)
 					{
 						//process
@@ -107,7 +108,6 @@ class User extends CI_Controller
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/offline_town_portal', $data);
 							}
 							else
@@ -115,7 +115,6 @@ class User extends CI_Controller
 								//form processor
 								$char = $this->input->post('character', TRUE);
 								$town = $this->input->post('town', TRUE);
-								$data['query'] = $this->charac0->charac_char();
 								if ($this->input->post('offline_tp', TRUE))
 									{
 										$r = $this->charac0->update_tele($char, $town);
@@ -141,6 +140,7 @@ class User extends CI_Controller
 
 		public function acquire_super_shue()
 			{
+				$data['query'] = $this->charac0->charac_char();
 				if ($this->session->userdata('logged_in') == TRUE)
 					{
 						//process
@@ -148,13 +148,11 @@ class User extends CI_Controller
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/acquire_super_shue', $data);
 							}
 							else
 							{
 								//form processor
-								$data['query'] = $this->charac0->charac_char();
 								$char = $this->input->post('character', TRUE);
 								if($this->input->post('acq_ss', TRUE))
 									{
@@ -206,6 +204,7 @@ class User extends CI_Controller
 
 		public function buy_all_skill()
 			{
+				$data['query'] = $this->charac0->charac_char();
 				if ($this->session->userdata('logged_in') == TRUE)
 					{
 						//process
@@ -213,13 +212,11 @@ class User extends CI_Controller
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/buy_all_skill', $data);
 							}
 							else
 							{
 								//form processor
-								$data['query'] = $this->charac0->charac_char();
 								$char = $this->input->post('character', TRUE);
 								if ($this->input->post('buy_skill', TRUE))
 									{
@@ -303,6 +300,7 @@ class User extends CI_Controller
 
 		public function equip_super_super_shue()
 			{
+				$data['query'] = $this->charac0->charac_char();
 				if ($this->session->userdata('logged_in') == TRUE)
 					{
 						//process
@@ -310,13 +308,11 @@ class User extends CI_Controller
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/equip_super_super_shue', $data);
 							}
 							else
 							{
 								//form processor
-								$data['query'] = $this->charac0->charac_char();
 								$char = $this->input->post('character', TRUE);
 								if ($this->input->post('eq_sss', TRUE))
 									{
@@ -543,6 +539,7 @@ class User extends CI_Controller
 
 		public function buy_lore()
 			{
+				$data['query'] = $this->charac0->charac_char();
 				if ($this->session->userdata('logged_in') == TRUE)
 					{
 						//process
@@ -550,13 +547,11 @@ class User extends CI_Controller
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/buy_lore', $data);
 							}
 							else
 							{
 								//form processor
-								$data['query'] = $this->charac0->charac_char();
 								$char = $this->input->post('character', TRUE);
 								$lore = $this->input->post('lore', TRUE);
 								if ($this->input->post('buy_lore', TRUE))
@@ -632,6 +627,7 @@ class User extends CI_Controller
 
 		public function rebirth()
 			{
+				$data['query'] = $this->charac0->charac_char();
 				if ($this->session->userdata('logged_in') == TRUE)
 					{
 						//process
@@ -639,13 +635,11 @@ class User extends CI_Controller
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/rebirth', $data);
 							}
 							else
 							{
 								//form processor
-								$data['query'] = $this->charac0->charac_char();
 								$char = $this->input->post('character', TRUE);
 								if ($this->input->post('rebirth', TRUE))
 									{
@@ -723,6 +717,7 @@ class User extends CI_Controller
 
 		public function reset_rebirth()
 			{
+				$data['query'] = $this->charac0->charac_char();
 				if ($this->session->userdata('logged_in') == TRUE)
 					{
 						//process
@@ -730,13 +725,11 @@ class User extends CI_Controller
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/reset_rebirth', $data);
 							}
 							else
 							{
 								//form processor
-								$data['query'] = $this->charac0->charac_char();
 								$char = $this->input->post('character', TRUE);
 								if ($this->input->post('reset_rebirth', TRUE))
 									{
@@ -813,21 +806,47 @@ class User extends CI_Controller
 
 		public function mercenary_rebirth()
 			{
+				$this->load->database('HSDB', TRUE);
+				$data['query'] = $this->charac0->charac_char();
 				if ($this->session->userdata('logged_in') == TRUE)
 					{
 						//process
-						$this->load->database('HSDB', TRUE);
 						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
 						if ($this->form_validation->run() == FALSE)
 							{
 								//form
-								$data['query'] = $this->charac0->charac_char();
 								$this->load->view('user/mercenary_rebirth', $data);
 							}
 							else
 							{
 								//form processor
-								$data['query'] = $this->charac0->charac_char();
+								$char = $this->input->post('character', TRUE);
+								$mercid = $this->input->post('merc', TRUE);
+								if ($this->input->post('merc_rebirth', TRUE))
+									{
+										$u = $this->hstable->hstable_id($char, $mercid);
+										if ($u->num_rows() == 1)
+											{
+												//--------------------check merc level--------------------------
+												$merclvl = $u->row()->HSLevel;
+												echo "<p align='center'>Currently... your mercenary $merc is level $merclvl</p>";
+
+												//--------------------check wz from $char----------------------------------
+												$charwz = $this->charac0->charac_cid($char);
+												echo "<p align='center'>In $char inventory have $charwz wz only.</p>";
+
+												//--------------------check merc level rebirth----------------------------
+												$sqlrb="select rb from MERC where HSName = '$merc' AND MasterName = '$char'";
+												$rsrb=$db2->Execute($sqlrb);
+												$mercrblvl=$rsrb->fields[0];
+												//echo "mercrblvl =".$mercrblvl."<br>";
+											}
+											else
+											{
+												$data['info'] = "$char selected with wrong mercenary";
+												$this->load->view('user/mercenary_rebirth', $data);
+											}
+									}
 							}
 					}
 					else
