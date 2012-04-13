@@ -970,47 +970,50 @@ class User extends CI_Controller
 																				$balance = $charwz - $this->config->item('mercwzreset'); 
 
 																				//update the MERC table
-																				$sql2="update $db_hsdb.dbo.MERC set reset_rb = '$reset_rb_merc', rb = '0' where HSName = '$merc'";
-																				$rs02=db_query($conn2, $sql2);
+																				$rs02 = $this->merc->update_reset_rebirth($mercid, $char, $reset_rb_merc);
 
 																				//update the charac0 table for the wz
-																				$sql3="update $db_asd.dbo.charac0 set c_headerc = '$balance' where c_id = '$char'";
-																				$rs03=db_query($conn1, $sql3);
+																				$rs03 = $this->charac0->update_wz($char, $balance);
 																				if ($rs02 && $rs03)
 																					{
-																						echo "<p align='center'>Successfully reset rebirth level for your $merc.</p>";
-																						$lap = "UPDATE $db_asd.dbo.account SET d_udate = CONVERT(DATETIME, '$date', 102) WHERE (c_id = '$username')";
-																						$top = sqlsrv_query($conn1, $lap);
+																						$data['info'] = 'Successfully reset rebirth';
+																						$this->load->view('user/mercenary_reset_rebirth', $data);
+																						$this->account->update_activity();
 																					}
 																					else
 																					{
-																						echo "<p align='center'>Internal server error, please try again later.</p>";
+																						$data['info'] = 'Internal server error, please try again later';
+																						$this->load->view('user/mercenary_reset_rebirth', $data);
 																					};
 																			}
 																			else
 																			{
-																				echo "<p align='center'>Your $char have only $charwz, please make sure you have more than $mercwzreset wz to use reset rebirth for your mercenary.</p>";
+																				$data['info'] = "Your $char only have $charwz, please make sure you have more than ".$this->config->item('mercwzreset')." wz to use reset rebirth for your mercenary";
+																				$this->load->view('user/mercenary_reset_rebirth', $data);
 																			};
 																	}
 																	else
 																	{
-																		echo "<p align='center'>Your mercenary $merc rebirth level is $merclvl, please make sure youre $merc is at least level $mercresetlvl.</p>";
+																		$data['info'] = "Your mercenary rebirth level is $merclvl, please make sure your mercenary is at least level $mercresetlvl";
+																		$this->load->view('user/mercenary_reset_rebirth', $data);
 																	};
 															}
 															else
 															{
-																echo "<p align='center'>Your mercenary $merc rebirth level is $mercrblvl, please make sure your $merc is at least rebirth level $mercrblevel.</p>";
+																$data['info'] = "Your mercenary rebirth level is $mercrblvl, please make sure your mercenary is at least rebirth level ".$this->config->item('mercrblevel')."";
+																$this->load->view('user/mercenary_reset_rebirth', $data);
 															};
 													}
 													else
 													{
-														echo "<p align='center'>Your mercenary $merc reset rebirth level is $mercrbreset, you cant use anymore reset rebirth for ur $merc. Its at the peak of the reset.</p>";
+														$data['info'] = "Your mercenary reset rebirth level is $mercrbreset, you cant use anymore reset rebirth for ur mercenary. Its at the peak of the reset";
+														$this->load->view('user/mercenary_reset_rebirth', $data);
 													};
 											}
 											else
 											{
 												$data['info'] = "$char selected with wrong mercenary";
-												$this->load->view('user/mercenary_rebirth', $data);
+												$this->load->view('user/mercenary_reset_rebirth', $data);
 											}
 									}
 							}

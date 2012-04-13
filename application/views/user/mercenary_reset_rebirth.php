@@ -5,26 +5,7 @@
 
 <p><font color="#FF0000"><blink><?=@$info?></blink></font></p>
 
-<p>Here is how you should do to rebirth your mercenary. Click on ur hero then click on your mercenary corresponded to your character. Thats it.<br>Have fun tanking medusa with your mercenary!!</p>
-		<table border="0" width="100%" style="border-collapse: collapse">
-		<tr>
-		<td align="center"><b>Rebirth</b></td>
-		<td align="center"><b>Mercenary Level</b></td>
-		<td align="center"><b>Wz Needed</b></td>
-		</tr>															
-		<?php
-		for ($i = $this->config->item('merclvlrb'); $i <= 300; $i=$i+10)
-			{
-				$rbirthmerc = ($i - $this->config->item('merclvlrb')) / 10 ;
-				$rbirthwz = $this->config->item('mercwzrb') * ($rbirthmerc);
-				echo "<tr>";
-				echo "<td align='center'>$rbirthmerc</td>";
-				echo "<td align='center'>$i</td>";
-				echo "<td align='center'>$rbirthwz wz</td>";
-				echo "</tr>";
-			};
-		?>															
-		</table>
+<p>Make your mercenary more stronger by using this AMT. Same like you reset rebirth your character.To use this tools, you need at least <?php echo $this->config->item('mercwzreset'); ?> wz when your mercenary is level <?php echo $this->config->item('mercresetlvl'); ?> and this only applied if and only if your mercenary is at rebirth level <?php echo $this->config->item('mercrblevel'); ?> and your mercenary rank is not a 'Reaper'</p>
 
 <?=form_open()?>
 

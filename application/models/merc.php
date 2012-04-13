@@ -20,7 +20,11 @@ class Merc extends CI_Model
 			return $this->db->where(array('HSID' => $hsid, 'MasterName' => $mastername))->update('HSDB.dbo.MERC', array('rb' => $rb));
 		}
 
-	
+		function update_reset_rebirth($hsid, $mastername, $reset_rb)
+		{
+			return $this->db->where(array('HSID' => $hsid, 'MasterName' => $mastername))->update('HSDB.dbo.MERC', array('reset_rb' => $reset_rb, 'rb' => 0));
+		}
+
 //INSERT
 	function insert_merc($HSID, $HSName, $MasterName, $Type, $HSLevel)
 		{
