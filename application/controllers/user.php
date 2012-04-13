@@ -831,18 +831,14 @@ class User extends CI_Controller
 											{
 												//--------------------check merc level--------------------------
 												$merclvl = $u->row()->HSLevel;
-												//echo "<p align='center'>Currently... your mercenary $mercid is level $merclvl</p>";
 
 												//--------------------check wz from $char----------------------------------
 												$charwz = $y->row()->c_headerc;
-												//echo $charwz.' char wz<br />';
 
 												//--------------------check merc level rebirth----------------------------
 												$mercrblvl = $h->row()->rb;
-												//echo "mercrblvl = ".$mercrblvl."<br>";
 
 												//check rebirth level data from the MERC table weather its NULL or got a value
-												
 												if ( $mercrblvl == NULL )
 													{
 														//insert data into the MERC table
@@ -850,7 +846,6 @@ class User extends CI_Controller
 
 														//--------------------check merc level rebirth----------------------------
 														$mercrblvl = $h->row()->rb;
-														//echo "<p align='center'>and $mercid rebirth level is $mercrblvl.</p>";
 													}
 
 												//---------------------------rebirth operation----------------------------------------------------
@@ -865,7 +860,6 @@ class User extends CI_Controller
 												//initializing wz for rebirth
 												$wz = $this->config->item('mercwzrb');
 												$wzforrb = $wz * $lvllvlrb;
-												//echo "<p align='center'>For $mercid to rebirth, you must fullfill all this requirement which is<br>current lvl ($merclvl) must be greater than or equal to min lvl ($merclvlforrb) for rebirth level ($mercrblvl)<br>and<br>current wz ($charwz) must be greater than or equal to paying wz ($wzforrb).</p>";
 
 												//balance wz
 												$sqlwz = $charwz - $wzforrb;
@@ -937,6 +931,88 @@ class User extends CI_Controller
 							else
 							{
 								//form processor
+								$char = $this->input->post('character', TRUE);
+								$mercid = $this->input->post('merc', TRUE);
+								if ($this->input->post('mercenary_reset_rebirth', TRUE))
+									{
+										$h = $this->hstable->hstable_id($char, $mercid);
+										$c = $this->charac0->charac_cid($char);
+										$m = $this->merc->merc_getAll($char, $mercid);
+										if ($h->num_rows() == 1)
+											{
+												//--------------------check merc level--------------------------
+												$merclvl = $h->row()->HSLevel;
+
+												//--------------------check wz from $char----------------------------------
+												$charwz = $c->row()->c_headerc;
+
+												//--------------------check merc level rebirth----------------------------
+												$mercrblvl = $m->row()->rb;
+
+												//--------------------check merc level reset rebirth----------------------------
+												$mercrbreset = $m->row()->reset_rb;
+
+												//--------------------reset rebirth operation----------------------------
+												// 1st we check the reset rebirth lvl...
+												if ($mercrbreset <= $this->config->item('mercmaxresetrb'))
+													{
+														//then we check its rb level
+														if ($mercrblvl == $this->config->item('mercrblevel'))
+															{
+																//then we check its level
+																if ($merclvl == $this->config->item('mercresetlvl'))
+																	{
+																		//then we check the wz
+																		if ($charwz >= $this->config->item('mercwzreset'))
+																			{
+																				//reset rebirth for merc begin
+																				$reset_rb_merc = $mercrbreset + 1;	//up 1 lvl of reset_rb table
+																				$balance = $charwz - $this->config->item('mercwzreset'); 
+
+																				//update the MERC table
+																				$sql2="update $db_hsdb.dbo.MERC set reset_rb = '$reset_rb_merc', rb = '0' where HSName = '$merc'";
+																				$rs02=db_query($conn2, $sql2);
+
+																				//update the charac0 table for the wz
+																				$sql3="update $db_asd.dbo.charac0 set c_headerc = '$balance' where c_id = '$char'";
+																				$rs03=db_query($conn1, $sql3);
+																				if ($rs02 && $rs03)
+																					{
+																						echo "<p align='center'>Successfully reset rebirth level for your $merc.</p>";
+																						$lap = "UPDATE $db_asd.dbo.account SET d_udate = CONVERT(DATETIME, '$date', 102) WHERE (c_id = '$username')";
+																						$top = sqlsrv_query($conn1, $lap);
+																					}
+																					else
+																					{
+																						echo "<p align='center'>Internal server error, please try again later.</p>";
+																					};
+																			}
+																			else
+																			{
+																				echo "<p align='center'>Your $char have only $charwz, please make sure you have more than $mercwzreset wz to use reset rebirth for your mercenary.</p>";
+																			};
+																	}
+																	else
+																	{
+																		echo "<p align='center'>Your mercenary $merc rebirth level is $merclvl, please make sure youre $merc is at least level $mercresetlvl.</p>";
+																	};
+															}
+															else
+															{
+																echo "<p align='center'>Your mercenary $merc rebirth level is $mercrblvl, please make sure your $merc is at least rebirth level $mercrblevel.</p>";
+															};
+													}
+													else
+													{
+														echo "<p align='center'>Your mercenary $merc reset rebirth level is $mercrbreset, you cant use anymore reset rebirth for ur $merc. Its at the peak of the reset.</p>";
+													};
+											}
+											else
+											{
+												$data['info'] = "$char selected with wrong mercenary";
+												$this->load->view('user/mercenary_rebirth', $data);
+											}
+									}
 							}
 					}
 					else

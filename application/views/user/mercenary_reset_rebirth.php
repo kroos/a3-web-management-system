@@ -59,7 +59,7 @@
 	<?endforeach?>
 	<?endif?>
 </table>
-<p><?=form_submit('merc_rebirth', 'Mercenary Rebirth')?></p>
+<p><?=form_submit('mercenary_reset_rebirth', 'Mercenary Reset Rebirth')?></p>
 <?=form_close()?>
 <?php endblock(); ?>
 
