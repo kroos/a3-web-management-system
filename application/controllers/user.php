@@ -825,21 +825,87 @@ class User extends CI_Controller
 								if ($this->input->post('merc_rebirth', TRUE))
 									{
 										$u = $this->hstable->hstable_id($char, $mercid);
+										$y = $this->charac0->charac_cid($char);
+										$h = $this->merc->merc_getAll($char, $mercid);
 										if ($u->num_rows() == 1)
 											{
 												//--------------------check merc level--------------------------
 												$merclvl = $u->row()->HSLevel;
-												echo "<p align='center'>Currently... your mercenary $merc is level $merclvl</p>";
+												//echo "<p align='center'>Currently... your mercenary $mercid is level $merclvl</p>";
 
 												//--------------------check wz from $char----------------------------------
-												$charwz = $this->charac0->charac_cid($char);
-												echo "<p align='center'>In $char inventory have $charwz wz only.</p>";
+												$charwz = $y->row()->c_headerc;
+												//echo $charwz.' char wz<br />';
 
 												//--------------------check merc level rebirth----------------------------
-												$sqlrb="select rb from MERC where HSName = '$merc' AND MasterName = '$char'";
-												$rsrb=$db2->Execute($sqlrb);
-												$mercrblvl=$rsrb->fields[0];
-												//echo "mercrblvl =".$mercrblvl."<br>";
+												$mercrblvl = $h->row()->rb;
+												//echo "mercrblvl = ".$mercrblvl."<br>";
+
+												//check rebirth level data from the MERC table weather its NULL or got a value
+												
+												if ( $mercrblvl == NULL )
+													{
+														//insert data into the MERC table
+														$this->merc->insert_merc($u->row()->HSID, $u->row()->HSName, $u->row()->MasterName, $u->row()->Type, $u->row()->HSLevel);
+
+														//--------------------check merc level rebirth----------------------------
+														$mercrblvl = $h->row()->rb;
+														//echo "<p align='center'>and $mercid rebirth level is $mercrblvl.</p>";
+													}
+
+												//---------------------------rebirth operation----------------------------------------------------
+												//initializing lvl to rebirth
+												$lvl = $this->config->item('merclvlrb');
+												$lvllvlrb = $mercrblvl * 10;
+												$merclvlforrb= $lvllvlrb + $lvl;
+
+												//initializing rebirth lvl
+												$mercrblvlforrb = $mercrblvl + 1;
+
+												//initializing wz for rebirth
+												$wz = $this->config->item('mercwzrb');
+												$wzforrb = $wz * $lvllvlrb;
+												//echo "<p align='center'>For $mercid to rebirth, you must fullfill all this requirement which is<br>current lvl ($merclvl) must be greater than or equal to min lvl ($merclvlforrb) for rebirth level ($mercrblvl)<br>and<br>current wz ($charwz) must be greater than or equal to paying wz ($wzforrb).</p>";
+
+												//balance wz
+												$sqlwz = $charwz - $wzforrb;
+												$sqlrblvl = $mercrblvl + 1;
+
+												//1st we check lvl
+												if ($merclvl >= $merclvlforrb)
+													{
+														//then we check its wz
+														if ($charwz >= $wzforrb)
+															{
+																	//update char part
+																	$rsgo1 = $this->charac0->update_wz($char, $sqlwz);
+																	//update merc part at MERC table
+																	$rsgo2 = $this->merc->update_rebirth($mercid, $char, $sqlrblvl);
+																	//update hstable part
+																	$rsgo3 = $this->hstable->update_rebirth($mercid, $char);
+																	if(!$rsgo1 && !$rsgo2 && !$rsgo3)
+																		{
+																			$data['info'] = 'Please try again, somehow i cant update the data';
+																			$this->load->view('user/mercenary_rebirth', $data);
+																		}
+																		else
+																		{
+																			$data['info'] = 'Success rebirth your mercenary for '.$char.'';
+																			$this->load->view('user/mercenary_rebirth', $data);
+																			$this->account->update_activity();
+																		}
+															}
+															else
+															{
+																$data['info'] = 'Not enough wz to rebirth your mercenary. You need at least '.$wzforrb.' wz for rebirth lvl '.$mercrblvl.'';
+																$this->load->view('user/mercenary_rebirth', $data);
+															};
+													}
+													else
+													{
+														$data['info'] = 'Your mercenary level is lower than a minimum level. You need at least lvl '.$merclvlforrb.' for rebirth lvl '.$mercrblvl.'';
+														$this->load->view('user/mercenary_rebirth', $data);
+													};
 											}
 											else
 											{
@@ -855,7 +921,29 @@ class User extends CI_Controller
 					}
 			}
 
-
+		public function mercenary_reset_rebirth()
+			{
+				$this->load->database('HSDB', TRUE);
+				$data['query'] = $this->charac0->charac_char();
+				if ($this->session->userdata('logged_in') == TRUE)
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('user/mercenary_reset_rebirth', $data);
+							}
+							else
+							{
+								//form processor
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
 
 
 

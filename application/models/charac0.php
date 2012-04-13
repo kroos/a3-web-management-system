@@ -60,6 +60,11 @@ class Charac0 extends CI_Model
 	{
 		return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_headerc' => $wz, 'rb' => '0', 'times_rb' => $times_rb ) );
 	}
+
+	function update_wz($char, $wz)
+	{
+		return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_headerc' => $wz) );
+	}
 //INSERT
 
 //DELETE

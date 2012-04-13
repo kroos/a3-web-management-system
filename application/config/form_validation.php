@@ -192,6 +192,21 @@ $config = array	(
 								'label' => 'Mercenary',
 								'rules' => 'trim|required|is_natural|xss_clean'
 							)
+					),
+					'user/mercenary_reset_rebirth' => array
+					(
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'merc',
+								'label' => 'Mercenary',
+								'rules' => 'trim|required|is_natural|xss_clean'
+							)
 					)
 
 
