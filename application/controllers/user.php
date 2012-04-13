@@ -1024,7 +1024,28 @@ class User extends CI_Controller
 					}
 			}
 
-
+		public function adding_hero_stat_points()
+			{
+				if ($this->session->userdata('logged_in') == TRUE)
+					{
+						//process
+						$data['query'] = $this->charac0->charac_char();
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('user/adding_hero_stat_points', $data);
+							}
+							else
+							{
+								//form processor
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
 
 
 

@@ -7,9 +7,7 @@
 <link href="<?=base_url()?>css/templatemo_style.css" rel="stylesheet" type="text/css" />
 <link href="<?=base_url()?>css/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection" />
 
-<link rel="stylesheet" type="text/css" href="<?=base_url()?>css/popup.css" media="screen" />
-<script type="text/javascript" src="<?=base_url()?>js/popups.js"></script>
-<script type="text/javascript" src="<?=base_url()?>js/popupbox.js"></script>
+
 <link rel="icon" href="<?=base_url()?>images/favicon.ico" type="image/x-icon" />
 <title><?=$this->config->item('homepage')?> Account Management Tools</title>
 
