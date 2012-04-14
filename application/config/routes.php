@@ -39,6 +39,8 @@
 */
 
 $route['default_controller'] = 'a3';
+$route['user/char_points/(:any)'] = 'user/char_points';
+$route['user/merc_points/(:num)'] = 'user/merc_points';
 $route['404_override'] = 'a3/page_missing';
 
 

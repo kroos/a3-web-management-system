@@ -18,6 +18,11 @@ class Hstable extends CI_Model
 		{
 			return $this->db->get_where('HSDB.dbo.HSTABLE', array('MasterName' => $char, 'HSState' => 0, 'HSID' => $id));
 		}
+
+	function hstable_hsid($id)
+		{
+			return $this->db->get_where('HSDB.dbo.HSTABLE', array('HSID' => $id, 'HSState' => 0));
+		}
 //UPDATE
 	function update_rebirth($id, $char)
 		{

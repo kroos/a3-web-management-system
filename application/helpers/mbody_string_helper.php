@@ -132,139 +132,139 @@ function mbody_insert($attrib, $newstring, $mbody)
 			{
 				case 'EXP' :
 					$EXP = explode('=',$temp[0]);
-					$EXP[1]=$newstring;
+					$EXP[1] = $newstring;
 					$temp[0] = implode('=', $EXP);
 				break;
 
 				case 'SKILL' :
 					$SKILL = explode('=',$temp[1]);
-					$SKILL[1]=$newstring;
+					$SKILL[1] = $newstring;
 					$temp[1] = implode('=', $SKILL);
 				break;
 
 				case 'PK' :
 					$PK = explode('=',$temp[2]);
-					$PK[1]=$newstring;
+					$PK[1] = $newstring;
 					$temp[2] = implode('=', $PK);
 				break;
 
 				case 'RTM' :
 					$RTM = explode('=',$temp[3]);
-					$RTM[1]=$newstring;
+					$RTM[1] = $newstring;
 					$temp[3] = implode('=', $RTM);
 				break;
 
 				case 'SINFO' :
 					$SINFO = explode('=',$temp[4]);
-					$SINFO[1]=$newstring;
+					$SINFO[1] = $newstring;
 					$temp[4] = implode('=', $SINFO);
 				break;
 
 				case 'WEAR' :
 					$WEAR = explode('=',$temp[5]);
-					$WEAR[1]=$newstring;
+					$WEAR[1] = $newstring;
 					$temp[5] = implode('=', $WEAR);
 				break;
 
 				case 'INVEN' :
 					$INVEN = explode('=',$temp[6]);
-					$INVEN[1]=$newstring;
+					$INVEN[1] = $newstring;
 					$temp[6] = implode('=', $INVEN);
 				break;
 
 				case 'PETINV' :
 					$PETINV = explode('=',$temp[7]);
-					$PETINV[1]=$newstring;
+					$PETINV[1] = $newstring;
 					$temp[7] = implode('=', $PETINV);
 				break;
 
 				case 'CQUEST' :
 					$CQUEST = explode('=',$temp[8]);
-					$CQUEST[1]=$newstring;
+					$CQUEST[1] = $newstring;
 					$temp[8] = implode('=', $CQUEST);
 				break;
 
 				case 'WAR' :
 					$WAR = explode('=',$temp[9]);
-					$WAR[1]=$newstring;
+					$WAR[1] = $newstring;
 					$temp[9] = implode('=', $WAR);
 				break;
 
 				case 'SQUEST' :
 					$SQUEST = explode('=',$temp[10]);
-					$SQUEST[1]=$newstring;
+					$SQUEST[1] = $newstring;
 					$temp[10] = implode('=', $SQUEST);
 				break;
 
 				case 'FAVOR' :
 					$FAVOR = explode('=',$temp[11]);
-					$SQUEST[1]=$newstring;
+					$SQUEST[1] = $newstring;
 					$temp[11] = implode('=', $FAVOR);
 				break;
 
 				case 'PSKILL' :
 					$PSKILL = explode('=',$temp[12]);
-					$PSKILL[1]=$newstring;
+					$PSKILL[1] = $newstring;
 					$temp[12] = implode('=', $PSKILL);
 				break;
 
 				case 'SKLSLT' :
 					$SKLSLT = explode('=',$temp[13]);
-					$SKLSLT[1]=$newstring;
+					$SKLSLT[1] = $newstring;
 					$temp[13] = implode('=', $SKLSLT);
 				break;
 
 				case 'CHATOPT' :
 					$CHATOPT = explode('=',$temp[14]);
-					$CHATOPT[1]=$newstring;
+					$CHATOPT[1] = $newstring;
 					$temp[14] = implode('=', $CHATOPT);
 				break;
 
 				case 'TYR' :
 					$TYR = explode('=',$temp[15]);
-					$TYR[1]=$newstring;
+					$TYR[1] = $newstring;
 					$temp[15] = implode('=', $TYR);
 				break;
 
 				case 'SKILLEX' :
 					$SKILLEX = explode('=',$temp[16]);
-					$SKILLEX[1]=$newstring;
+					$SKILLEX[1] = $newstring;
 					$temp[16] = implode('=', $SKILLEX);
 				break;
 
 				case 'SKLSLTEX' :
 					$SKLSLTEX = explode('=',$temp[17]);
-					$SKLSLTEX[1]=$newstring;
+					$SKLSLTEX[1] = $newstring;
 					$temp[17] = implode('=', $SKLSLTEX);
 				break;
 
 				case 'PETACT' :
 					$PETACT = explode('=',$temp[18]);
-					$PETACT[1]=$newstring;
+					$PETACT[1] = $newstring;
 					$temp[18] = implode('=', $PETACT);
 				break;
 
 				case 'LORE' :
 					$LORE = explode('=',$temp[19]);
-					$LORE[1]=$newstring;
+					$LORE[1] = $newstring;
 					$temp[19] = implode('=', $LORE);
 				break;
 
 				case 'LQUEST' :
 					$LQUEST = explode('=',$temp[20]);
-					$LQUEST[1]=$newstring;
+					$LQUEST[1] = $newstring;
 					$temp[20] = implode('=', $LQUEST);
 				break;
 
 				case 'RESRV0' :
 					$RESRV0 = explode('=',$temp[21]);
-					$RESRV0[1]=$newstring;
+					$RESRV0[1] = $newstring;
 					$temp[21] = implode('=', $RESRV0);
 				break;
 
 				case 'RESRV1' :
 					$RESRV1 = explode('=',$temp[22]);
-					$RESRV1[1]=$newstring;
+					$RESRV1[1] = $newstring;
 					$temp[22] = implode('=', $RESRV1);
 				break;
 			}

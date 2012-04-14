@@ -1030,15 +1030,128 @@ class User extends CI_Controller
 					{
 						//process
 						$data['query'] = $this->charac0->charac_char();
-						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
-						if ($this->form_validation->run() == FALSE)
+						$this->load->view('user/adding_hero_stat_points', $data);
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function char_points()
+			{
+				if ($this->session->userdata('logged_in') == TRUE)
+					{
+						//process
+						$char = $this->uri->segment(3, 0);
+						$data['char'] = $this->charac0->charac_cid($char);
+						if ($data['char']->num_rows() == 1)
 							{
-								//form
-								$this->load->view('user/adding_hero_stat_points', $data);
+								$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+								if ($this->form_validation->run() == FALSE)
+									{
+										//form
+										$this->load->view('user/char_points', $data);
+									}
+									else
+									{
+										//form processor
+										//$all = $this->input->post(NULL, TRUE);
+										$str = $this->input->post('str', TRUE);
+										$int = $this->input->post('int', TRUE);
+										$dex = $this->input->post('dex', TRUE);
+										$vit = $this->input->post('vit', TRUE);
+										$mana = $this->input->post('mana', TRUE);
+
+										if ($this->input->post('distrib_points', TRUE))
+											{
+												//from DB
+												$strdb = char_attrib('STR', $data['char']->row()->c_headera);
+												$intdb = char_attrib('INT', $data['char']->row()->c_headera);
+												$dexdb = char_attrib('DEX', $data['char']->row()->c_headera);
+												$vitdb = char_attrib('VIT', $data['char']->row()->c_headera);
+												$manadb = char_attrib('MANA', $data['char']->row()->c_headera);
+												$pointsdb = char_attrib('POINTS', $data['char']->row()->c_headera);
+
+												//from form
+												$pointsf = $str + $int + $dex + $vit + $mana;
+												if ($pointsf <= $pointsdb)
+													{
+														$strn = $strdb + $str;
+														$intn = $intdb + $int;
+														$dexn = $dexdb + $dex;
+														$vitn = $vitdb + $vit;
+														$manan = $manadb + $mana;
+														$pointsn = $pointsdb - $pointsf;
+
+														if ($strn >= 65536)
+															{
+																$data['info'] = 'Strength (<b>'.$strn.'</b>) has exceed 65535';
+																$this->load->view('user/char_points', $data);
+															}
+															else
+															{
+																if ($intn >= 65536)
+																	{
+																		$data['info'] = 'Intelligence (<b>'.$intn.'</b>) has exceed 65535';
+																		$this->load->view('user/char_points', $data);
+																	}
+																	else
+																	{
+																		if($dexn >= 65536)
+																			{
+																				$data['info'] = 'Dexterity (<b>'.$dexn.'</b>) has exceed 65535';
+																				$this->load->view('user/char_points', $data);
+																			}
+																			else
+																			{
+																				if ($vitn >= 65536)
+																					{
+																						$data['info'] = 'Vitality (<b>'.$vitn.'</b>) has exceed 65535';
+																						$this->load->view('user/char_points', $data);
+																					}
+																					else
+																					{
+																						if ($manan >= 65536)
+																							{
+																								$data['info'] = 'Mana (<b>'.$manan.'</b>) has exceed 65535';
+																								$this->load->view('user/char_points', $data);
+																							}
+																							else
+																							{
+																								$string = char_stat($strn, $intn, $dexn, $vitn, $manan, $pointsn, $data['char']->row()->c_headera);
+																								echo $string.' new c_headera<br />';
+																								$p = $this->charac0->update_stat($char, $string);
+																								if ($p)
+																									{
+																										$data['info'] = 'Success distribute points';
+																										$this->load->view('user/char_points', $data);
+																										$this->account->update_activity();
+																										redirect('user/adding_hero_stat_points', 'location');
+																									}
+																									else
+																									{
+																										$data['info'] = 'Please try again. Somehow i cant update the statistic points';
+																										$this->load->view('user/char_points', $data);
+																									}
+																							}
+																					}
+																			}
+																	}
+															}
+													}
+													else
+													{
+														$data['info'] = "Your insertion ($pointsf), have exceed your remaining stat points ($pointsdb)";
+														$this->load->view('user/char_points', $data);
+													}
+											}
+									}
 							}
 							else
 							{
-								//form processor
+								$data['info'] = 'What are you trying to do huh?';
+								$this->load->view('user/char_points', $data);
 							}
 					}
 					else
@@ -1046,6 +1159,90 @@ class User extends CI_Controller
 						redirect(base_url(), 'location');
 					}
 			}
+
+		public function adding_mercenary_stat_points()
+			{
+				$this->load->database('HSDB', TRUE);
+				$data['query'] = $this->charac0->charac_char();
+				if ($this->session->userdata('logged_in') == TRUE)
+					{
+						//process
+						$this->load->view('user/adding_mercenary_stat_points', $data);
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function merc_points()
+			{
+				if ($this->session->userdata('logged_in') == TRUE)
+					{
+						//process
+						$hsid = $this->uri->segment(3, 0);
+						$this->load->database('HSDB', TRUE);
+						$data['merc'] = $this->hstable->hstable_hsid($hsid);
+						$char = $data['merc']->row()->MasterName;
+						$security = $this->charac0->charac_cid($char);
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($security->num_rows() == 1)
+							{
+								if ($this->form_validation->run() == FALSE)
+									{
+										//form
+										$this->load->view('user/merc_points', $data);
+									}
+									else
+									{
+										//form processor
+									}
+							}
+							else
+							{
+								$data['info'] = 'What are you trying to do huh?';
+								$this->load->view('user/char_points', $data);
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1144,16 +1341,17 @@ class User extends CI_Controller
 			}
 //*/
 ///*
-		public function email_check($email)
+		public function points_check($points)
 			{
-				$query = $this->db_easy->get_account('c_headerb', $email)->count_all_results();
-				if ($query == 1)
+				if ($points > 65535)
 					{
-						$this->form_validation->set_message('email_check', "The %s \"$email\" has been taken");
+						//echo $query;
+						$this->form_validation->set_message('points_check', "%s exceed more than 65535");
 						return FALSE;
 					}
 					else
 					{
+						//echo $query;
 						return TRUE;
 					}
 			}

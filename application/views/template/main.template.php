@@ -3,12 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="A3, A3 online, a3 online game, a3 private server, a3 game, free online game, free private server, free a3, free a3 game online, revive, a3 revive, revive online game, free a3 revive" />
-<meta name="description" content="This is an Account Management Tools for  <?php echo $this->config->item('homepage'); ?> Online Games to modify their character" />
+<meta name="description" content="This is an Account Management Tools for  <?=$this->config->item('homepage')?> Online Games to modify their character" />
 <link href="<?=base_url()?>css/templatemo_style.css" rel="stylesheet" type="text/css" />
 <link href="<?=base_url()?>css/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection" />
 
+<link href="<?=base_url()?>css/jquery-ui-1.8.18.custom.css" type="text/css" rel="stylesheet" />	
 
-<link rel="icon" href="<?=base_url()?>images/favicon.ico" type="image/x-icon" />
+<script src="<?=base_url()?>js/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
+
+<link href="<?=base_url()?>images/favicon.ico" type="image/x-icon" rel="icon" />
 <title><?=$this->config->item('homepage')?> Account Management Tools</title>
 
 <script language="javascript" type="text/javascript">
@@ -54,7 +58,9 @@ function clearText(field)
 	<div id="templatemo_content_wrapper"><span class="top"></span><span class="bottom"></span>
 		<div id="templatemo_content">
 			<div id="templatemo_slider">
-			
+
+
+		<?php start_block_marker('contentslider'); ?>
 				<div id="one" class="contentslider">
 					<div class="cs_wrapper">
 						<div class="cs_slider">
@@ -81,7 +87,8 @@ function clearText(field)
 					<!-- End cs_wrapper -->
 				</div>
 				<!-- End contentslider -->
-                
+		<?php end_block_marker(); ?>
+
 				<!-- Site JavaScript -->
 				<script type="text/javascript" src="<?=base_url()?>js/jquery-1.3.1.min.js"></script>
 				<script type="text/javascript" src="<?=base_url()?>js/jquery.easing.1.3.js"></script>
