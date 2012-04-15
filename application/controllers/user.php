@@ -1127,6 +1127,7 @@ class User extends CI_Controller
 																										$data['info'] = 'Success distribute points';
 																										$this->load->view('user/char_points', $data);
 																										$this->account->update_activity();
+																										sleep(3);
 																										redirect('user/adding_hero_stat_points', 'location');
 																									}
 																									else
@@ -1196,6 +1197,87 @@ class User extends CI_Controller
 									else
 									{
 										//form processor
+										$str = $this->input->post('str', TRUE);
+										$int = $this->input->post('int', TRUE);
+										$dex = $this->input->post('dex', TRUE);
+										$vit = $this->input->post('vit', TRUE);
+										$mana = $this->input->post('mana', TRUE);
+										if ($this->input->post('distrib_merc_points', TRUE))
+											{
+												$strdb = merc_attrib('STR', $data['merc']->row()->Ability);
+												$intdb = merc_attrib('INT', $data['merc']->row()->Ability);
+												$dexdb = merc_attrib('DEX', $data['merc']->row()->Ability);
+												$vitdb = merc_attrib('VIT', $data['merc']->row()->Ability);
+												$manadb = merc_attrib('MANA', $data['merc']->row()->Ability);
+												$pointsdb = merc_attrib('POINTS', $data['merc']->row()->Ability);
+												
+												$strn = $str + $strdb;
+												$intn = $int + $intdb;
+												$dexn = $dex + $dexdb;
+												$vitn = $vit + $vitdb;
+												$manan = $mana + $manadb;
+												$pointsn = $str + $int + $dex + $vit + $mana;
+
+												//check balance, pastikan x lebih dari pointsdb
+												$balance = $pointsdb - $pointsn;
+												if ($balance >= 0)
+													{
+														if($strn > 65535)
+															{
+																$data['info'] = 'Strength (<b>'.$strn.'</b>) has exceed 65535';
+																$this->load->view('user/merc_points', $data);
+															}
+															else
+															{
+																if ($intn > 65535)
+																	{
+																		$data['info'] = 'Intelligence (<b>'.$intn.'</b>) has exceed 65535';
+																		$this->load->view('user/merc_points', $data);
+																	}
+																	else
+																	{
+																		if($dexn > 65535)
+																			{
+																				$data['info'] = 'Dexterity (<b>'.$dexn.'</b>) has exceed 65535';
+																				$this->load->view('user/merc_points', $data);
+																			}
+																			else
+																			{
+																				if($manan > 65535)
+																					{
+																						$data['info'] = 'Mana (<b>'.$manan.'</b>) has exceed 65535';
+																						$this->load->view('user/merc_points', $data);
+																					}
+																					else
+																					{
+																						$ability = merc_stat($strn, $intn, $dexn, $vitn, $manan, $pointsn, $data['merc']->row()->Ability);
+																						//echo $data['merc']->row()->Ability.' from db<br />';
+																						//echo $ability.' from form<br />';;
+																						$m = $this->hstable->update_ability($hsid, $ability);
+																						if (!$m)
+																							{
+																								$data['info'] = 'Please try again. Somehow i cant update the statistic points';
+																								$this->load->view('user/merc_points', $data);
+																							}
+																							else
+																							{
+																								$data['info'] = 'Success distribute points';
+																								$this->load->view('user/merc_points', $data);
+																								$this->account->update_activity();
+																								sleep(3);
+																								redirect('user/adding_mercenary_stat_points', 'location');
+																							}
+																					}
+																			}
+																	}
+															}
+													}
+													else
+													{
+														$data['info'] = "Your insertion ($pointsn), have exceed your remaining stat points ($pointsdb)";
+														$this->load->view('user/merc_points', $data);
+													}
+											}
 									}
 							}
 							else
@@ -1209,66 +1291,6 @@ class User extends CI_Controller
 						redirect(base_url(), 'location');
 					}
 			}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #############################################################################################################################
 		public function logout()

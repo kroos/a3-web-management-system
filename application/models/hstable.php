@@ -28,6 +28,11 @@ class Hstable extends CI_Model
 		{
 			return $this->db->where(array('HSID' => $id, 'MasterName' => $char))->update('HSDB.dbo.HSTABLE', array('HSLevel' => 1, 'HSExp' => 0));
 		}
+
+	function update_ability($id, $ability)
+		{
+			return $this->db->where(array('HSID' => $id))->update('HSDB.dbo.HSTABLE', array('Ability' => $ability));
+		}
 //INSERT
 
 //DELETE

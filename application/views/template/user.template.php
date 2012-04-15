@@ -158,35 +158,35 @@ No character created.
 		<li><?=anchor('user/mercenary_reset_rebirth', 'Mercenary Reset Rebirth', 'title="Mercenary Reset Rebirth"');?></li>
 		<li><?=anchor('user/adding_hero_stat_points', 'Adding Hero Stat Points', 'title="Adding Hero Stat Points"');?></li>
 		<li><?=anchor('user/adding_mercenary_stat_points', 'Adding Mercenary Stat Points', 'title="Adding Mercenary Stat Points"');?></li>
-		<li><?=anchor('user/salary', 'Salary', 'title="Salary"');?></li>
-		<li><?=anchor('user/editing_news', 'Editing News', 'title="Editing News"');?></li>
-		<li><?=anchor('user/editing_download', 'Editing Download', 'title="Editing Download"');?></li>
-		<li><?=anchor('user/editing_event', 'Editing Event', 'title="Editing Event"');?></li>
-		<li><?=anchor('user/info_account', 'Info About Account', 'title="Info About Account"');?></li>
-		<li><?=anchor('user/changing_account_type', 'Changing Account Type', 'title="Changing Account Type"');?></li>
-		<li><?=anchor('user/paid_membership', 'Paid Membership', 'title="Paid Membership"');?></li>
-		<li><?=anchor('user/list_of_paid_membership', 'List of Paid Membership', 'title="List of Paid Membership"');?></li>
-		<li><?=anchor('user/acccount_banning', 'Account Banning', 'title="Account Banning"');?></li>
-		<li><?=anchor('user/account_unbanning', 'Account Unbanning', 'title="Account Unbanning"');?></li>
-		<li><?=anchor('user/list_of_suspended_account', 'List Of Suspended Account', 'title="List Of Suspended Account"');?></li>
-		<li><?=anchor('user/list_of_ban_IP', 'List Of Ban IP', 'title="List Of Ban IP"');?></li>
-		<li><?=anchor('user/ban_IP', 'Ban IP', 'title="Ban IP"');?></li>
-		<li><?=anchor('user/unban_IP', 'Unban IP', 'title="Unban IP"');?></li>
-		<li><?=anchor('user/character_altering_points', 'Character Altering Points', 'title="Character Altering Points"');?></li>
-		<li><?=anchor('user/equipping_equipment_and_passive_skill', 'Equipping Equipment And Passive Skill', 'title="Equipping Equipment And Passive Skill"');?></li>
-		<li><?=anchor('user/equip_super_super_shue', 'Equip Super Super Shue', 'title="Equip Super Super Shue"');?></li>
-		<li><?=anchor('user/learn_episode_5_skill', 'Learn Episode 5 Skill', 'title="Learn Episode 5 Skill"');?></li>
-		<li><?=anchor('user/altering_level', 'Altering Level', 'title="Altering Level"');?></li>
-		<li><?=anchor('user/inserting_lore', 'Inserting Lore', 'title="Inserting Lore"');?></li>
-		<li><?=anchor('user/grace_of_silbadu_insertion', 'Grace Of Silbadu Insertion', 'title="Grace Of Silbadu Insertion"');?></li>
-		<li><?=anchor('user/inserting_1_box_of_items', 'Inserting 1 Box of Items', 'title="Inserting 1 Box of Items In The Inventory"');?></li>
-		<li><?=anchor('user/inserting_1_item', 'Inserting 1 Item', 'title="Inserting 1 Item In The Inventory"');?></li>
-		<li><?=anchor('user/character_clone', 'Character Clone', 'title="Character Clone"');?></li>
-		<li><?=anchor('user/guild_removal', 'Guild Removal', 'title="Guild Removal"');?></li>
-		<li><?=anchor('user/info_pk', 'Info PK', 'title="Info PK"');?></li>
-		<li><?=anchor('user/altering_PK_timer', 'Altering PK timer', 'title="Altering PK timer"');?></li>
-		<li><?=anchor('user/inserting_items_manually', 'Inserting Items Manually', 'title="Inserting Items Manually"');?></li>
-		<li><?=anchor('user/database_back_up', 'Database Back Up', 'title="Database Back Up"');?></li>
+		<li><?=anchor('vip/salary', 'Salary', 'title="Salary"');?></li>
+		<li><?=anchor('admin/editing_news', 'Editing News', 'title="Editing News"');?></li>
+		<li><?=anchor('admin/editing_download', 'Editing Download', 'title="Editing Download"');?></li>
+		<li><?=anchor('admin/editing_event', 'Editing Event', 'title="Editing Event"');?></li>
+		<li><?=anchor('admin/info_account', 'Info About Account', 'title="Info About Account"');?></li>
+		<li><?=anchor('admin/changing_account_type', 'Changing Account Type', 'title="Changing Account Type"');?></li>
+		<li><?=anchor('admin/paid_membership', 'Paid Membership', 'title="Paid Membership"');?></li>
+		<li><?=anchor('admin/list_of_paid_membership', 'List of Paid Membership', 'title="List of Paid Membership"');?></li>
+		<li><?=anchor('admin/acccount_banning', 'Account Banning', 'title="Account Banning"');?></li>
+		<li><?=anchor('admin/account_unbanning', 'Account Unbanning', 'title="Account Unbanning"');?></li>
+		<li><?=anchor('admin/list_of_suspended_account', 'List Of Suspended Account', 'title="List Of Suspended Account"');?></li>
+		<li><?=anchor('admin/list_of_ban_IP', 'List Of Ban IP', 'title="List Of Ban IP"');?></li>
+		<li><?=anchor('admin/ban_IP', 'Ban IP', 'title="Ban IP"');?></li>
+		<li><?=anchor('admin/unban_IP', 'Unban IP', 'title="Unban IP"');?></li>
+		<li><?=anchor('admin/character_altering_points', 'Character Altering Points', 'title="Character Altering Points"');?></li>
+		<li><?=anchor('admin/equipping_equipment_and_passive_skill', 'Equipping Equipment And Passive Skill', 'title="Equipping Equipment And Passive Skill"');?></li>
+		<li><?=anchor('admin/equip_super_super_shue', 'Equip Super Super Shue', 'title="Equip Super Super Shue"');?></li>
+		<li><?=anchor('admin/learn_episode_5_skill', 'Learn Episode 5 Skill', 'title="Learn Episode 5 Skill"');?></li>
+		<li><?=anchor('admin/altering_level', 'Altering Level', 'title="Altering Level"');?></li>
+		<li><?=anchor('admin/inserting_lore', 'Inserting Lore', 'title="Inserting Lore"');?></li>
+		<li><?=anchor('admin/grace_of_silbadu_insertion', 'Grace Of Silbadu Insertion', 'title="Grace Of Silbadu Insertion"');?></li>
+		<li><?=anchor('admin/inserting_1_box_of_items', 'Inserting 1 Box of Items', 'title="Inserting 1 Box of Items In The Inventory"');?></li>
+		<li><?=anchor('admin/inserting_1_item', 'Inserting 1 Item', 'title="Inserting 1 Item In The Inventory"');?></li>
+		<li><?=anchor('admin/character_clone', 'Character Clone', 'title="Character Clone"');?></li>
+		<li><?=anchor('admin/guild_removal', 'Guild Removal', 'title="Guild Removal"');?></li>
+		<li><?=anchor('admin/info_pk', 'Info PK', 'title="Info PK"');?></li>
+		<li><?=anchor('admin/altering_PK_timer', 'Altering PK timer', 'title="Altering PK timer"');?></li>
+		<li><?=anchor('admin/inserting_items_manually', 'Inserting Items Manually', 'title="Inserting Items Manually"');?></li>
+		<li><?=anchor('admin/database_back_up', 'Database Back Up', 'title="Database Back Up"');?></li>
 	</ul>
 <?php endblock(); ?>
 

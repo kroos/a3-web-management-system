@@ -31,7 +31,7 @@
 			<p>Dexterity : <?=form_input(array('name' => 'dex', 'value' => 0, 'maxlength' => '5', 'size' => '6'))?>&nbsp;<?=merc_attrib('DEX', $merc->row()->Ability)?>&nbsp;<?=form_error('dex')?>&nbsp;</p>
 			<p>Vitality : <?=form_input(array('name' => 'vit', 'value' => 0, 'maxlength' => '5', 'size' => '6'))?>&nbsp;<?=merc_attrib('VIT', $merc->row()->Ability)?>&nbsp;<?=form_error('vit')?>&nbsp;</p>
 			<p>Mana : <?=form_input(array('name' => 'mana', 'value' => 0, 'maxlength' => '5', 'size' => '6'))?>&nbsp;<?=merc_attrib('MANA', $merc->row()->Ability)?>&nbsp;<?=form_error('mana')?>&nbsp;</p>
-			<p><?=form_submit('distrib_points', 'Distribute '.$merc->row()->HSName.' Points')?></p>
+			<p><?=form_submit('distrib_merc_points', 'Distribute '.$merc->row()->HSName.' Points')?></p>
 			<?=form_close()?>
 <?else:?>
 <p>&nbsp;</p>

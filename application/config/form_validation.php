@@ -240,6 +240,39 @@ $config = array	(
 								'label' => 'Mana',
 								'rules' => 'trim|required|is_natural|callback_points_check|xss_clean'
 							)
+					),
+					'user/merc_points' => array
+					(
+						array
+							(
+								'field' => 'str',
+								'label' => 'Strength',
+								'rules' => 'trim|required|is_natural|callback_points_check|xss_clean'
+							),
+						array
+							(
+								'field' => 'int',
+								'label' => 'Intelligence',
+								'rules' => 'trim|required|is_natural|callback_points_check|xss_clean'
+							),
+						array
+							(
+								'field' => 'dex',
+								'label' => 'Dexterity',
+								'rules' => 'trim|required|is_natural|callback_points_check|xss_clean'
+							),
+						array
+							(
+								'field' => 'vit',
+								'label' => 'Vitality',
+								'rules' => 'trim|required|is_natural|callback_points_check|xss_clean'
+							),
+						array
+							(
+								'field' => 'mana',
+								'label' => 'Mana',
+								'rules' => 'trim|required|is_natural|callback_points_check|xss_clean'
+							)
 					)
 
 
