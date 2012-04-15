@@ -357,6 +357,23 @@ $config['rewrite_short_tags'] = TRUE;
 */
 $config['proxy_ips'] = '';
 
+/*
+|--------------------------------------------------------------------------
+| Javascript
+|--------------------------------------------------------------------------
+|
+| I wrote this library as a means of knowing which Javascripts to load in
+| my view for a given controller/method. My sites often use a common array
+| of jquery libraries, but occasionally I need to use a special JS script
+| on a certain page, say ... for table sorting or something.
+|
+| In order to use this library, PHP5 is required, though it can easily be
+| altered for PHP4. First create a file called ‘Javascripts.php’ in your
+| ‘application/libraries’ folder with the following contents: 
+|
+*/
+//$config['javascripts'] = array('jquery-1.3.1.min.js', 'jquery.easing.1.3.js', 'jquery.ennui.contentslider.js', 'jquery.js', 'popupbox.js', 'popups.js'); 
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
