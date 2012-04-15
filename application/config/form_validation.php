@@ -273,6 +273,15 @@ $config = array	(
 								'label' => 'Mana',
 								'rules' => 'trim|required|is_natural|callback_points_check|xss_clean'
 							)
+					),
+					'vip/salary' => array
+					(
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
 					)
 
 

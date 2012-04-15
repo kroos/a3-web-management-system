@@ -57,18 +57,23 @@ class Charac0 extends CI_Model
 		}
 
 	function update_reset_rebirth($char, $wz, $times_rb)
-	{
-		return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_headerc' => $wz, 'rb' => '0', 'times_rb' => $times_rb ) );
-	}
+		{
+			return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_headerc' => $wz, 'rb' => '0', 'times_rb' => $times_rb ) );
+		}
 
 	function update_wz($char, $wz)
-	{
-		return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_headerc' => $wz) );
-	}
+		{
+			return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_headerc' => $wz) );
+		}
 
 	function update_stat($char, $stat)
 		{
 			return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_headera' => $stat));
+		}
+
+	function update_salary($char, $wz)
+		{
+			return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_headerc' => $wz));
 		}
 //INSERT
 

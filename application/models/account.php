@@ -12,7 +12,7 @@ class Account extends CI_Model
 //SELECT
 	function account_user($username, $password)
 		{
-			return $this->db->get_where('Account', array('c_id' => $username, 'c_headera' => $password));
+			return $this->db->get_where('Account', array('c_id' => $username, 'c_headera' => $password, 'c_status' => 'A'));
 		}
 
 	function account()
@@ -22,12 +22,12 @@ class Account extends CI_Model
 
 	function account_get_password($username, $email)
 		{
-			return $this->db->get_where('Account', array('c_id' => $username, 'c_headerb' => $email));
+			return $this->db->get_where('Account', array('c_id' => $username, 'c_headerb' => $email, 'c_status' => 'A'));
 		}
 
 	function account_cid($username)
 		{
-			return $this->db->get_where('Account', array('c_id' => $username));
+			return $this->db->get_where('Account', array('c_id' => $username, 'c_status' => 'A'));
 		}
 
 		function account_cheaderb($email)
@@ -40,10 +40,21 @@ class Account extends CI_Model
 			return $this->db->where(array('c_id' => $this->session->userdata('username')))->update('Account', array('c_headera' => $password, 'd_udate' => mssqldate()));
 		}
 
+	function update_vip_expired()
+		{
+			return $this->db->where(array('c_id' => $this->session->userdata('username'), 'c_status' => 'A'))->update('Account', array('c_sheaderc' => 'Normal'));
+		}
+
 	function update_activity()
 		{
-			return $this->db->where('c_id', $this->session->userdata('username'))->update('Account', array('d_udate' => mssqldate()) );
+			return $this->db->where(array('c_id' => $this->session->userdata('username'), 'c_status' => 'A'))->update('Account', array('d_udate' => mssqldate()) );
 		}
+
+	function update_salary($date)
+		{
+			return $this->db->where(array('c_id' => $this->session->userdata('username'), 'c_status' => 'A'))->update('Account', array('salary' => $date));
+		}
+
 //INSERT
 	function insert_account($username, $password, $email)
 		{

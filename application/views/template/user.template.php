@@ -101,13 +101,20 @@ Welcome to <?=$this->config->item('homepage')?> Account Management Tools
 ?>
 <p>You are our <font color='#0000FF'><?php echo $laptop; ?></font> user.</p>
 <?php
-if ($this->session->userdata('group') == 'BM' || $this->session->userdata('group') == 'SM' || $this->session->userdata('group') == 'GoldM')
+if ($this->session->userdata('group') == 'BM' || $this->session->userdata('group') == 'SM' || $this->session->userdata('group') == 'GoldM' || $this->session->userdata('group') == 'GM')
 	{
-		echo "<p><font color='#0000FF'>$laptop</font> will expire in <font color='#0000FF'>$timespan</font>.<br />";
+		if ($timespan < 2)
+			{
+				echo "<p><font color='#0000FF'>$laptop</font> account expired.<br />";
+			}
+			else
+			{
+				echo "<p><font color='#0000FF'>$laptop</font> will expire in <font color='#0000FF'>$timespan</font>.<br />";
+			}
 		echo "Salary available on : <font color='#0000FF'>".date_my($legalDate)."</font><br />";
 		if ($timespan1 < 2)
 			{
-				echo "Please claim your salary right away<br />";
+				echo '<blink><b><font color=\'#ff00ff\'>Please claim your salary right away</font></b></blink><br />';
 			}
 			else
 			{
@@ -158,7 +165,9 @@ No character created.
 		<li><?=anchor('user/mercenary_reset_rebirth', 'Mercenary Reset Rebirth', 'title="Mercenary Reset Rebirth"');?></li>
 		<li><?=anchor('user/adding_hero_stat_points', 'Adding Hero Stat Points', 'title="Adding Hero Stat Points"');?></li>
 		<li><?=anchor('user/adding_mercenary_stat_points', 'Adding Mercenary Stat Points', 'title="Adding Mercenary Stat Points"');?></li>
+<?if(($this->session->userdata('logged_in') == TRUE) && (($this->session->userdata('group') == 'GoldM') || ($this->session->userdata('group') == 'SM') || ($this->session->userdata('group') == 'BM') || ($this->session->userdata('group') == 'GM'))):?>
 		<li><?=anchor('vip/salary', 'Salary', 'title="Salary"');?></li>
+<?endif?>
 		<li><?=anchor('admin/editing_news', 'Editing News', 'title="Editing News"');?></li>
 		<li><?=anchor('admin/editing_download', 'Editing Download', 'title="Editing Download"');?></li>
 		<li><?=anchor('admin/editing_event', 'Editing Event', 'title="Editing Event"');?></li>
