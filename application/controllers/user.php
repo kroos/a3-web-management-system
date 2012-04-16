@@ -1197,6 +1197,9 @@ class User extends CI_Controller
 									else
 									{
 										//form processor
+<<<<<<< .mine
+										
+=======
 										$str = $this->input->post('str', TRUE);
 										$int = $this->input->post('int', TRUE);
 										$dex = $this->input->post('dex', TRUE);
