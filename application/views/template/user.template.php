@@ -101,7 +101,7 @@ Welcome to <?=$this->config->item('homepage')?> Account Management Tools
 ?>
 <p>You are our <font color='#0000FF'><?php echo $laptop; ?></font> user.</p>
 <?php
-if ($this->session->userdata('group') == 'BM' || $this->session->userdata('group') == 'SM' || $this->session->userdata('group') == 'GoldM' || $this->session->userdata('group') == 'GM')
+if ($this->session->userdata('group') == 'BM' || $this->session->userdata('group') == 'SM' || $this->session->userdata('group') == 'GoldM')
 	{
 		if ($timespan < 2)
 			{
@@ -168,6 +168,7 @@ No character created.
 <?if(($this->session->userdata('logged_in') == TRUE) && (($this->session->userdata('group') == 'GoldM') || ($this->session->userdata('group') == 'SM') || ($this->session->userdata('group') == 'BM') || ($this->session->userdata('group') == 'GM'))):?>
 		<li><?=anchor('vip/salary', 'Salary', 'title="Salary"');?></li>
 <?endif?>
+<?if($this->session->userdata('logged_in') == TRUE && $this->session->userdata('group') == 'GM'):?>
 		<li><?=anchor('admin/editing_news', 'Editing News', 'title="Editing News"');?></li>
 		<li><?=anchor('admin/editing_download', 'Editing Download', 'title="Editing Download"');?></li>
 		<li><?=anchor('admin/editing_event', 'Editing Event', 'title="Editing Event"');?></li>
@@ -196,6 +197,7 @@ No character created.
 		<li><?=anchor('admin/altering_PK_timer', 'Altering PK timer', 'title="Altering PK timer"');?></li>
 		<li><?=anchor('admin/inserting_items_manually', 'Inserting Items Manually', 'title="Inserting Items Manually"');?></li>
 		<li><?=anchor('admin/database_back_up', 'Database Back Up', 'title="Database Back Up"');?></li>
+<?endif?>
 	</ul>
 <?php endblock(); ?>
 
