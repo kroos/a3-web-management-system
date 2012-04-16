@@ -51,14 +51,14 @@ class Vip extends CI_Controller
 										//tgk wz
 										$r = $this->charac0->charac_cid($char);
 										$wz = $r->row()->c_headerc;
-										echo $wz.' wz ada pada '.$char.'<br />';
+										//echo $wz.' wz ada pada '.$char.'<br />';
 										
 										//penambahan wz dgn gaji
 										$gaji = $wz + $payment;
 
 										$sql2 = $this->account->account_user($this->session->userdata('username'), $this->session->userdata('password'))->row();
-										echo $sql2->last_salary.' last salary<br />';
-										echo $sql2->salary.' salary<br />';
+										//echo $sql2->last_salary.' last salary<br />';
+										//echo $sql2->salary.' salary<br />';
 
 										##################################################
 										//convert to unix time stamp
@@ -67,24 +67,24 @@ class Vip extends CI_Controller
 										##################################################
 
 										$datediff = $this->db->select("DATEDIFF(month, '".$sql2->last_salary."', '".$sql2->salary."') AS monthdatediff")->get()->row();
-										echo $datediff->monthdatediff.' monthdate salary->last salary<br />';
+										//echo $datediff->monthdatediff.' monthdate salary->last salary<br />';
 
 										$datediff1 = $this->db->select("DATEDIFF(month, '".$sql2->last_salary."', GETDATE()) AS monthdate")->get()->row();
-										echo $datediff1->monthdate.' monthdate now->last salary<br />';
+										//echo $datediff1->monthdate.' monthdate now->last salary<br />';
 
 										//check curernt date
 										$cdate = mssqldate();
-										echo $cdate.' current date<br />';
+										//echo $cdate.' current date<br />';
 
 										$sql3 = $this->db->select("DATEADD(month, ".$datediff->monthdatediff."+1, '".$sql2->last_salary."') AS monthdateadd")->get()->row();
-										echo $sql3->monthdateadd.' month<br />';
+										//echo $sql3->monthdateadd.' month<br />';
 										$i = 0;
 										if ($cdate > $sql3->monthdateadd)
 											{
 												$i++;
 											}
 										$sql4 = $this->db->select("DATEADD(month, ".$datediff->monthdatediff."+1+".$i.", '".$sql2->last_salary."') AS monthdateadd")->get()->row();
-										echo $sql4->monthdateadd.' month after process<br />';
+										//echo $sql4->monthdateadd.' month after process<br />';
 
 										if ($cdate > $sql3->monthdateadd)
 											{
@@ -94,7 +94,7 @@ class Vip extends CI_Controller
 											{
 												$legalDate = $sql4->monthdateadd;
 											}
-										echo $legalDate.' legal date<br />';
+										//echo $legalDate.' legal date<br />';
 
 										##################################################
 										//convert to unix time stamp
@@ -110,7 +110,7 @@ class Vip extends CI_Controller
 										$mktime = mktime($hour, $minute, $sec, $month, $day, $year);
 										$legalDate = mdate("%Y-%m-%d %H:%i:%s", $mktime);
 										$timeu1 = human_to_unix($legalDate);
-										echo $timeu1.' unix legal date<br />';
+										//echo $timeu1.' unix legal date<br />';
 										$timespan1 = timespan(now(), $timeu1);
 										##################################################
 
