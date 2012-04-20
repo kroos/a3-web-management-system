@@ -282,6 +282,48 @@ $config = array	(
 								'label' => 'Character',
 								'rules' => 'trim|required|xss_clean'
 							)
+					),
+					'admin/index' => array
+					(
+						array
+							(
+								'field' => 'subject',
+								'label' => 'Subject',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'news_add',
+								'label' => 'News',
+								'rules' => 'trim|required|prep_for_form|xss_clean'
+							),
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
+					'admin/news_edit' => array
+					(
+						array
+							(
+								'field' => 'subject',
+								'label' => 'Subject',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'news_edit',
+								'label' => 'News',
+								'rules' => 'trim|required|prep_for_form|xss_clean'
+							),
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
 					)
 
 

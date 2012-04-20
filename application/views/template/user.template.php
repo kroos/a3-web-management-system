@@ -169,7 +169,7 @@ No character created.
 		<li><?=anchor('vip/salary', 'Salary', 'title="Salary"');?></li>
 <?endif?>
 <?if($this->session->userdata('logged_in') == TRUE && $this->session->userdata('group') == 'GM'):?>
-		<li><?=anchor('admin/editing_news', 'Editing News', 'title="Editing News"');?></li>
+		<li><?=anchor('admin/', 'Editing News', 'title="Editing News"');?></li>
 		<li><?=anchor('admin/editing_download', 'Editing Download', 'title="Editing Download"');?></li>
 		<li><?=anchor('admin/editing_event', 'Editing Event', 'title="Editing Event"');?></li>
 		<li><?=anchor('admin/info_account', 'Info About Account', 'title="Info About Account"');?></li>
