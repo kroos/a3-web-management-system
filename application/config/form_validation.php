@@ -324,6 +324,135 @@ $config = array	(
 								'label' => 'Character',
 								'rules' => 'trim|required|xss_clean'
 							)
+					),
+					'admin/editing_download' => array
+					(
+						array
+							(
+								'field' => 'subject',
+								'label' => 'Subject',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'download_add',
+								'label' => 'Download',
+								'rules' => 'trim|required|prep_for_form|xss_clean'
+							),
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
+					'admin/download_edit' => array
+					(
+						array
+							(
+								'field' => 'subject',
+								'label' => 'Subject',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'download_edit',
+								'label' => 'Download',
+								'rules' => 'trim|required|prep_for_form|xss_clean'
+							),
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
+					'admin/editing_event' => array
+					(
+						array
+							(
+								'field' => 'subject',
+								'label' => 'Subject',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'event_add',
+								'label' => 'Event',
+								'rules' => 'trim|required|prep_for_form|xss_clean'
+							),
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
+					'admin/event_edit' => array
+					(
+						array
+							(
+								'field' => 'subject',
+								'label' => 'Subject',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'event_edit',
+								'label' => 'Event',
+								'rules' => 'trim|required|prep_for_form|xss_clean'
+							),
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
+					'admin/info_account' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							)
+					),
+					'admin/changing_account_type' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'acc',
+								'label' => 'Account Type',
+								'rules' => 'trim|required|alpha|min_length[2]|max_length[6]|xss_clean'
+							)
+					),
+					'admin/paid_membership' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'paid',
+								'label' => 'Type Of Membership',
+								'rules' => 'trim|required|alpha|min_length[2]|max_length[5]|xss_clean'
+							),
+						array
+							(
+								'field' => 'month',
+								'label' => 'Month',
+								'rules' => 'trim|required|is_natural|max_length[2]|xss_clean'
+							)
 					)
 
 

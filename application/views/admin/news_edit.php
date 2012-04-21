@@ -9,7 +9,7 @@
 		<tr>
 		<td>
 		<?=form_open()?>
-		<p align="center">Add your latest update in this form and then just submit.</p>
+		<p align="center">Add your latest news update in this form and then just submit.</p>
 		<p align="center">Subject : <?=form_input(array('name' => 'subject', 'value' => $news->row()->Subject, 'maxlength' => '50', 'size' => '50'))?>&nbsp;<?=form_error('subject')?></p>
 		<p align="center">
 		<?=ckeditor('news_edit', $news->row()->HTML, $this->session->userdata('group'))?>&nbsp;<?=form_error('news_edit')?>

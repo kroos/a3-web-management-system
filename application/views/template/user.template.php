@@ -34,9 +34,11 @@ Welcome to <?=$this->config->item('homepage')?> Account Management Tools
 			break;
 			case 'GM':
 			$laptop = 'Game Master';
+			$payment = 4000000000;
 			break;
 			case 'Normal':
 			$laptop = 'Normal';
+			$payment = NULL;
 			break;
 		};
 	
@@ -176,7 +178,6 @@ No character created.
 		<li><?=anchor('admin/changing_account_type', 'Changing Account Type', 'title="Changing Account Type"');?></li>
 		<li><?=anchor('admin/paid_membership', 'Paid Membership', 'title="Paid Membership"');?></li>
 		<li><?=anchor('admin/list_of_paid_membership', 'List of Paid Membership', 'title="List of Paid Membership"');?></li>
-		<li><?=anchor('admin/acccount_banning', 'Account Banning', 'title="Account Banning"');?></li>
 		<li><?=anchor('admin/account_unbanning', 'Account Unbanning', 'title="Account Unbanning"');?></li>
 		<li><?=anchor('admin/list_of_suspended_account', 'List Of Suspended Account', 'title="List Of Suspended Account"');?></li>
 		<li><?=anchor('admin/list_of_ban_IP', 'List Of Ban IP', 'title="List Of Ban IP"');?></li>

@@ -27,10 +27,20 @@ class Charac0 extends CI_Model
 			return $this->db->get_where('Charac0', array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username'), 'c_status' => 'A'));
 		}
 
+	function search($char)
+		{
+			return $this->db->like('c_id', $char)->where('c_status', 'A')->get('Charac0');
+		}
+
 	function char_online($minutes_ago)
 		{
 			$t = $this->db->select("DATEADD(minute, $minutes_ago, GETDATE()) AS hourago", FALSE)->get()->row();
 			return $this->db->where("(c_status = 'A') AND (d_udate >= CONVERT(DATETIME, '".$t->hourago."', 102))")->order_by ('d_udate', 'DESC')->get('Charac0');
+		}
+
+	function charac($char)
+		{
+			return $this->db->get_where('Charac0', array('c_id' => $char, 'c_status' => 'A'));
 		}
 
 //UPDATE
@@ -74,6 +84,11 @@ class Charac0 extends CI_Model
 	function update_salary($char, $wz)
 		{
 			return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('c_headerc' => $wz));
+		}
+
+	function update_vip_account($char, $user, $plus)
+		{
+			return $this->db->where(array('c_id' => $char, 'c_sheadera' => $user, 'c_status' => 'A'))->update('Charac0', array('c_headerc' => $plus));
 		}
 //INSERT
 

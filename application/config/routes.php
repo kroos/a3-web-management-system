@@ -44,6 +44,10 @@ $route['user/char_points/(:any)'] = 'user/char_points';
 $route['user/merc_points/(:num)'] = 'user/merc_points';
 $route['admin/news_edit/(:num)'] = 'admin/news_edit';
 $route['admin/news_del/(:num)'] = 'admin/news_del';
+$route['admin/download_edit/(:num)'] = 'admin/download_edit';
+$route['admin/download_del/(:num)'] = 'admin/download_del';
+$route['admin/event_edit/(:num)'] = 'admin/event_edit';
+$route['admin/event_del/(:num)'] = 'admin/event_del';
 $route['404_override'] = 'a3/page_missing';
 
 
