@@ -6,12 +6,13 @@
 <p><font color="#FF0000"><blink><?=@$info?></blink></font></p>
 
 <p>You can use this tool if and only if you banned <b>temporarily</b> the character</p>
-<?=form_open()?>
-<p>Character : <?=form_input(array('name' => 'char', 'value' => set_value('char'), 'size' => 20))?>&nbsp;<?=form_error('char')?></p>
-<p>Ban Type : <?=form_dropdown('banning', array('' => '', '1' => 'Temporary', '2' => 'Permanent'))?>&nbsp;<?=form_error('banning')?></p>
-<p><?=form_submit('ban_account', 'Ban Account')?></p>
-<?=form_close()?>
-
+<p>Below is the list of banned <b>ACCOUNT</b></p>
+<p>Click the link below to unban the account</p>
+<?foreach($banned->result() as $b):?>
+<p><?=anchor('/admin/unban/'.$b->c_id.'/'.$b->c_sheadera, 'Unban Account '.$b->c_id, array('title' => 'Unban Account '.$b->c_id))?></p>
+<p>Time span this account have been banned : <?=timespan(mysql_to_unix($b->d_udate), now())?></p>
+<hr>
+<?endforeach?>
 <?php endblock(); ?>
 
 <?php startblock('cleaner_h40b'); ?>

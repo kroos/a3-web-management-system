@@ -179,11 +179,7 @@ No character created.
 		<li><?=anchor('admin/paid_membership', 'Paid Membership', 'title="Paid Membership"');?></li>
 		<li><?=anchor('admin/list_of_paid_membership', 'List of Paid Membership', 'title="List of Paid Membership"');?></li>
 		<li><?=anchor('admin/account_ban', 'Ban Account', 'title="Ban Account"');?></li>
-		<li><?=anchor('admin/account_unbanning', 'Account Unbanning', 'title="Account Unbanning"');?></li>
-		<li><?=anchor('admin/list_of_suspended_account', 'List Of Suspended Account', 'title="List Of Suspended Account"');?></li>
-		<li><?=anchor('admin/list_of_ban_IP', 'List Of Ban IP', 'title="List Of Ban IP"');?></li>
-		<li><?=anchor('admin/ban_IP', 'Ban IP', 'title="Ban IP"');?></li>
-		<li><?=anchor('admin/unban_IP', 'Unban IP', 'title="Unban IP"');?></li>
+		<li><?=anchor('admin/account_unbanning', 'Unban Account', 'title="Unban Account"');?></li>
 		<li><?=anchor('admin/character_altering_points', 'Character Altering Points', 'title="Character Altering Points"');?></li>
 		<li><?=anchor('admin/equipping_equipment_and_passive_skill', 'Equipping Equipment And Passive Skill', 'title="Equipping Equipment And Passive Skill"');?></li>
 		<li><?=anchor('admin/equip_super_super_shue', 'Equip Super Super Shue', 'title="Equip Super Super Shue"');?></li>

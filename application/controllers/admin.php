@@ -653,11 +653,199 @@ class Admin extends CI_Controller
 				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
 					{
 						//process
+						$data['banned'] = $this->account->banned_list();
+						$this->load->view('admin/account_unban', $data);
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function unban()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$acc = $this->uri->segment(3, 0);
+						$pass = $this->uri->segment(4, 0);
+						$t = $this->account->update_unban_acc($acc, $pass);
+						if (!$t)
+							{
+								$data['info'] = 'Please try again later for account : '.$acc.' with the password : '.$pass.'';
+								$data['banned'] = $this->account->banned_list();
+								$this->load->view('admin/account_unban', $data);
+							}
+							else
+							{
+								redirect('admin/account_unbanning', 'location');
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function character_altering_points()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						//form validation process
+						if ($this->input->post('search', TRUE))
+							{
+								$this->form_validation->set_rules('char', 'Character', 'trim|required|alpha_dash|min_length[2]|max_length[12]|xss_clean');
+							}
+							else
+							{
+								if ($this->input->post('alter', TRUE))
+									{
+										$this->form_validation->set_rules('char', 'Character', 'trim|required|alpha_dash|min_length[2]|max_length[12]|xss_clean');
+										$this->form_validation->set_rules('str', 'Strength', 'trim|required|is_natural|less_than[65535]|max_length[5]|xss_clean');
+										$this->form_validation->set_rules('int', 'Intelligence', 'trim|required|is_natural|less_than[65535]|max_length[5]|xss_clean');
+										$this->form_validation->set_rules('dex', 'Dexterity', 'trim|required|is_natural|less_than[65535]|max_length[5]|xss_clean');
+										$this->form_validation->set_rules('vit', 'Vitality', 'trim|required|is_natural|less_than[65535]|max_length[5]|xss_clean');
+										$this->form_validation->set_rules('mana', 'Mana', 'trim|required|is_natural|less_than[65535]|max_length[5]|xss_clean');
+										$this->form_validation->set_rules('prem', 'Remaining Points', 'trim|required|is_natural|less_than[65535]|max_length[5]|xss_clean');
+										$this->form_validation->set_rules('wz', 'Woonz', 'trim|required|is_natural|less_than[4200000000]|max_length[10]|xss_clean');
+									}
+							}
+
+						//form processor
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/char_alter_points');
+							}
+							else
+							{
+								if ($this->input->post('search', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										$r = $this->charac0->charac($char);
+										if (!$r)
+											{
+												$data['info'] = 'I cant find the character '.$char.'. Maybe this character have been banned?';
+												$this->load->view('admin/char_alter_points', $data);
+											}
+											else
+											{
+												$data['query'] = $this->charac0->charac($char);
+												$this->load->view('admin/char_alter_points', $data);
+											}
+									}
+									else
+									{
+										if ($this->input->post('alter', TRUE))
+											{
+												$char = $this->input->post('char', TRUE);
+												$str = $this->input->post('str', TRUE);
+												$int = $this->input->post('int', TRUE);
+												$dex = $this->input->post('dex', TRUE);
+												$mana = $this->input->post('mana', TRUE);
+												$vit = $this->input->post('vit', TRUE);
+												$points = $this->input->post('prem', TRUE);
+												$wz = $this->input->post('wz', TRUE);
+
+												$n = $this->charac0->charac($char);
+												$wz += $n->row()->c_headerc;
+												
+												$str += char_attrib('STR', $n->row()->c_headera);
+												$int += char_attrib('INT', $n->row()->c_headera);
+												$dex += char_attrib('DEX', $n->row()->c_headera);
+												$vit += char_attrib('VIT', $n->row()->c_headera);
+												$mana += char_attrib('MANA', $n->row()->c_headera);
+												$points += char_attrib('POINTS', $n->row()->c_headera);
+												
+												if ($wz > 4100000000)
+													{
+														$data['info'] = $n->row()->c_id.' exceed more than 4.1b wz, '.$wz;
+														$this->load->view('admin/char_alter_points', $data);
+													}
+													else
+													{
+														if($points > 100000)
+															{
+																$data['info'] = $n->row()->c_id.' remaining points exceed more than 100k, '.$points;
+																$this->load->view('admin/char_alter_points', $data);
+															}
+															else
+															{
+																if($str > 65534)
+																	{
+																		$data['info'] = $n->row()->c_id.' strength exceed more than 65535, '.$str;
+																		$this->load->view('admin/char_alter_points', $data);
+																	}
+																	else
+																	{
+																		if($int > 65534)
+																			{
+																				$data['info'] = $n->row()->c_id.' intelligence exceed more than 65535, '.$int;
+																				$this->load->view('admin/char_alter_points', $data);
+																			}
+																			else
+																			{
+																				if ($dex > 65534)
+																					{
+																						$data['info'] = $n->row()->c_id.' dexterity exceed more than 65535, '.$dex;
+																						$this->load->view('admin/char_alter_points', $data);
+																					}
+																					else
+																					{
+																						if($vit > 65534)
+																							{
+																								$data['info'] = $n->row()->c_id.' vitality exceed more than 65535, '.$vit;
+																								$this->load->view('admin/char_alter_points', $data);
+																							}
+																							else
+																							{
+																								if($mana> 65534)
+																									{
+																										$data['info'] = $n->row()->c_id.' mana exceed more than 65535, '.$mana;
+																										$this->load->view('admin/char_alter_points', $data);
+																									}
+																									else
+																									{
+																										$r = $this->charac0->update_alter_points($n->row()->c_id, char_stat($str, $int, $dex, $vit, $mana, $points, $n->row()->c_headera), $wz);
+																										if (!$r)
+																											{
+																												$data['info'] = 'Please try it again';
+																												$this->load->view('admin/char_alter_points', $data);
+																											}
+																											else
+																											{
+																												$data['info'] = 'Success alter '.$n->row()->c_id;
+																												$this->load->view('admin/char_alter_points', $data);
+																											}
+																									}
+																							}
+																					}
+																			}
+																	}
+															}
+													}
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function equipping_equipment_and_passive_skill()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
 						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
 						if ($this->form_validation->run() == FALSE)
 							{
-								//form	account_unban
-								$this->load->view('admin/account_unban');
+								//form
+								$this->load->view('admin/equip_psvskill');
 							}
 							else
 							{
@@ -669,12 +857,6 @@ class Admin extends CI_Controller
 						redirect(base_url(), 'location');
 					}
 			}
-
-
-
-
-
-
 
 
 

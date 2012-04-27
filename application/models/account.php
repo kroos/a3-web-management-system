@@ -44,6 +44,12 @@ class Account extends CI_Model
 			{
 				return $this->db->order_by('c_sheaderc, last_salary DESC')->where('c_sheaderc', 'GoldM')->or_where('c_sheaderc', 'BM')->or_where('c_sheaderc', 'SM')->get('Account');
 			}
+
+		function banned_list()
+			{
+				return $this->db->order_by('d_udate', 'DESC')->get_where('Account', array('c_headera' => $this->config->item('secret_password'), 'c_status' => 'X'));
+			}
+
 //UPDATE
 		function update_password($password)
 			{
@@ -77,7 +83,12 @@ class Account extends CI_Model
 
 		function update_ban_account($username,  $backpass)
 			{
-				return $this->db->where(array('c_id' => $username))->update('Account', array('c_sheadera' => $backpass, 'c_headera' => $this->config->item('secret_password'), 'c_status' => 'X'));
+				return $this->db->where(array('c_id' => $username))->update('Account', array('c_sheadera' => $backpass, 'c_headera' => $this->config->item('secret_password'), 'c_status' => 'X', 'd_udate' => mssqldate()));
+			}
+
+		function update_unban_acc($cid, $pass)
+			{
+				return $this->db->where(array('c_id' => $cid))->update('Account', array( 'c_headera' => $pass, 'c_status' => 'A', 'd_udate' => mssqldate() ));
 			}
 
 //INSERT

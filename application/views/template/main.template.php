@@ -167,7 +167,7 @@ function clearText(field)
 				<!--
 					<a href="http://www.templatemo.com/page/1" target="_parent">FOLLOW US <span>on Twitter</span></a>
 				-->
-					<div  id="templatemo_menu">
+					<div id="templatemo_menu1">
 
 						<?php start_block_marker('templatemo_menu_side'); ?>
 						<?php end_block_marker(); ?>

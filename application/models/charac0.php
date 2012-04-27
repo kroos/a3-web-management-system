@@ -94,6 +94,12 @@ class Charac0 extends CI_Model
 			{
 				return $this->db->where(array('c_id' => $char, 'c_sheadera' => $user, 'c_status' => 'A'))->update('Charac0', array('c_headerc' => $plus));
 			}
+
+		function update_alter_points($char, $ability, $wz)
+			{
+				return $this->db->where(array('c_id' => $char))->update('Charac0', array('c_headera' => $ability, 'c_headerc' => $wz));
+			}
+
 	//INSERT
 	
 	//DELETE
