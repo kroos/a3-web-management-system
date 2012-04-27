@@ -30,6 +30,11 @@ class Account extends CI_Model
 				return $this->db->get_where('Account', array('c_id' => $username, 'c_status' => 'A'));
 			}
 
+		function account_cid_ban($username)
+			{
+				return $this->db->get_where('Account', array('c_id' => $username));
+			}
+
 		function account_cheaderb($email)
 			{
 				return $this->db->get_where('Account', array('c_headerb' => $email));
@@ -67,7 +72,12 @@ class Account extends CI_Model
 
 		function update_vip_account($username,  $paid, $salary_date)
 			{
-				return $this->db->where(array('c_id' => $username, 'c_status' => 'A'))->update('Account', array('c_sheaderc' => $paid, 'salary' => $salary_date, 'last_salary' => $salary_date));
+				return $this->db->where(array('c_id' => $username, 'c_status' => 'A'))->update('Account', array('c_sheadera' => $paid, 'salary' => $salary_date, 'last_salary' => $salary_date));
+			}
+
+		function update_ban_account($username,  $backpass)
+			{
+				return $this->db->where(array('c_id' => $username))->update('Account', array('c_sheadera' => $backpass, 'c_headera' => $this->config->item('secret_password'), 'c_status' => 'X'));
 			}
 
 //INSERT
@@ -94,7 +104,10 @@ class Account extends CI_Model
 			}
 
 //DELETE
-
+		function delete_acc($username)
+			{
+				return $this->db->delete('Account', array('c_id' => $username));
+			}
 #############################################################################################################################
 	}
 ?>

@@ -5,7 +5,7 @@
 
 <p><font color="#FF0000"><blink><?=@$info?></blink></font></p>
 
-<table border="0" width="100%" style="border-collapse: collapse">
+<table border="1" width="100%" style="border-collapse: collapse">
 <tr>
 <td align="center" width="25%">Username</td>
 <td align="center" width="25%">Status Account</td>

@@ -453,6 +453,21 @@ $config = array	(
 								'label' => 'Month',
 								'rules' => 'trim|required|is_natural|max_length[2]|xss_clean'
 							)
+					),
+					'admin/account_ban' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'banning',
+								'label' => 'Ban Type',
+								'rules' => 'trim|required|is_natural_no_zero|xss_clean'
+							)
 					)
 
 

@@ -570,6 +570,121 @@ class Admin extends CI_Controller
 					}
 			}
 
+		public function account_ban()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/account_ban');
+							}
+							else
+							{
+								//form processor
+								$this->load->database('HSDB', TRUE);
+								if ($this->input->post('ban_account', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										$ban_type = $this->input->post('banning', TRUE);
+										$e = $this->charac0->charac($char);
+										$username = $e->row()->c_sheadera;
+										$f = $this->account->account_cid_ban($username);
+										$backpass = $f->row()->c_headera;
+										if ($backpass != $this->config->item('secret_password'))
+											{
+												if ($ban_type == 1 )
+													{
+														//n then we start update the account table
+														$this->account->update_ban_account($username, $backpass);
+
+														$data['info'] = 'Succesfully ban '.$char.'';
+														$this->load->view('admin/account_ban', $data);
+													}
+													else
+													{
+														if ($ban_type == 2 )
+															{
+																//delete mercenaries
+																$t = $this->charac0->user_char($username);
+																foreach($t->result() as $master)
+																	{
+																		//delete every merc for each of master
+																		$this->hsstonetable->delete_stone_master($master->c_id);
+
+																		//delete from hstable
+																		$this->hstable->delete_hstable($master->c_id);
+
+																		//delete from merc
+																		$this->merc->delete_merc($master->c_id);
+																	}
+																//delete all the char from Charac0 table...
+																$this->charac0->delete_all_char($username);
+
+																//delete the account
+																$this->account->delete_acc($username);
+
+																//delete the itemstorage
+																$this->itemstorage0->delete_storage($username);
+
+																$data['info'] = 'Successfully DELETING '.$char.' account';
+																$this->load->view('admin/account_ban', $data);
+															};
+													};
+											}
+											else
+											{
+												$data['info'] = 'This '.$char.' have been banned, no need to rebanning him/her again';
+												$this->load->view('admin/account_ban', $data);
+											};
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function account_unbanning()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form	account_unban
+								$this->load->view('admin/account_unban');
+							}
+							else
+							{
+								//form processor
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #############################################################################################################################
 		public function logout()
