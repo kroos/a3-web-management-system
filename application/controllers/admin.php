@@ -850,6 +850,29 @@ class Admin extends CI_Controller
 							else
 							{
 								//form processor
+								if($this->input->post('chareq', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										$eq = $this->input->post('eq', TRUE);
+										$psskill = $this->input->post('psskill', TRUE);
+
+										$h = $this->charac0->charac($char);
+
+										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('WEAR', $eq, $h->row()->m_body));
+										$h = $this->charac0->charac($char);
+										$o1 = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('PSKILL', $psskill, $h->row()->m_body));
+
+										if (!$o && !$o1 )
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/equip_psvskill', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success equip passive skill and equip gear for  '.$h->row()->c_id;
+												$this->load->view('admin/equip_psvskill', $data);
+											}
+									}
 							}
 					}
 					else
@@ -858,15 +881,203 @@ class Admin extends CI_Controller
 					}
 			}
 
+		public function equip_super_super_shue()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/equip_super_super_shue');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('putsss', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										$sss = $this->input->post('sss', TRUE);
 
+										$h = $this->charac0->charac($char);
+										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('PETACT', $sss, $h->row()->m_body));
+										if (!$o)
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/equip_super_super_shue', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success insert super super shue for  '.$h->row()->c_id;
+												$this->load->view('admin/equip_super_super_shue', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
 
+		public function learn_episode_5_skill()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/learn_episode_5_skill');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('skillepi5', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
 
+										$h = $this->charac0->charac($char);
+										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('SKILLEX', '4294967295;4294967295;4294967295', $h->row()->m_body));
+										if (!$o)
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/learn_episode_5_skill', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success learning episode V skill for  '.$h->row()->c_id;
+												$this->load->view('admin/learn_episode_5_skill', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
 
+		public function altering_level()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/altering_level');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('charlvl', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										$level = $this->input->post('level', TRUE);
 
+										$h = $this->charac0->charac($char);
+										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('EXP', $level, $h->row()->m_body));
+										if (!$o)
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/altering_level', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success alter level for  '.$h->row()->c_id;
+												$this->load->view('admin/altering_level', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
 
+		public function inserting_lore()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/inserting_lore');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('insertlore', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										$lore = $this->input->post('lore', TRUE);
 
+										$h = $this->charac0->charac($char);
+										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('LORE', $lore, $h->row()->m_body));
+										if (!$o)
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/inserting_lore', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success insert lore for  '.$h->row()->c_id;
+												$this->load->view('admin/inserting_lore', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
 
+		public function grace_of_silbadu_insertion()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/grace_of_silbadu_insertion');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('gos_insert', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
 
+										$h = $this->charac0->charac($char);
+										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('LORE', '9586;123;123;0;9586;123;123;1;9586;123;123;2;9586;123;123;3;9586;123;123;4;9586;123;123;5;9586;123;123;6;9586;123;123;7;9586;123;123;8;9586;123;123;9', $h->row()->m_body));
+										if (!$o)
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/inserting_lore', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success insert lore for  '.$h->row()->c_id;
+												$this->load->view('admin/inserting_lore', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
 
 #############################################################################################################################
 		public function logout()

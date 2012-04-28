@@ -468,6 +468,81 @@ $config = array	(
 								'label' => 'Ban Type',
 								'rules' => 'trim|required|is_natural_no_zero|xss_clean'
 							)
+					),
+					'admin/equipping_equipment_and_passive_skill' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'eq',
+								'label' => 'Equipment',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'psskill',
+								'label' => 'Passive Skill',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
+					'admin/equip_super_super_shue' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'sss',
+								'label' => 'Super Super Shue',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
+					'admin/learn_episode_5_skill' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							)
+					),
+					'admin/altering_level' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'level',
+								'label' => 'Level',
+								'rules' => 'trim|required|is_natural_no_zero|xss_clean'
+							)
+					),
+					'admin/inserting_lore' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'lore',
+								'label' => 'Lore',
+								'rules' => 'trim|required|is_natural_no_zero|xss_clean'
+							)
 					)
 
 
