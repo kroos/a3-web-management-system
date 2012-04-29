@@ -481,13 +481,13 @@ $config = array	(
 							(
 								'field' => 'eq',
 								'label' => 'Equipment',
-								'rules' => 'trim|required|xss_clean'
+								'rules' => 'trim|required|min_length[2]|xss_clean'
 							),
 						array
 							(
 								'field' => 'psskill',
 								'label' => 'Passive Skill',
-								'rules' => 'trim|required|xss_clean'
+								'rules' => 'trim|required|min_length[2]|xss_clean'
 							)
 					),
 					'admin/equip_super_super_shue' => array

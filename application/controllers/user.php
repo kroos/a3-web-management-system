@@ -11,7 +11,35 @@ class User extends CI_Controller
 					{
 						//process
 						$data['news'] = $this->a3web_html->news();
-						$this->load->view('user/home', $data);
+						$data['char'] = $this->charac0->charac_char();
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('user/home', $data);
+							}
+							else
+							{
+								//form processor
+								if ($this->input->post('rely_news', TRUE))
+									{
+										$bil_post = $this->input->post('bil_post', TRUE);
+										$html = stripslashes($this->input->post('news_reply', TRUE));
+										$author = $this->input->post('character', TRUE);
+										
+										$b = $this->a3web_comment->insert_news($author, $bil_post, $html);
+										if(!$b)
+											{
+												$data['info'] = 'Please try again later';
+												$this->load->view('user/home', $data);
+											}
+											else
+											{
+												$data['info'] = 'Successfull send reply';
+												$this->load->view('user/home', $data);
+											}
+									}
+							}
 					}
 					else
 					{
@@ -24,9 +52,18 @@ class User extends CI_Controller
 				if ($this->session->userdata('logged_in') == TRUE)
 					{
 						//process
-						$data['event'] = $this->a3web_html->event();
-						$this->load->view('user/event', $data);
-						
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$data['event'] = $this->a3web_html->event();
+								$data['char'] = $this->charac0->charac_char();
+								$this->load->view('user/event', $data);
+							}
+							else
+							{
+								//form processor
+							}
 					}
 					else
 					{
@@ -39,9 +76,18 @@ class User extends CI_Controller
 				if ($this->session->userdata('logged_in') == TRUE)
 					{
 						//process
-						$data['event'] = $this->a3web_html->download();
-						$this->load->view('user/download', $data);
-						
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$data['event'] = $this->a3web_html->download();
+								$data['char'] = $this->charac0->charac_char();
+								$this->load->view('user/download', $data);
+							}
+							else
+							{
+								//form processor
+							}
 					}
 					else
 					{
