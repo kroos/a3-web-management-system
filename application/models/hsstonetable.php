@@ -9,8 +9,16 @@ class Hsstonetable extends CI_Model
 			}
 #############################################################################################################################
 //CRUD for hsstonetable
+		function master($char)
+			{
+				return $this->db->get_where('HSDB.dbo.HSSTONETABLE', array('MasterName' => $char));
+			}
 
 //UPDATE
+		function update_transfer($char, $CreateDate, $SaveDate, $Slot0, $Slot1, $Slot2, $Slot3)
+			{
+				return $this->db->where(array('MasterName' => $char))->update('HSDB.dbo.HSSTONETABLE', array('CreateDate' => $CreateDate, 'SaveDate' => $SaveDate, 'Slot0' => $Slot0, 'Slot1' => $Slot1, 'Slot2' => $Slot2, 'Slot3' => $Slot3));
+			}
 
 //INSERT
 

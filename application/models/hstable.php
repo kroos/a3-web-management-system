@@ -14,6 +14,11 @@ class Hstable extends CI_Model
 				return $this->db->get_where('HSDB.dbo.HSTABLE', array('MasterName' => $char, 'HSState' => 0));
 			}
 
+		function hstable_char($char)
+			{
+				return $this->db->get_where('HSDB.dbo.HSTABLE', array('MasterName' => $char));
+			}
+
 		function hstable_id($char, $id)
 			{
 				return $this->db->get_where('HSDB.dbo.HSTABLE', array('MasterName' => $char, 'HSState' => 0, 'HSID' => $id));
@@ -35,6 +40,11 @@ class Hstable extends CI_Model
 				return $this->db->where(array('HSID' => $id))->update('HSDB.dbo.HSTABLE', array('Ability' => $ability));
 			}
 
+		function update_transfer($id, $char)
+			{
+				return $this->db->where(array('HSID' => $id))->update('HSDB.dbo.HSTABLE', array('MasterName' => $char));
+			}
+			
 	//INSERT
 
 	//DELETE

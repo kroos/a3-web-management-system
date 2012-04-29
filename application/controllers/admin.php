@@ -858,9 +858,9 @@ class Admin extends CI_Controller
 
 										$h = $this->charac0->charac($char);
 
-										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('WEAR', $eq, $h->row()->m_body));
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('WEAR', $eq, $h->row()->m_body));
 										$h = $this->charac0->charac($char);
-										$o1 = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('PSKILL', $psskill, $h->row()->m_body));
+										$o1 = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('PSKILL', $psskill, $h->row()->m_body));
 
 										if (!$o && !$o1 )
 											{
@@ -901,7 +901,7 @@ class Admin extends CI_Controller
 										$sss = $this->input->post('sss', TRUE);
 
 										$h = $this->charac0->charac($char);
-										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('PETACT', $sss, $h->row()->m_body));
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('PETACT', $sss, $h->row()->m_body));
 										if (!$o)
 											{
 												$data['info'] = 'Please try again';
@@ -940,7 +940,7 @@ class Admin extends CI_Controller
 										$char = $this->input->post('char', TRUE);
 
 										$h = $this->charac0->charac($char);
-										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('SKILLEX', '4294967295;4294967295;4294967295', $h->row()->m_body));
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('SKILLEX', '4294967295;4294967295;4294967295', $h->row()->m_body));
 										if (!$o)
 											{
 												$data['info'] = 'Please try again';
@@ -980,7 +980,7 @@ class Admin extends CI_Controller
 										$level = $this->input->post('level', TRUE);
 
 										$h = $this->charac0->charac($char);
-										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('EXP', $level, $h->row()->m_body));
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('EXP', $level, $h->row()->m_body));
 										if (!$o)
 											{
 												$data['info'] = 'Please try again';
@@ -1020,7 +1020,7 @@ class Admin extends CI_Controller
 										$lore = $this->input->post('lore', TRUE);
 
 										$h = $this->charac0->charac($char);
-										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('LORE', $lore, $h->row()->m_body));
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('LORE', $lore, $h->row()->m_body));
 										if (!$o)
 											{
 												$data['info'] = 'Please try again';
@@ -1059,18 +1059,398 @@ class Admin extends CI_Controller
 										$char = $this->input->post('char', TRUE);
 
 										$h = $this->charac0->charac($char);
-										$o = $this->charac0->update_mbody($h->row()->c_id, mbody_insert('LORE', '9586;123;123;0;9586;123;123;1;9586;123;123;2;9586;123;123;3;9586;123;123;4;9586;123;123;5;9586;123;123;6;9586;123;123;7;9586;123;123;8;9586;123;123;9', $h->row()->m_body));
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('INVEN', '9586;123;123;0;9586;123;123;1;9586;123;123;2;9586;123;123;3;9586;123;123;4;9586;123;123;5;9586;123;123;6;9586;123;123;7;9586;123;123;8;9586;123;123;9', $h->row()->m_body));
 										if (!$o)
 											{
 												$data['info'] = 'Please try again';
-												$this->load->view('admin/inserting_lore', $data);
+												$this->load->view('admin/grace_of_silbadu_insertion', $data);
 											}
 											else
 											{
 												$data['info'] = 'Success insert lore for  '.$h->row()->c_id;
-												$this->load->view('admin/inserting_lore', $data);
+												$this->load->view('admin/grace_of_silbadu_insertion', $data);
 											}
 									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function inserting_1_box_of_items()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/inserting_1_box_of_items');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('item_inv', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										$item = $this->input->post('item', TRUE);
+										$slot = $this->input->post('slot', TRUE);
+
+										$h = $this->charac0->charac($char);
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('INVEN', '17;164'.$item.';131845;'.$slot.';', $h->row()->m_body));
+										if (!$o)
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/inserting_1_box_of_items', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success insert a box of item for  '.$h->row()->c_id;
+												$this->load->view('admin/inserting_1_box_of_items', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function inserting_1_item()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/inserting_1_item');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('gm_items', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										$item = $this->input->post('item', TRUE);
+										$slot = $this->input->post('slot', TRUE);
+
+										$h = $this->charac0->charac($char);
+										
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('INVEN', $item.';'.$slot.';'.mbody_part('INVEN', $h->row()->m_body), $h->row()->m_body));
+										if (!$o)
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/inserting_1_item', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success insert GAME MASTER item for '.$h->row()->c_id;
+												$this->load->view('admin/inserting_1_item', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function character_clone()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/character_clone');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('clone', TRUE))
+									{
+										$char1 = $this->input->post('char1', TRUE);	//old char
+										$char2 = $this->input->post('char2', TRUE);	//new char
+
+										$h1 = $this->charac0->charb($char1);
+										$h2 = $this->charac0->charac($char2);		//must make sure that char2 is alive
+
+										if($h1->num_rows() < 1)
+											{
+												$data['info'] = 'Cant find '.$char1.'. Please make sure that you type it correctly';
+												$this->load->view('admin/character_clone', $data);
+											}
+											else
+											{
+												if ($h2->num_rows() < 1)
+													{
+														$data['info'] = 'Cant find '.$char2.'. Please make sure that you type it correctly and that character is not having status "X"';
+														$this->load->view('admin/character_clone', $data);
+													}
+													else
+													{
+														//transfer all the info from char1 to char2
+														$r = $this->charac0->update_char_clone($h2->row()->c_id, $h1->row()->c_sheaderc, $h1->row()->c_headera, $h1->row()->c_headerb, $h1->row()->c_headerc, $h1->row()->d_cdate, $h1->row()->d_udate, mbody_insert('SINFO', '0', $h1->row()->m_body), $h1->row()->rb, $h1->row()->times_rb);		//buang kh siap siap
+														if (!$r)
+															{
+																$data['info'] = 'Cant transfer data from '.$h1->row()->c_id.' (old character) to '.$h2->row()->c_id.' (new char)';
+																$this->load->view('admin/character_clone', $data);
+															}
+															else
+															{
+																//disable char1 just in case
+																$j = $this->charac0->update_disable_char($h1->row()->c_id);
+																	if (!$j)
+																		{
+																			$data['info'] = 'Cant disable character '.$h1->row()->c_id.' (old character)';
+																			$this->load->view('admin/character_clone', $data);
+																		}
+																		else
+																		{
+																			//now we start backing the merc, 1st we need to find the correct name for char cos at the HSSTONETABLE, it was case sensitive
+																			$char100 = $h1->row()->c_id;
+
+																			//find another char name like above
+																			$char101 = $h2->row()->c_id;
+
+																			$this->load->database('HSDB');
+																			//then we find update at HSSTONETABLE
+																			//collect all data from char been deleted.
+																			$l1 = $this->hsstonetable->master($h1->row()->c_id);
+																			if ( $l1->num_rows() < 1 )
+																				{
+																					$data['info'] = $h1->row()->c_id.' doesn\'t have any mercenary (HSSTONETABLE)';
+																					$this->load->view('admin/character_clone', $data);
+																				}
+																				else
+																				{
+																					//now we r updating new char with the mercenary which is $char101
+																					$kapcai = $this->hsstonetable->update_transfer($h2->row()->c_id, $l1->row()->CreateDate, $l1->row()->SaveDate, $l1->row()->Slot0, $l1->row()->Slot1, $l1->row()->Slot2, $l1->row()->Slot3);
+																	
+																					//now we r deleting 'old char' which is $char100
+																					$sucdel = $this->hsstonetable->delete_stone_master($char100);
+																	
+																					//updating data at HSTABLE, but we need to find merc if there is more than 1 merc.
+																					$rs103 = $this->hstable->hstable_char($h1->row()->c_id);
+																					if ($rs103->num_rows() < 1)
+																						{
+																							$data['info'] = $h1->row()->c_id.' doesn\'t have any mercenary (HSTABLE)';
+																							$this->load->view('admin/character_clone', $data);
+																						}
+																						else
+																						{
+																							foreach ($rs103->result() as $mers)
+																								{
+																									//updating the HSTABLE process
+																									$sql104 = $this->hstable->update_transfer($$mers->HSID, $h2->row()->c_id);
+																									if (!$sql104)
+																										{
+																											$data['info'] = 'Cant transfer the merc but however that character is fully restored';
+																											$this->load->view('admin/character_clone', $data);
+																										}
+																										else
+																										{
+																											$data['info'] = 'Successfull cloning the character and the mercenary';
+																											$this->load->view('admin/character_clone', $data);
+																										}
+																								};
+																						}
+																				};
+																		}
+															};
+													}
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function guild_removal()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/guild_removal');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('removeguild', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+
+										$h = $this->charac0->charac($char);
+										
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('SINFO', '0', $h->row()->m_body));
+										if (!$o)
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/guild_removal', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success removing knighthood from '.$h->row()->c_id;
+												$this->load->view('admin/guild_removal', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function info_pk()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/info_pk');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('info_pk', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+
+										$data['h'] = $this->charac0->charac($char);
+										
+										if (!$data['h'])
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/info_pk', $data);
+											}
+											else
+											{
+												$this->load->view('admin/info_pk', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function altering_PK_timer()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/altering_PK_timer');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('pk_timer', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										$timer = $this->input->post('timer', TRUE);
+
+										$h = $this->charac0->charac($char);
+
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('RTM', $timer, $h->row()->m_body));
+										if (!$o)
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/altering_PK_timer', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success modify PK timer for '.$h->row()->c_id;
+												$this->load->view('admin/altering_PK_timer', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function inserting_items_manually()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/inserting_items_manually');
+							}
+							else
+							{
+								//form processor
+								if($this->input->post('insert_manual', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										$code = $this->input->post('code', TRUE);
+
+										$h = $this->charac0->charac($char);
+
+										$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('INVEN', $code.mbody_part('INVEN', $h->row()->m_body), $h->row()->m_body));
+										if (!$o)
+											{
+												$data['info'] = 'Please try again';
+												$this->load->view('admin/inserting_items_manually', $data);
+											}
+											else
+											{
+												$data['info'] = 'Success inject the code for '.$h->row()->c_id;
+												$this->load->view('admin/inserting_items_manually', $data);
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function database_back_up()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+							}
+							else
+							{
+								//form processor
 							}
 					}
 					else

@@ -543,6 +543,120 @@ $config = array	(
 								'label' => 'Lore',
 								'rules' => 'trim|required|is_natural_no_zero|xss_clean'
 							)
+					),
+					'admin/grace_of_silbadu_insertion' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							)
+					),
+					'admin/inserting_1_box_of_items' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'item',
+								'label' => 'Item',
+								'rules' => 'trim|required|is_natural_no_zero|exact_length[4]|xss_clean'
+							),
+						array
+							(
+								'field' => 'slot',
+								'label' => 'Slot',
+								'rules' => 'trim|required|is_natural_no_zero|min_length[1]|max_length[2]|xss_clean'
+							)
+					),
+					'admin/inserting_1_item' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'item',
+								'label' => 'Item',
+								'rules' => 'trim|required|min_length[2]|xss_clean'
+							),
+						array
+							(
+								'field' => 'slot',
+								'label' => 'Slot',
+								'rules' => 'trim|required|is_natural|min_length[1]|max_length[2]|xss_clean'
+							)
+					),
+					'admin/character_clone' => array
+					(
+						array
+							(
+								'field' => 'char1',
+								'label' => 'Character Backup',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'char2',
+								'label' => 'Character Restore',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							)
+					),
+					'admin/guild_removal' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							)
+					),
+					'admin/info_pk' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							)
+					),
+					'admin/altering_PK_timer' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'timer',
+								'label' => 'Timer',
+								'rules' => 'trim|required|is_natural|max_length[12]|xss_clean'
+							)
+					),
+					'admin/inserting_items_manually' => array
+					(
+						array
+							(
+								'field' => 'char',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							),
+						array
+							(
+								'field' => 'code',
+								'label' => 'code',
+								'rules' => 'trim|required|xss_clean'
+							)
 					)
 
 

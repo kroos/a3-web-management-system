@@ -47,6 +47,12 @@ class Charac0 extends CI_Model
 			{
 				return $this->db->get_where('Charac0', array('c_sheadera' => $username));
 			}
+
+		function charb($char)
+			{
+				return $this->db->get_where('Charac0', array('c_id' => $char));
+			}
+
 //UPDATE
 		function update_tele($char, $town)
 			{
@@ -57,6 +63,11 @@ class Charac0 extends CI_Model
 		function update_mbody($char, $mbody)
 			{
 				return $this->db->where(array('c_id' => $char, 'c_sheadera' => $this->session->userdata('username')))->update('Charac0', array('m_body' => $mbody) );
+			}
+
+		function update_mbody_gm($char, $mbody)
+			{
+				return $this->db->where(array('c_id' => $char))->update('Charac0', array('m_body' => $mbody) );
 			}
 
 //update mbody n wz
@@ -98,6 +109,23 @@ class Charac0 extends CI_Model
 		function update_alter_points($char, $ability, $wz)
 			{
 				return $this->db->where(array('c_id' => $char))->update('Charac0', array('c_headera' => $ability, 'c_headerc' => $wz));
+			}
+
+		function update_char_clone($char, $c_sheaderc, $c_headera, $c_headerb, $c_headerc, $d_cdate, $d_udate, $m_body, $rb, $times_rb)
+			{
+				if ($d_cdate == NULL)
+					{
+						return $this->db->where(array('c_id' => $char))->update('Charac0', array( 'c_sheaderc' => $c_sheaderc, 'c_headera' => $c_headera, 'c_headerb' => $c_headerb, 'c_headerc' => $c_headerc, 'd_udate' => $d_udate, 'm_body' => $m_body, 'rb' => $rb, 'times_rb' => $times_rb ));
+					}
+					else
+					{
+						return $this->db->where(array('c_id' => $char))->update('Charac0', array( 'c_sheaderc' => $c_sheaderc, 'c_headera' => $c_headera, 'c_headerb' => $c_headerb, 'c_headerc' => $c_headerc, 'd_cdate' => $d_cdate, 'd_udate' => $d_udate, 'm_body' => $m_body, 'rb' => $rb, 'times_rb' => $times_rb ));
+					}
+			}
+
+		function update_disable_char($char)
+			{
+				$this->db->where(array('c_id' => $char))->update('Charac0', array('c_status' => 'X'));
 			}
 
 	//INSERT
