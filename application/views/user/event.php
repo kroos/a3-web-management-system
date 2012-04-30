@@ -3,7 +3,7 @@
 <?php startblock('cleaner_h40a'); ?>
 <h2>Event</h2>
 
-<?if($event->num_rows() == 0):?>
+<?if($event->num_rows() < 1):?>
 	<p>No news for event has been created</p>
 <?else:?>
 
@@ -35,6 +35,19 @@
 					<hr />
 				<?endforeach?>
 		<?endif?>
+		
+		<h2>Reply</h2>
+		<?=form_open('', '', array('bil_post' => $events->Bil))?>
+		<p>
+		<?=ckeditor('news_reply', '', $this->session->userdata('group'))?>&nbsp;<?=form_error('news_reply')?>
+		</p>
+		<p>Author</p>
+		<?foreach($char->result() as $y):?>
+		<p><?=form_radio('character', $y->c_id, set_select('character', $y->c_id, TRUE))?>&nbsp;&nbsp;<font color='#0000FF'><?=$y->c_id?></font>&nbsp;<?=form_error('character')?></p>
+		<?endforeach?>
+		<p><?=form_submit('rely_news', 'Reply News')?></p>
+		<?=form_close()?>
+		
 <?endforeach?>
 
 <?endif?>
@@ -42,17 +55,8 @@
 <?php endblock(); ?>
 
 <?php startblock('cleaner_h40b'); ?>
-<h2>Reply</h2>
-<?=form_open('', '', array('bil_post' => $events->Bil))?>
-<p>
-<?=ckeditor('news_reply', '', $this->session->userdata('group'))?>&nbsp;<?=form_error('news_reply')?>
-</p>
-<p>Author</p>
-<?foreach($char->result() as $y):?>
-<p><?=form_radio('character', $y->c_id, set_select('character', $y->c_id, TRUE))?>&nbsp;&nbsp;<font color='#0000FF'><?=$y->c_id?></font>&nbsp;<?=form_error('character')?></p>
-<?endforeach?>
-<p><?=form_submit('rely_news', 'Reply News')?></p>
-<?=form_close()?>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
 <?php endblock(); ?>
 
 <?end_extend()?>

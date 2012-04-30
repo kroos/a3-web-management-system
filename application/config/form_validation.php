@@ -82,6 +82,69 @@ $config = array	(
 								'rules' => 'trim|required|valid_email|min_length[6]|xss_clean'
 							)
 					),
+					'user/index' => array
+					(
+						array
+							(
+								'field' => 'bil_post',
+								'label' => 'Bil Post',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'news_reply',
+								'label' => 'Reply Section',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							)
+					),
+					'user/event' => array
+					(
+						array
+							(
+								'field' => 'bil_post',
+								'label' => 'Bil Post',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'news_reply',
+								'label' => 'Reply Section',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							)
+					),
+					'user/download' => array
+					(
+						array
+							(
+								'field' => 'bil_post',
+								'label' => 'Bil Post',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'news_reply',
+								'label' => 'Reply Section',
+								'rules' => 'trim|required|xss_clean'
+							),
+						array
+							(
+								'field' => 'character',
+								'label' => 'Character',
+								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
+							)
+					),
 					'user/change_password' => array
 					(
 						array

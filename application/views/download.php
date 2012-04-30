@@ -3,7 +3,7 @@
 <?php startblock('cleaner_h40a'); ?>
 <h2>Download</h2>
 
-<?if($event->num_rows() == 0):?>
+<?if($event->num_rows() < 1):?>
 	<p>No announcement for download has been created</p>
 <?else:?>
 
@@ -15,8 +15,22 @@
 		<p>Regards<br /><b><font color="#008080"><?=ucwords($events->Author)?></font></b></p>
 		<hr />
 
+		<?$r = $this->a3web_comment->reply($events->Bil)?>
+
+		<?if($r->num_rows() < 1):?>
+			<p>&nbsp;</p>
+		<?else:?>
+
+			<?foreach ($r->result() as $reply):?>
+				<hr />
+				<p>Reply from <font color="#008080"><?=ucwords($reply->author)?></font> on <?=date_my($reply->date)?></p>
+				<?=$reply->html?>
+				<hr />
+			<?endforeach?>
+
+		<?endif?>
+
 	<?endforeach?>
-	
 <?endif?>
 <?php endblock(); ?>
 

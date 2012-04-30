@@ -50,7 +50,7 @@ function ckeditor($textarea_id, $initialValue, $group = '')
 			}
 
 		// Change default textarea attributes.
-		$CKEditor->textareaAttributes = array("cols" => 80, "rows" => 10);
+		$CKEditor->textareaAttributes = array("cols" => 80, "rows" => 5);
 
 		return $CKEditor->editor($textarea_id, $initialValue);
 	}
