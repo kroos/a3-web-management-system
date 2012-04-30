@@ -48,9 +48,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '122.255.120.139';
-$db['default']['username'] = 'sa';
-$db['default']['password'] = 'oi62it2a2o';
+$db['default']['hostname'] = '127.0.0.1';
+$db['default']['username'] = 'username';
+$db['default']['password'] = 'password';
 $db['default']['database'] = 'ASD';
 $db['default']['dbdriver'] = 'sqlsrv';
 $db['default']['dbprefix'] = '';
@@ -64,9 +64,9 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
-$db['HSDB']['hostname'] = '122.255.120.139';
-$db['HSDB']['username'] = 'sa';
-$db['HSDB']['password'] = 'oi62it2a2o';
+$db['HSDB']['hostname'] = '127.0.0.1';
+$db['HSDB']['username'] = 'username';
+$db['HSDB']['password'] = 'password';
 $db['HSDB']['database'] = 'HSDB';
 $db['HSDB']['dbdriver'] = 'sqlsrv';
 $db['HSDB']['dbprefix'] = '';

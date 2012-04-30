@@ -3,13 +3,13 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 ##################################################################################################
 //HOMEPAGE SECTION.
 //server name
-$config['homepage'] = 'A3 REVIVE';
+$config['homepage'] = 'YOUR SERVER NAME';
 
 //URL of your homepage
-$config['homepage_url'] = 'http://a3ncabal.dyndns.info/a3/';
+$config['homepage_url'] = 'HOMEPAGE URL';		//EXAMPLE = http://a3ncabal.dyndns.info/a3/
 
 //forum URL
-$config['forum_url'] = 'http://a3ncabal.dyndns.info/';
+$config['forum_url'] = 'FORUM URL';		//http://a3ncabal.dyndns.info/
 
 ##################################################################################################
 //SERVER STATUS.
@@ -38,19 +38,19 @@ $config['smtp_port'] = 465;
 $config['SMTP_Secure'] = 'ssl';
 
 //email account from sender associated to the pop3 n smtp server settings.
-$config['username'] = 'a3outlaw@gmail.com';
-$config['password'] = '0162172420';
+$config['username'] = 'YOUR GMAIL USERNAME';
+$config['password'] = 'YOUR GMAIL PASSWORD';
 
 //other things related to mailer
-$config['addreplyto_email'] = 'a3outlaw@gmail.com';
-$config['addreplyto_name'] = 'Outlaw';
-$config['from'] = 'admin@localhost.com';
-$config['from_name'] = 'Outlaw';
+$config['addreplyto_email'] = 'YOUR EMAIL';
+$config['addreplyto_name'] = 'YOUR NAME';
+$config['from'] = 'YOUR EMAIL';
+$config['from_name'] = 'YOUR NAME';
 
 ##################################################################################################
 //GAMESERVER PORT.
 //this is your server IP, mostly you don't need to change this IP if your webhosting is the same with your gameserver
-$config['srvip'] = '122.255.120.139';
+$config['srvip'] = 'YOUR GAMESERVER IP';
 
 //zoneserver port. if ur webserver is diiferent from your gameserver, dont forget to open this port at your gameserver.
 $config['svrportZone'] = '6689';
@@ -129,23 +129,6 @@ $config['GoldMP'] = '1500000000';
 ##################################################################################################
 //BANNING AN ACCOUNT SECTION.
 //secret password that will be use to ban an account.
-$config['secret_password'] = 'BANFOOKER';
-##################################################################################################
-//Database Back Up
-//drive to be used by database backup files.  If u need to change the drive, please include 2 backslash just like i did.
-$config['drive'] = "C:\\";
-
-//Database name that need to be back up.
-$config['dbback0'] = "A3ItemEvent";
-$config['dbback1'] = "Account";
-$config['dbback2'] = "ASD";
-$config['dbback3'] = "Cabal_ManagerDB";
-$config['dbback4'] = "Cabal_stat";
-$config['dbback5'] = "CabalCash";
-$config['dbback6'] = "CabalShop";
-$config['dbback7'] = "Event";
-$config['dbback8'] = "FRIENDDB";
-$config['dbback9'] = "GameDB";
-$config['dbback10'] = "HSDB";
+$config['secret_password'] = 'BANNED_ACCOUNT';
 ##################################################################################################
 ?>
