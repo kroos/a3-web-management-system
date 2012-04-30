@@ -145,6 +145,15 @@ $config = array	(
 								'rules' => 'trim|required|min_length[2]|max_length[12]|xss_clean'
 							)
 					),
+					'user/reply' => array
+					(
+						array
+							(
+								'field' => 'edit_news',
+								'label' => 'Edit Reply',
+								'rules' => 'trim|required|xss_clean'
+							)
+					),
 					'user/change_password' => array
 					(
 						array

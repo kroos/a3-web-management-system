@@ -2,6 +2,9 @@
 
 <?php startblock('cleaner_h40a'); ?>
 <h2>Event</h2>
+
+<p><font color="#FF0000"><blink><?=@$info?></blink></font></p>
+
 <?if($event->num_rows() < 1):?>
 	<p>No news for event has been created</p>
 <?else:?>

@@ -131,6 +131,80 @@ class User extends CI_Controller
 					}
 			}
 
+		public function reply()
+			{
+				if ($this->session->userdata('logged_in') == TRUE)
+					{
+						//process
+						if (is_numeric($this->uri->segment(3, 0)))
+							{
+								$data['reply'] = $this->a3web_comment->reply_edit($this->uri->segment(3, 0))->row();
+								$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+								if ($this->form_validation->run() == FALSE)
+									{
+										$this->load->view('user/reply', $data);
+									}
+									else
+									{
+										//form processor
+										if($this->input->post('news_edit', TRUE))
+											{
+												$y = $this->a3web_comment->update_comment($this->uri->segment(3, 0), $this->input->post('edit_news', TRUE));
+												if (!$y)
+													{
+														$data['info'] = 'Please try again later';
+														$this->load->view('user/reply', $data);
+													}
+													else
+													{
+														$data['info'] = 'Done edit news';
+														$this->load->view('user/reply', $data);
+													}
+											}
+									}
+							}
+							else
+							{
+								$data['info'] = 'What are you trying to do?';
+								$this->load->view('user/reply', $data);
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
+		public function replyr()
+			{
+				if ( $this->session->userdata('logged_in') == TRUE && $this->session->userdata('group') == 'GM' )
+					{
+						//process
+						if (is_numeric($this->uri->segment(3, 0)))
+							{
+								$h = $this->a3web_comment->delete_a3web($this->uri->segment(3, 0));
+								if (!$h)
+									{
+										$data['info'] = 'Please try again later';
+										$this->load->view('user/home', $data);
+									}
+									else
+									{
+										redirect(base_url(), 'location');
+									}
+							}
+							else
+							{
+								$data['info'] = 'What are you trying to do?';
+								$this->load->view('user/home', $data);
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
 		public function change_password()
 			{
 				if ($this->session->userdata('logged_in') == TRUE)
@@ -257,10 +331,6 @@ class User extends CI_Controller
 											};
 
 										$charstring = $y->row()->m_body;
-
-										//echo mbody_insert('PETACT', 'jadi dak?', $charstring).' mbody<br />';
-
-										//echo mbody_part('RESRV1', $charstring);
 
 										$newString = mbody_insert('PETACT', $PETACT[1], $charstring);
 										$f = $this->charac0->update_mbody($char, $newString);

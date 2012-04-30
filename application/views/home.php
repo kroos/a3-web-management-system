@@ -2,6 +2,9 @@
 
 <?php startblock('cleaner_h40a'); ?>
 <h2>News and Announcement</h2>
+
+<p><font color="#FF0000"><blink><?=@$info?></blink></font></p>
+
 <?if($news->num_rows() < 1):?>
 	<p>No news or announcement has been created</p>
 <?else:?>

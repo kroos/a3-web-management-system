@@ -15,6 +15,11 @@ class A3web_comment extends CI_Model
 				return $this->db->order_by('bil', 'ASC')->get_where('A3Web_Comment', array('bil_post' => $id));
 			}
 
+		function reply_edit($id)
+			{
+				return $this->db->get_where('A3Web_Comment', array('bil' => $id));
+			}
+
 //UPDATE
 		function update_comment($bil, $html)
 			{

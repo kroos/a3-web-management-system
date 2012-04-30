@@ -39,7 +39,8 @@
 */
 
 $route['default_controller'] = 'a3';
-$route['user/comment/(:num)'] = 'user/comment';
+$route['user/reply/(:num)'] = 'user/reply';
+$route['user/replyr/(:num)'] = 'user/replyr';
 $route['user/char_points/(:any)'] = 'user/char_points';
 $route['user/merc_points/(:num)'] = 'user/merc_points';
 $route['admin/news_edit/(:num)'] = 'admin/news_edit';

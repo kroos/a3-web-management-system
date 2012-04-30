@@ -3,6 +3,8 @@
 <?php startblock('cleaner_h40a'); ?>
 <h2>Download</h2>
 
+<p><font color="#FF0000"><blink><?=@$info?></blink></font></p>
+
 <?if($event->num_rows() < 1):?>
 	<p>No announcement for download has been created</p>
 <?else:?>
