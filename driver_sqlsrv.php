@@ -2,13 +2,13 @@
 ##################################################################################################
 //MSSQL SERVER AND ODBC SETTING.
 //Database server.
-$server = '122.255.120.139';
+$server = '127.0.0.1';
 
 //your mssql username
-$sa = 'sa';
+$sa = 'username';
 
 //sa password
-$sa_pass = 'oi62it2a2o';
+$sa_pass = 'password';
 
 //this is your ODBC that connected to your ASD database (account and charac0 table)
 $db_asd = 'ASD';
