@@ -330,10 +330,7 @@ class User extends CI_Controller
 													break;
 											};
 
-										$charstring = $y->row()->m_body;
-
-										$newString = mbody_insert('PETACT', $PETACT[1], $charstring);
-										$f = $this->charac0->update_mbody($char, $newString);
+										$f = $this->charac0->update_mbody($char, mbody_insert('PETACT', $PETACT[1], $y->row()->m_body));
 										if (!$f)
 											{
 												$data['info'] = 'Sorry, we cant equip yet your super shue, please try again later';

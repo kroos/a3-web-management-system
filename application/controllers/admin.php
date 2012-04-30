@@ -1438,6 +1438,95 @@ class Admin extends CI_Controller
 					}
 			}
 
+		public function reset_rebirth()
+			{
+				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )
+					{
+						//process
+						$this->form_validation->set_error_delimiters('&nbsp;&nbsp;<font color="#FF0000">', '</font>&nbsp;&nbsp;');
+						if ($this->form_validation->run() == FALSE)
+							{
+								//form
+								$this->load->view('admin/reset_rebirth');
+							}
+							else
+							{
+								//form processor
+								if ($this->input->post('reset_rebith', TRUE))
+									{
+										$char = $this->input->post('char', TRUE);
+										
+										$t = $this->charac0->charac_cid($char);
+										if ($t->num_rows() == 1)
+											{
+												//--------------------check level rebirth----------------------------
+												$rblvl = $t->row()->rb;
+												//echo "<p align='center'>$char rebirth level is $rblvl.</p>";
+
+												//--------------------check wz----------------------------------
+												$rbwz = $t->row()->c_headerc;
+												//echo "<p align='center'>In $char inventory have $rbwz wz.</p>";
+
+												//--------------------check rebirth times----------------------------
+												$rblvltimes = $t->row()->times_rb;
+												//echo "<p align='center'>$char reset rebirth for $rblvltimes times.</p>";
+
+												//---------------------------reset rebirth operation----------------------------------------------------
+												//1st we check rb times, it should be no more than 2 times rb
+												if ($rblvltimes < 3 )
+													{
+														//1st we check rebirth level
+														if ($rblvl >= $this->config->item('rebirth_count'))
+															{
+																//then we check the wz
+																if ($rbwz >= $this->config->item('wzresetrebirth'))
+																	{
+																		//initialize wz balance
+																		$wz = $rbwz - $this->config->item('wzresetrebirth');
+
+																		//initialize reset rb times
+																		$resetrb = $rblvltimes + 1;
+
+																		$rson = $this->charac0->update_reset_rebirth($char, $wz, $resetrb);
+																		if (!$rson)
+																			{
+																				$data['info'] = 'Sorry, internal server error, please try again later';
+																				$this->load->view('admin/reset_rebirth', $data);
+																			}
+																			else
+																			{
+																				$data['info'] = 'Successful reset rebirth';
+																				$this->load->view('admin/reset_rebirth', $data);
+																				$this->account->update_activity();
+																			};
+																	}
+																	else
+																	{
+																		$data['info'] = "Insufficient wz, your $char only have $rbwz wz";
+																		$this->load->view('admin/reset_rebirth', $data);
+																	};
+															}
+															else
+															{
+																$data['info'] = "$char rebirth level is $rblvl, $char need to have at least rebirth level ".$this->config->item('rebirth_count')." to reset its rebirth";
+																$this->load->view('admin/reset_rebirth', $data);
+															};
+													}
+													else
+													{
+														$data['info'] = 'You are now a god in this server, you cant reset rb anymore';
+														$this->load->view('admin/reset_rebirth', $data);
+													}
+											}
+									}
+							}
+					}
+					else
+					{
+						redirect(base_url(), 'location');
+					}
+			}
+
 		public function database_back_up()
 			{
 				if ( ($this->session->userdata('logged_in') == TRUE) && ($this->session->userdata('group') == 'GM') )

@@ -194,7 +194,8 @@ No character created.
 		<li><?=anchor('admin/info_pk', 'Info PK', 'title="Info PK"');?></li>
 		<li><?=anchor('admin/altering_PK_timer', 'Altering PK timer', 'title="Altering PK timer"');?></li>
 		<li><?=anchor('admin/inserting_items_manually', 'Inserting Items Manually', 'title="Inserting Items Manually"');?></li>
-		<li><?=anchor('admin/database_back_up', 'Database Back Up', 'title="Database Back Up"');?></li>
+		<li><?=anchor('admin/reset_rebirth', 'Character Reset Rebirth', 'title="Character Reset Rebirth"');?></li>
+		<!-- <li><?=anchor('admin/database_back_up', 'Database Back Up', 'title="Database Back Up"');?></li> -->
 <?endif?>
 	</ul>
 <?php endblock(); ?>
