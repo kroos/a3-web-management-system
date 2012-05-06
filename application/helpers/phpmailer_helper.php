@@ -29,7 +29,7 @@ function send_email($recipient, $user, $subject, $message, $pop3_server, $pop3_p
 		$mail->MsgHTML($message);
 		$mail->AddAddress($recipient, $user);
 
-		$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!";		// optional, comment out and test
+		$mail->AltBody    = 'To view the message, please use an HTML compatible email viewer!';		// optional, comment out and test
 
 		if (!$mail->Send())
 			{
