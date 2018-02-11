@@ -10,6 +10,11 @@ class Account extends CI_Model
 #############################################################################################################################
 //CRUD for account
 //SELECT
+		function remote()
+		{
+			return $this->db->get('Account');
+		}
+
 		function account_user($username, $password)
 			{
 				return $this->db->get_where('Account', array('c_id' => $username, 'c_headera' => $password, 'c_status' => 'A'));

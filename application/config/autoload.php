@@ -53,7 +53,7 @@ $autoload['packages'] = array();
 */
 
 //$autoload['libraries'] = array('database', 'session', 'form_validation', 'javascripts');
-$autoload['libraries'] = array('database', 'session', 'form_validation');
+$autoload['libraries'] = array('database', 'form_validation', 'myphpmailer');
 
 
 /*
@@ -65,7 +65,7 @@ $autoload['libraries'] = array('database', 'session', 'form_validation');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('template_inheritance', 'url', 'form', 'date', 'captcha', 'phpmailer', 'MY_date', 'password', 'mbody_string', 'c_sheaderb', 'c_headera', 'ability', 'type', 'ckeditor');
+$autoload['helper'] = array('template_inheritance', 'url', 'form', 'date', 'captcha', 'MY_date', 'password', 'mbody_string', 'c_sheaderb', 'c_headera', 'ability', 'type', );
 
 
 /*

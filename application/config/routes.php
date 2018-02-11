@@ -50,7 +50,7 @@ $route['admin/download_del/(:num)'] = 'admin/download_del';
 $route['admin/event_edit/(:num)'] = 'admin/event_edit';
 $route['admin/event_del/(:num)'] = 'admin/event_del';
 $route['admin/unban/(:any)/(:any)'] = 'admin/unban';
-$route['404_override'] = 'a3/page_missing';
+$route['404_override'] = 'damage/page_missing';
 
 
 /* End of file routes.php */

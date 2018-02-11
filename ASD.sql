@@ -397,6 +397,11 @@ CREATE TABLE [dbo].[charac0](
 ) ON [PRIMARY]
 END
 GO
+ALTER TABLE [dbo].[charac0]  WITH CHECK ADD  CONSTRAINT [Only_Characters] CHECK  ((NOT [c_id] like '%[^A-Z0-9]%'))
+GO
+
+ALTER TABLE [dbo].[charac0] CHECK CONSTRAINT [Only_Characters]
+GO
 SET ANSI_PADDING OFF
 GO
 /****** Object:  Table [dbo].[vAdultAge]    Script Date: 04/29/2012 23:03:17 ******/

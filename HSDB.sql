@@ -71,3 +71,15 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
+
+ALTER TABLE [dbo].[MERC]  WITH CHECK ADD  CONSTRAINT [Only_Characters] CHECK  ((NOT [HSName] like '%[^A-Z0-9]%'))
+GO
+
+ALTER TABLE [dbo].[MERC] CHECK CONSTRAINT [Only_Characters]
+GO
+
+ALTER TABLE [dbo].[HSTABLE]  WITH CHECK ADD  CONSTRAINT [Only_Characters] CHECK  ((NOT [HSName] like '%[^A-Z0-9]%'))
+GO
+
+ALTER TABLE [dbo].[HSTABLE] CHECK CONSTRAINT [Only_Characterss]
+GO

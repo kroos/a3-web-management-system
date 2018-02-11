@@ -33,18 +33,23 @@ $config['pop3_port'] = 995;
 
 //smtp server
 $config['SMTP_auth'] = TRUE;
-$config['smtp_server'] = 'smtp.gmail.com';
-$config['smtp_port'] = 465;
-$config['SMTP_Secure'] = 'ssl';
+// $config['smtp_server'] = 'smtp.gmail.com';
+$config['smtp_server'] = 'localhost';
+// $config['smtp_port'] = 465;
+$config['smtp_port'] = 1024;
+// $config['smtp_secure'] = 'ssl';
+
+//debugging
+$config['mailer_debug'] = 2;						//debug = 0 (no debug), 1 = errors and messages, 2 = messages only
 
 //email account from sender associated to the pop3 n smtp server settings.
-$config['username'] = 'YOUR GMAIL USERNAME';
-$config['password'] = 'YOUR GMAIL PASSWORD';
+$config['mailer_username'] = 'YOUR GMAIL USERNAME';
+$config['mailer_password'] = 'YOUR GMAIL PASSWORD';
 
 //other things related to mailer
-$config['addreplyto_email'] = 'YOUR EMAIL';
+$config['addreplyto_email'] = 'YOUR_EMAIL@mail.com';
 $config['addreplyto_name'] = 'YOUR NAME';
-$config['from'] = 'YOUR EMAIL';
+$config['from'] = 'YOUR_EMAIL@mail.com';
 $config['from_name'] = 'YOUR NAME';
 
 ##################################################################################################
