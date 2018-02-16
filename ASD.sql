@@ -1,17 +1,718 @@
 USE [ASD]
 GO
-/****** Object:  Table [dbo].[Lotto]    Script Date: 04/29/2012 23:03:16 ******/
+/****** Object:  UserDefinedFunction [GetAccountName]    Script Date: 16/02/2018 11:43:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GetAccountName]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+BEGIN
+execute dbo.sp_executesql @statement = N'
+CREATE  FUNCTION [GetAccountName](@CharacterName char(20))
+RETURNS char(20) AS  
+BEGIN   
+   DECLARE @AccountName char(20)
+   select @AccountName = c_sheadera
+   from ASD.dbo.Character
+   where c_id=@CharacterName
+
+   RETURN @AccountName
+END
+
+' 
+END
+
+GO
+/****** Object:  Table [A3Web_Comment]    Script Date: 16/02/2018 11:43:53 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Lotto]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[A3Web_Comment]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[Lotto](
+CREATE TABLE [A3Web_Comment](
+	[bil] [int] IDENTITY(1,1) NOT NULL,
+	[bil_post] [int] NOT NULL,
+	[author] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[html] [varchar](max) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[date] [smalldatetime] NOT NULL,
+ CONSTRAINT [PK_A3Web_Comment_1] PRIMARY KEY CLUSTERED 
+(
+	[bil] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [A3Web_HTML]    Script Date: 16/02/2018 11:43:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[A3Web_HTML]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [A3Web_HTML](
+	[Bil] [int] IDENTITY(1,1) NOT NULL,
+	[Author] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Category] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Subject] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[HTML] [varchar](4000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Date] [smalldatetime] NULL,
+ CONSTRAINT [PK_A3Web_HTML] PRIMARY KEY CLUSTERED 
+(
+	[Bil] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Account]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Account]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Account](
+	[c_id] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheadera] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheaderb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheaderc] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headera] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headerb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headerc] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[d_cdate] [smalldatetime] NULL,
+	[d_udate] [smalldatetime] NULL,
+	[c_status] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[m_body] [varchar](4000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[acc_status] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[salary] [smalldatetime] NULL,
+	[last_salary] [smalldatetime] NULL,
+ CONSTRAINT [PK_Account_unique] PRIMARY KEY CLUSTERED 
+(
+	[c_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [AccountAuth]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[AccountAuth]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [AccountAuth](
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[AuthType] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[AuthDate] [smalldatetime] NOT NULL,
+	[Result] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [AccountExt]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[AccountExt]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [AccountExt](
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Job] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[RecomID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[EmailStatus] [bit] NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [AccountFailAuth]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[AccountFailAuth]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [AccountFailAuth](
+	[FailAuthID] [int] NOT NULL,
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[SCN1] [char](15) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[SCN2] [char](15) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[AuthDate] [smalldatetime] NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [AdultCheck]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[AdultCheck]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [AdultCheck](
+	[Name] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[SCN] [char](13) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[RegDate] [smalldatetime] NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Answer]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Answer]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Answer](
+	[QuestNo] [tinyint] NOT NULL,
+	[AnswerNo] [tinyint] NOT NULL,
+	[Content] [varchar](100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [AuthLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[AuthLog]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [AuthLog](
+	[AuthLogID] [int] NOT NULL,
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[AuthType] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[AuthDate] [smalldatetime] NOT NULL,
+	[Result] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Ban_IP]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Ban_IP]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Ban_IP](
+	[List_IP] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [BlackList]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[BlackList]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [BlackList](
+	[BlackListID] [int] NOT NULL,
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[BlockStartDate] [smalldatetime] NOT NULL,
+	[BlockEndDate] [smalldatetime] NOT NULL,
+	[AccountStatus] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Status] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Content] [varchar](1000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Captcha]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Captcha]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Captcha](
+	[captcha_id] [bigint] IDENTITY(1,1) NOT NULL,
+	[captcha_time] [int] NULL,
+	[ip_address] [varchar](50) COLLATE Latin1_General_CI_AS NULL,
+	[word] [varchar](50) COLLATE Latin1_General_CI_AS NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Charac0]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Charac0]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Charac0](
+	[c_id] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheadera] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheaderb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheaderc] [int] NOT NULL,
+	[c_headera] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headerb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headerc] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[d_cdate] [smalldatetime] NULL,
+	[d_udate] [smalldatetime] NULL,
+	[c_status] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[m_body] [varchar](4000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[rb] [int] NOT NULL,
+	[times_rb] [int] NOT NULL,
+ CONSTRAINT [PK_Charac0] PRIMARY KEY CLUSTERED 
+(
+	[c_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [CharInfo]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[CharInfo]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [CharInfo](
+	[ServerIdx] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Nation] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[AccountID] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[CharName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Clan]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Clan]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Clan](
+	[ClanID] [char](2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[ServerID] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[ClanName] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Nation] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[MarkID] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[CDate] [smalldatetime] NULL,
+	[DDate] [smalldatetime] NULL,
+	[ClanPasswd] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[ClanRank] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[ClanStatus] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[StorageID] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[AgitID] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[WinCount] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[LoseCount] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Count]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Count]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Count](
+	[count] [int] NOT NULL
+) ON [PRIMARY]
+END
+GO
+/****** Object:  Table [DenyChar]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[DenyChar]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [DenyChar](
+	[DenyCharID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [FaultMailAccount]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[FaultMailAccount]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [FaultMailAccount](
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [FRIEND0]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[FRIEND0]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [FRIEND0](
+	[CharName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[GroupInfo] [varchar](1024) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[FriendInfo] [varchar](1024) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [GameBroadcast]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GameBroadcast]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [GameBroadcast](
+	[GameBroadcastID] [int] NOT NULL,
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[RequestDate] [smalldatetime] NOT NULL,
+	[Job] [varchar](200) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Motive] [varchar](2000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Intro] [varchar](2000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[FilePath] [varchar](200) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [GameLoginLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GameLoginLog]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [GameLoginLog](
+	[LoginIdx] [int] NOT NULL,
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[LoginIP] [varchar](15) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[LoginDate] [smalldatetime] NOT NULL,
+	[PayMode] [char](3) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [GameServer]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GameServer]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [GameServer](
+	[ServerIdx] [tinyint] NOT NULL,
+	[ServerName] [char](16) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[CntRegist] [int] NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [GameServerMessage]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GameServerMessage]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [GameServerMessage](
+	[AccountID] [ntext] COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[StatusID] [ntext] COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[mbody] [ntext] COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Message] [ntext] COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+/****** Object:  Table [GroupSeat]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[GroupSeat]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [GroupSeat](
+	[GroupSeatID] [int] NOT NULL,
+	[Master] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[SeatName] [varchar](40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[SeatType] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[SeatPassword] [varchar](15) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ServerIdx] [tinyint] NOT NULL,
+	[CntRegist] [tinyint] NOT NULL,
+	[Name] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Hsstonetable]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Hsstonetable]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Hsstonetable](
+	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[CreateDate] [smalldatetime] NULL,
+	[SaveDate] [smalldatetime] NULL,
+	[Slot0] [varchar](256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Slot1] [varchar](256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Slot2] [varchar](256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Slot3] [varchar](256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+ CONSTRAINT [PK_Hsstonetable] PRIMARY KEY CLUSTERED 
+(
+	[MasterName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Hstable]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Hstable]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Hstable](
+	[HSID] [int] IDENTITY(1,1) NOT NULL,
+	[HSName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Type] [tinyint] NOT NULL,
+	[HSLevel] [smallint] NOT NULL,
+	[HSExp] [int] NOT NULL,
+	[Ability] [varchar](1024) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[CreateDate] [smalldatetime] NOT NULL,
+	[SaveDate] [smalldatetime] NOT NULL,
+	[HSState] [tinyint] NULL,
+	[DelDate] [smalldatetime] NULL,
+	[HSBody] [varchar](1024) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+ CONSTRAINT [PK_Hstable] PRIMARY KEY CLUSTERED 
+(
+	[HSID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [InnerAccount]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[InnerAccount]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [InnerAccount](
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Desc] [varchar](500) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[CreateDate] [smalldatetime] NOT NULL,
+	[Creater] [char](8) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [ItemStorage]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ItemStorage]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [ItemStorage](
+	[c_id] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheadera] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheaderb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheaderc] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headera] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headerb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headerc] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[d_cdate] [datetime] NULL,
+	[d_udate] [datetime] NULL,
+	[c_status] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[m_body] [varchar](max) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Job]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Job]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Job](
+	[JobID] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[JobName] [varchar](100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [LETTERDB0]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB0]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [LETTERDB0](
+	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[SendDate] [smalldatetime] NOT NULL,
+	[Reading] [tinyint] NOT NULL,
+	[Keeping] [tinyint] NOT NULL,
+	[Title] [varchar](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB0] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [LoginLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LoginLog]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [LoginLog](
+	[SCN] [char](13) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[LoginDate] [datetime] NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [LotteryTicket]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LotteryTicket]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [LotteryTicket](
+	[LotteryTicketID] [bigint] NOT NULL,
+	[IsUsed] [varchar](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[TicketNo] [varchar](12) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+ CONSTRAINT [PK_LotteryTicket] PRIMARY KEY CLUSTERED 
+(
+	[LotteryTicketID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [Lotto]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Lotto]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [Lotto](
 	[LottoEventID] [smallint] NOT NULL,
-	[AccountID] [char](20) NOT NULL,
+	[AccountID] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[SelectNum1] [tinyint] NOT NULL,
 	[SelectNum2] [tinyint] NOT NULL,
 	[SelectNum3] [tinyint] NOT NULL,
@@ -22,195 +723,258 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[LottoEvent]    Script Date: 04/29/2012 23:03:16 ******/
+/****** Object:  Table [LottoEvent]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[LottoEvent]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LottoEvent]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[LottoEvent](
+CREATE TABLE [LottoEvent](
 	[LottoEventID] [smallint] NOT NULL,
-	[EventName] [varchar](30) NOT NULL
+	[EventName] [varchar](30) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[OutAccount]    Script Date: 04/29/2012 23:03:16 ******/
+/****** Object:  Table [Merc]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[OutAccount]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Merc]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[OutAccount](
+CREATE TABLE [Merc](
+	[HSName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Type] [int] NOT NULL,
+	[HSLevel] [int] NOT NULL,
+	[rb] [int] NULL,
+	[reset_rb] [int] NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [OutAccount]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[OutAccount]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [OutAccount](
 	[OutAccountID] [int] NOT NULL,
-	[AccountID] [char](20) NOT NULL,
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[OutDate] [smalldatetime] NOT NULL,
-	[Result] [char](1) NOT NULL,
-	[ResultUser] [varchar](20) NULL,
-	[ResultDesc] [varchar](4000) NULL,
-	[Reason] [varchar](1000) NULL,
+	[Result] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ResultUser] [varchar](20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[ResultDesc] [varchar](4000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Reason] [varchar](1000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
 	[RestoreDate] [smalldatetime] NULL,
-	[SCN] [varchar](14) NOT NULL,
-	[PrevStatus] [char](1) NOT NULL,
+	[SCN] [varchar](14) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[PrevStatus] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[ResultDate] [smalldatetime] NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[PcbangList]    Script Date: 04/29/2012 23:03:16 ******/
+/****** Object:  Table [PcbangList]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[PcbangList]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[PcbangList]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[PcbangList](
-	[AccountID] [char](20) NOT NULL,
-	[PcbangCode] [varchar](12) NOT NULL,
-	[PcbangName] [varchar](50) NOT NULL,
-	[Owner] [varchar](20) NOT NULL,
-	[SCN] [char](14) NOT NULL,
-	[PcbangAddress] [varchar](255) NOT NULL,
-	[PcbangZipcode] [char](7) NOT NULL,
-	[OwnerAddress] [varchar](255) NOT NULL,
-	[OwnerZipcode] [char](7) NOT NULL,
-	[PcbangTel] [char](14) NOT NULL,
-	[Uptae] [varchar](100) NOT NULL,
-	[OpenDate] [varchar](10) NOT NULL,
-	[Upzong] [varchar](100) NOT NULL,
-	[Semuser] [varchar](30) NOT NULL,
+CREATE TABLE [PcbangList](
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[PcbangCode] [varchar](12) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[PcbangName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Owner] [varchar](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[SCN] [char](14) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[PcbangAddress] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[PcbangZipcode] [char](7) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[OwnerAddress] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[OwnerZipcode] [char](7) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[PcbangTel] [char](14) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Uptae] [varchar](100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[OpenDate] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Upzong] [varchar](100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Semuser] [varchar](30) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[RequestDate] [smalldatetime] NOT NULL,
-	[Result] [char](1) NOT NULL,
+	[Result] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[ResultDate] [smalldatetime] NULL,
-	[ResultDesc] [varchar](1000) NOT NULL,
-	[ResultUser] [char](20) NOT NULL,
+	[ResultDesc] [varchar](1000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ResultUser] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[ResultNo] [int] NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[QuestList]    Script Date: 04/29/2012 23:03:16 ******/
+/****** Object:  Table [QuestList]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[QuestList]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[QuestList]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[QuestList](
+CREATE TABLE [QuestList](
 	[QuestNo] [tinyint] NOT NULL,
-	[Content] [varchar](50) NOT NULL,
+	[Content] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[QuestFlag] [bit] NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[QuestResponse]    Script Date: 04/29/2012 23:03:16 ******/
+/****** Object:  Table [QuestResponse]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[QuestResponse]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[QuestResponse]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[QuestResponse](
+CREATE TABLE [QuestResponse](
 	[QuestNo] [tinyint] NOT NULL,
 	[AnswerNo] [tinyint] NOT NULL,
-	[AccountID] [char](20) NOT NULL
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[RandChar]    Script Date: 04/29/2012 23:03:16 ******/
+/****** Object:  Table [RandChar]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[RandChar]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[RandChar]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[RandChar](
+CREATE TABLE [RandChar](
 	[RandNo] [int] NOT NULL,
 	[Rand] [int] NULL,
-	[AccountID] [char](20) NOT NULL
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[ReservedChar]    Script Date: 04/29/2012 23:03:16 ******/
+/****** Object:  Table [rbstat]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[rbstat]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [rbstat](
+	[c_id] [nvarchar](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheadera] [nvarchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheaderb] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_sheaderc] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headera] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headerb] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headerc] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[d_cdate] [smalldatetime] NULL,
+	[d_udate] [smalldatetime] NULL,
+	[c_status] [nvarchar](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[m_body] [ntext] COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[number_rb] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+END
+GO
+/****** Object:  Table [RcvResult]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[ReservedChar]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[RcvResult]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[ReservedChar](
-	[AccountID] [char](20) NOT NULL,
-	[CharName] [varchar](50) NOT NULL,
+CREATE TABLE [RcvResult](
+	[AccountName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[PCName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Serial] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[DateTimeLog] [datetime] NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [ReservedChar]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ReservedChar]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [ReservedChar](
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[CharName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[ServerIdx] [tinyint] NOT NULL,
 	[CharClass] [tinyint] NOT NULL,
 	[Nation] [tinyint] NOT NULL,
 	[GroupSeatID] [int] NULL,
 	[RegistDate] [smalldatetime] NOT NULL,
 	[Sex] [tinyint] NOT NULL,
-	[Name] [char](20) NOT NULL
+	[Name] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[ReservedPresent]    Script Date: 04/29/2012 23:03:17 ******/
+/****** Object:  Table [ReservedPresent]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[ReservedPresent]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ReservedPresent]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[ReservedPresent](
-	[AccountID] [char](20) NOT NULL,
-	[SeatName] [varchar](49) NULL,
-	[PresentType] [varchar](20) NOT NULL,
-	[Present] [varchar](100) NOT NULL
+CREATE TABLE [ReservedPresent](
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[SeatName] [varchar](49) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[PresentType] [varchar](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Present] [varchar](100) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[RestoreRequest]    Script Date: 04/29/2012 23:03:17 ******/
+/****** Object:  Table [RestoreRequest]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[RestoreRequest]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[RestoreRequest]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[RestoreRequest](
+CREATE TABLE [RestoreRequest](
 	[RestoreRequestID] [int] NOT NULL,
-	[AccountID] [char](20) NOT NULL,
-	[SCN] [char](14) NOT NULL,
-	[Result] [char](1) NOT NULL,
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[SCN] [char](14) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Result] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[RequestDate] [smalldatetime] NOT NULL,
 	[ResultDate] [smalldatetime] NULL
 ) ON [PRIMARY]
@@ -218,111 +982,145 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Sheet1]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Sheet1]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[Sheet1](
-	[F1] [nvarchar](255) NULL
-) ON [PRIMARY]
-END
-GO
-/****** Object:  Table [dbo].[StatusLog]    Script Date: 04/29/2012 23:03:17 ******/
+/****** Object:  Table [SerialList]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[StatusLog]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SerialList]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[StatusLog](
+CREATE TABLE [SerialList](
+	[SerialNo] [char](20) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
+	[ItemInfo] [varchar](255) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
+	[Parameter1] [varchar](255) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
+	[Parameter2] [varchar](255) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
+	[Type] [char](1) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
+	[UsedFlag] [char](1) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
+	[ExpireDate] [datetime] NOT NULL,
+ CONSTRAINT [PK_SerialList] PRIMARY KEY CLUSTERED 
+(
+	[SerialNo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [StatusLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[StatusLog]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [StatusLog](
 	[StatusLogID] [int] NOT NULL,
-	[ManageID] [char](20) NOT NULL,
-	[AccountID] [char](20) NOT NULL,
-	[Status] [char](1) NOT NULL,
+	[ManageID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Status] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[StartDate] [smalldatetime] NOT NULL,
 	[EndDate] [smalldatetime] NOT NULL,
-	[Content] [varchar](1000) NOT NULL,
+	[Content] [varchar](1000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[LogDate] [smalldatetime] NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[UpdateLog]    Script Date: 04/29/2012 23:03:17 ******/
+/****** Object:  Table [temp_account]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[UpdateLog]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[temp_account]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[UpdateLog](
+CREATE TABLE [temp_account](
+	[username] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[password] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[email] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[passkey] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[date] [smalldatetime] NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [UpdateLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[UpdateLog]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [UpdateLog](
 	[UpdateLogID] [int] NOT NULL,
-	[ManageID] [char](20) NOT NULL,
-	[AccountID] [char](20) NOT NULL,
-	[UpdateContent] [varchar](3000) NOT NULL,
+	[ManageID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[UpdateContent] [varchar](3000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[LogDate] [smalldatetime] NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[UserTicket]    Script Date: 04/29/2012 23:03:17 ******/
+/****** Object:  Table [UserTicket]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[UserTicket]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[UserTicket]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[UserTicket](
-	[AccountID] [char](20) NOT NULL,
-	[TicketNo] [char](12) NOT NULL
+CREATE TABLE [UserTicket](
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[TicketNo] [char](12) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[WebLoginLog]    Script Date: 04/29/2012 23:03:17 ******/
+/****** Object:  Table [WebLoginLog]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[WebLoginLog]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[WebLoginLog]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[WebLoginLog](
+CREATE TABLE [WebLoginLog](
 	[WebLoginLogID] [int] NOT NULL,
-	[AccountID] [char](20) NOT NULL,
-	[LoginIP] [char](15) NOT NULL,
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[LoginIP] [char](15) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[LoginDate] [smalldatetime] NOT NULL,
-	[LoginSuccess] [char](1) NOT NULL,
+	[LoginSuccess] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[AccessDeny] [bit] NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[WebLoginRecentLog]    Script Date: 04/29/2012 23:03:17 ******/
+/****** Object:  Table [WebLoginRecentLog]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[WebLoginRecentLog]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[WebLoginRecentLog]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[WebLoginRecentLog](
-	[AccountID] [char](20) NOT NULL,
-	[LoginIP] [char](15) NOT NULL,
+CREATE TABLE [WebLoginRecentLog](
+	[AccountID] [char](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[LoginIP] [char](15) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[CntLoginFailure] [int] NOT NULL,
 	[CheckDate] [smalldatetime] NOT NULL,
 	[AccessDenyDate] [smalldatetime] NULL
@@ -331,14 +1129,14 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[WebLoginReport]    Script Date: 04/29/2012 23:03:17 ******/
+/****** Object:  Table [WebLoginReport]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[WebLoginReport]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[WebLoginReport]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[WebLoginReport](
+CREATE TABLE [WebLoginReport](
 	[LoginYear] [smallint] NOT NULL,
 	[LoginMonth] [tinyint] NOT NULL,
 	[LoginDay] [tinyint] NOT NULL,
@@ -349,1247 +1147,165 @@ CREATE TABLE [dbo].[WebLoginReport](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [dbo].[ZipCode]    Script Date: 04/29/2012 23:03:17 ******/
+/****** Object:  Table [ZipCode]    Script Date: 16/02/2018 11:43:54 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[ZipCode]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ZipCode]') AND type in (N'U'))
 BEGIN
-CREATE TABLE [dbo].[ZipCode](
+CREATE TABLE [ZipCode](
 	[zipidx] [int] NOT NULL,
-	[zipcode] [char](7) NOT NULL,
-	[sido] [varchar](8) NOT NULL,
-	[gugun] [varchar](11) NOT NULL,
-	[dong] [varchar](41) NOT NULL,
-	[note1] [varchar](26) NULL,
-	[note2] [varchar](18) NULL
+	[zipcode] [char](7) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[sido] [varchar](8) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[gugun] [varchar](11) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[dong] [varchar](41) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[note1] [varchar](26) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[note2] [varchar](18) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[charac0]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[charac0]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_charac0_rb]') AND type = 'D')
 BEGIN
-CREATE TABLE [dbo].[charac0](
-	[c_id] [varchar](50) NOT NULL,
-	[c_sheadera] [varchar](255) NOT NULL,
-	[c_sheaderb] [varchar](255) NOT NULL,
-	[c_sheaderc] [int] NOT NULL,
-	[c_headera] [varchar](255) NOT NULL,
-	[c_headerb] [varchar](255) NOT NULL,
-	[c_headerc] [varchar](255) NOT NULL,
-	[d_cdate] [smalldatetime] NULL,
-	[d_udate] [smalldatetime] NULL,
-	[c_status] [varchar](50) NOT NULL,
-	[m_body] [varchar](4000) NOT NULL,
-	[rb] [int] NOT NULL CONSTRAINT [DF_charac0_rb]  DEFAULT (0),
-	[times_rb] [int] NOT NULL CONSTRAINT [DF_charac0_times_rb]  DEFAULT (0)
-) ON [PRIMARY]
+ALTER TABLE [Charac0] ADD  CONSTRAINT [DF_charac0_rb]  DEFAULT ((0)) FOR [rb]
 END
-GO
-ALTER TABLE [dbo].[charac0]  WITH CHECK ADD  CONSTRAINT [Only_Characters] CHECK  ((NOT [c_id] like '%[^A-Z0-9]%'))
-GO
 
-ALTER TABLE [dbo].[charac0] CHECK CONSTRAINT [Only_Characters]
 GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[vAdultAge]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[vAdultAge]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_charac0_times_rb]') AND type = 'D')
 BEGIN
-CREATE TABLE [dbo].[vAdultAge](
-	[age] [int] NULL
-) ON [PRIMARY]
+ALTER TABLE [Charac0] ADD  CONSTRAINT [DF_charac0_times_rb]  DEFAULT ((0)) FOR [times_rb]
 END
+
 GO
-/****** Object:  Table [dbo].[vItemStorage]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[vItemStorage]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_MERC_rb]') AND type = 'D')
 BEGIN
-CREATE TABLE [dbo].[vItemStorage](
-	[c_id] [char](20) NULL,
-	[c_sheadera] [varchar](255) NULL,
-	[c_sheaderb] [varchar](255) NULL,
-	[c_sheaderc] [varchar](255) NULL,
-	[c_headera] [varchar](255) NULL,
-	[c_headerb] [varchar](255) NULL,
-	[c_headerc] [varchar](255) NULL,
-	[d_cdate] [datetime] NULL,
-	[d_udate] [datetime] NULL,
-	[c_status] [char](1) NULL,
-	[m_body] [text] NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+ALTER TABLE [Merc] ADD  CONSTRAINT [DF_MERC_rb]  DEFAULT ((0)) FOR [rb]
 END
+
 GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[vStatAuth1]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[vStatAuth1]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
+IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_MERC_reset_rb]') AND type = 'D')
 BEGIN
-CREATE TABLE [dbo].[vStatAuth1](
-	[AuthType] [char](1) NULL,
-	[ResultO] [int] NOT NULL,
-	[ResultA] [int] NOT NULL,
-	[Total] [int] NOT NULL,
-	[AuthTypeName] [varchar](7) NOT NULL,
-	[ResultOP] [decimal](28, 12) NULL,
-	[ResultAP] [decimal](28, 12) NULL
-) ON [PRIMARY]
+ALTER TABLE [Merc] ADD  CONSTRAINT [DF_MERC_reset_rb]  DEFAULT ((0)) FOR [reset_rb]
 END
+
 GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[vStatAuth2]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[vStatAuth2]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[vStatAuth2](
-	[Result] [char](1) NULL,
-	[AuthTypeB] [int] NOT NULL,
-	[AuthTypeC] [int] NOT NULL,
-	[AuthTypeD] [int] NOT NULL,
-	[AuthTypeE] [int] NOT NULL,
-	[Total] [int] NOT NULL,
-	[ResultName] [varchar](3) NOT NULL,
-	[AuthTypeBP] [decimal](28, 12) NULL,
-	[AuthTypeCP] [decimal](28, 12) NULL,
-	[AuthTypeDP] [decimal](28, 12) NULL,
-	[AuthTypeEP] [decimal](28, 12) NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[vStatPcbang1]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[vStatPcbang1]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[vStatPcbang1](
-	[Sido] [varchar](4) NULL,
-	[Gugun] [varchar](6) NULL,
-	[TypeA] [int] NULL,
-	[TypeO] [int] NULL,
-	[Total] [int] NULL,
-	[Ratio] [float] NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[vStatPcbang2]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[vStatPcbang2]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[vStatPcbang2](
-	[Sido] [varchar](4) NULL,
-	[TypeA] [int] NULL,
-	[TypeO] [int] NULL,
-	[Total] [int] NULL,
-	[Ratio] [float] NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[vStorage]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[vStorage]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[vStorage](
-	[HistoryDate] [datetime] NOT NULL,
-	[ServerID] [int] NOT NULL,
-	[AccountID] [char](20) NULL,
-	[Money] [varchar](255) NULL,
-	[CreateDate] [datetime] NULL,
-	[LastDate] [datetime] NULL,
-	[Status] [char](1) NULL,
-	[BodyInfo] [text] NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[v_beta]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_A3Web_Comment_A3Web_HTML]') AND parent_object_id = OBJECT_ID(N'[A3Web_Comment]'))
+ALTER TABLE [A3Web_Comment]  WITH CHECK ADD  CONSTRAINT [FK_A3Web_Comment_A3Web_HTML] FOREIGN KEY([bil_post])
+REFERENCES [A3Web_HTML] ([Bil])
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[v_beta]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[v_beta](
-	[AccountID] [char](20) NOT NULL,
-	[Motive] [varchar](200) NULL,
-	[Result] [char](1) NOT NULL,
-	[UserName] [char](20) NOT NULL,
-	[SCN] [char](15) NOT NULL,
-	[ResultDate] [smalldatetime] NULL,
-	[ResultUser] [char](20) NULL,
-	[ResultNo] [int] NOT NULL,
-	[ResultDesc] [varchar](2000) NULL,
-	[AuthType] [char](1) NOT NULL,
-	[RegistDate] [smalldatetime] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[v_cpu]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[v_cpu]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[v_cpu](
-	[QuestNo] [tinyint] NOT NULL,
-	[AnswerNo] [tinyint] NOT NULL,
-	[AccountID] [char](20) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[v_os]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[v_os]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[v_os](
-	[QuestNo] [tinyint] NOT NULL,
-	[AnswerNo] [tinyint] NOT NULL,
-	[AccountID] [char](20) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[v_ram]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[v_ram]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[v_ram](
-	[QuestNo] [tinyint] NOT NULL,
-	[AnswerNo] [tinyint] NOT NULL,
-	[AccountID] [char](20) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[v_vga]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_A3Web_Comment_A3Web_HTML]') AND parent_object_id = OBJECT_ID(N'[A3Web_Comment]'))
+ALTER TABLE [A3Web_Comment] CHECK CONSTRAINT [FK_A3Web_Comment_A3Web_HTML]
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[v_vga]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[v_vga](
-	[QuestNo] [tinyint] NOT NULL,
-	[AnswerNo] [tinyint] NOT NULL,
-	[AccountID] [char](20) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[vcharac]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[vcharac]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[vcharac](
-	[c_id] [char](20) NULL,
-	[c_sheadera] [varchar](255) NULL,
-	[c_sheaderb] [varchar](255) NULL,
-	[c_sheaderc] [varchar](255) NULL,
-	[c_headera] [varchar](255) NULL,
-	[c_headerb] [varchar](255) NULL,
-	[c_headerc] [varchar](255) NULL,
-	[d_cdate] [smalldatetime] NULL,
-	[d_udate] [smalldatetime] NULL,
-	[c_status] [char](1) NULL,
-	[m_body] [varchar](4000) NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_A3Web_Comment_Charac0]') AND parent_object_id = OBJECT_ID(N'[A3Web_Comment]'))
+ALTER TABLE [A3Web_Comment]  WITH CHECK ADD  CONSTRAINT [FK_A3Web_Comment_Charac0] FOREIGN KEY([author])
+REFERENCES [Charac0] ([c_id])
 GO
-/****** Object:  Table [dbo].[temp_account]    Script Date: 04/29/2012 23:03:17 ******/
-SET ANSI_NULLS ON
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_A3Web_Comment_Charac0]') AND parent_object_id = OBJECT_ID(N'[A3Web_Comment]'))
+ALTER TABLE [A3Web_Comment] CHECK CONSTRAINT [FK_A3Web_Comment_Charac0]
 GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[temp_account]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[temp_account](
-	[username] [varchar](50) NULL,
-	[password] [varchar](50) NULL,
-	[email] [varchar](50) NULL,
-	[passkey] [varchar](50) NULL,
-	[date] [smalldatetime] NULL
-) ON [PRIMARY]
-END
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_A3Web_HTML_Charac0]') AND parent_object_id = OBJECT_ID(N'[A3Web_HTML]'))
+ALTER TABLE [A3Web_HTML]  WITH CHECK ADD  CONSTRAINT [FK_A3Web_HTML_Charac0] FOREIGN KEY([Author])
+REFERENCES [Charac0] ([c_id])
 GO
-SET ANSI_PADDING OFF
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_A3Web_HTML_Charac0]') AND parent_object_id = OBJECT_ID(N'[A3Web_HTML]'))
+ALTER TABLE [A3Web_HTML] CHECK CONSTRAINT [FK_A3Web_HTML_Charac0]
 GO
-/****** Object:  Table [dbo].[Ban_IP]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Charac0_Account]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
+ALTER TABLE [Charac0]  WITH CHECK ADD  CONSTRAINT [FK_Charac0_Account] FOREIGN KEY([c_sheadera])
+REFERENCES [Account] ([c_id])
 GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Ban_IP]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[Ban_IP](
-	[List_IP] [varchar](50) NULL
-) ON [PRIMARY]
-END
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Charac0_Account]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
+ALTER TABLE [Charac0] CHECK CONSTRAINT [FK_Charac0_Account]
 GO
-SET ANSI_PADDING OFF
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_CharInfo_Charac0]') AND parent_object_id = OBJECT_ID(N'[CharInfo]'))
+ALTER TABLE [CharInfo]  WITH CHECK ADD  CONSTRAINT [FK_CharInfo_Charac0] FOREIGN KEY([CharName])
+REFERENCES [Charac0] ([c_id])
 GO
-/****** Object:  Table [dbo].[AccountAuth]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_CharInfo_Charac0]') AND parent_object_id = OBJECT_ID(N'[CharInfo]'))
+ALTER TABLE [CharInfo] CHECK CONSTRAINT [FK_CharInfo_Charac0]
 GO
-SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_FRIEND0_Charac0]') AND parent_object_id = OBJECT_ID(N'[FRIEND0]'))
+ALTER TABLE [FRIEND0]  WITH CHECK ADD  CONSTRAINT [FK_FRIEND0_Charac0] FOREIGN KEY([CharName])
+REFERENCES [Charac0] ([c_id])
 GO
-SET ANSI_PADDING ON
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_FRIEND0_Charac0]') AND parent_object_id = OBJECT_ID(N'[FRIEND0]'))
+ALTER TABLE [FRIEND0] CHECK CONSTRAINT [FK_FRIEND0_Charac0]
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[AccountAuth]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[AccountAuth](
-	[AccountID] [char](20) NOT NULL,
-	[AuthType] [char](1) NOT NULL,
-	[AuthDate] [smalldatetime] NOT NULL,
-	[Result] [char](1) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Hsstonetable_Charac0]') AND parent_object_id = OBJECT_ID(N'[Hsstonetable]'))
+ALTER TABLE [Hsstonetable]  WITH CHECK ADD  CONSTRAINT [FK_Hsstonetable_Charac0] FOREIGN KEY([MasterName])
+REFERENCES [Charac0] ([c_id])
 GO
-/****** Object:  Table [dbo].[AccountExt]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Hsstonetable_Charac0]') AND parent_object_id = OBJECT_ID(N'[Hsstonetable]'))
+ALTER TABLE [Hsstonetable] CHECK CONSTRAINT [FK_Hsstonetable_Charac0]
 GO
-SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Hstable_Charac0]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
+ALTER TABLE [Hstable]  WITH CHECK ADD  CONSTRAINT [FK_Hstable_Charac0] FOREIGN KEY([MasterName])
+REFERENCES [Charac0] ([c_id])
 GO
-SET ANSI_PADDING ON
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Hstable_Charac0]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
+ALTER TABLE [Hstable] CHECK CONSTRAINT [FK_Hstable_Charac0]
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[AccountExt]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[AccountExt](
-	[AccountID] [char](20) NOT NULL,
-	[Job] [char](1) NOT NULL,
-	[RecomID] [char](20) NOT NULL,
-	[EmailStatus] [bit] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[AccountFailAuth]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[AccountFailAuth]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[AccountFailAuth](
-	[FailAuthID] [int] NOT NULL,
-	[AccountID] [char](20) NOT NULL,
-	[SCN1] [char](15) NOT NULL,
-	[SCN2] [char](15) NOT NULL,
-	[AuthDate] [smalldatetime] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[AdultCheck]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Hstable_Hsstonetable]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
+ALTER TABLE [Hstable]  WITH CHECK ADD  CONSTRAINT [FK_Hstable_Hsstonetable] FOREIGN KEY([MasterName])
+REFERENCES [Hsstonetable] ([MasterName])
 GO
-SET ANSI_PADDING ON
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Hstable_Hsstonetable]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
+ALTER TABLE [Hstable] CHECK CONSTRAINT [FK_Hstable_Hsstonetable]
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[AdultCheck]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[AdultCheck](
-	[Name] [char](20) NOT NULL,
-	[SCN] [char](13) NOT NULL,
-	[RegDate] [smalldatetime] NULL
-) ON [PRIMARY]
-END
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ItemStorage_Charac0]') AND parent_object_id = OBJECT_ID(N'[ItemStorage]'))
+ALTER TABLE [ItemStorage]  WITH CHECK ADD  CONSTRAINT [FK_ItemStorage_Charac0] FOREIGN KEY([c_id])
+REFERENCES [Charac0] ([c_id])
 GO
-SET ANSI_PADDING OFF
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ItemStorage_Charac0]') AND parent_object_id = OBJECT_ID(N'[ItemStorage]'))
+ALTER TABLE [ItemStorage] CHECK CONSTRAINT [FK_ItemStorage_Charac0]
 GO
-/****** Object:  Table [dbo].[Answer]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB0_Charac0_receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB0]'))
+ALTER TABLE [LETTERDB0]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB0_Charac0_receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
 GO
-SET QUOTED_IDENTIFIER ON
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB0_Charac0_receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB0]'))
+ALTER TABLE [LETTERDB0] CHECK CONSTRAINT [FK_LETTERDB0_Charac0_receiver]
 GO
-SET ANSI_PADDING ON
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB0_Charac0_sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB0]'))
+ALTER TABLE [LETTERDB0]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB0_Charac0_sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
 GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Answer]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[Answer](
-	[QuestNo] [tinyint] NOT NULL,
-	[AnswerNo] [tinyint] NOT NULL,
-	[Content] [varchar](100) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[AuthLog]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[AuthLog]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[AuthLog](
-	[AuthLogID] [int] NOT NULL,
-	[AccountID] [char](20) NOT NULL,
-	[AuthType] [char](1) NOT NULL,
-	[AuthDate] [smalldatetime] NOT NULL,
-	[Result] [char](1) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Beta3_1]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Beta3_1]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[Beta3_1](
-	[BetaID] [int] NOT NULL,
-	[BetaRandNum] [int] NULL,
-	[AccountID] [char](20) NOT NULL,
-	[Scn] [varchar](20) NULL,
-	[Zipcode] [varchar](10) NULL,
-	[Region] [varchar](10) NULL,
-	[Age] [varchar](5) NULL,
-	[Sex] [tinyint] NULL,
-	[Result] [char](1) NULL,
-	[BetaNum] [tinyint] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Beta4]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Beta4]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[Beta4](
-	[AccountID] [char](20) NOT NULL,
-	[CntLogin] [int] NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BetaArgee]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BetaArgee]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BetaArgee](
-	[AccountID] [char](20) NOT NULL,
-	[AgreeStatus] [bit] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BetaPcbang]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BetaPcbang]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BetaPcbang](
-	[AccountID] [char](20) NOT NULL,
-	[PcbangCode] [varchar](12) NULL,
-	[PcbangName] [varchar](50) NULL,
-	[Owner] [varchar](20) NULL,
-	[Scn] [char](14) NULL,
-	[OpenDate] [varchar](10) NULL,
-	[PcbangAddress] [varchar](255) NULL,
-	[PcbangZipcode] [char](7) NULL,
-	[OwnerAddress] [varchar](255) NULL,
-	[OwnerZipcode] [char](7) NULL,
-	[Uptae] [varchar](100) NULL,
-	[Upzong] [varchar](100) NULL,
-	[Semuser] [varchar](30) NULL,
-	[AccountIDStatus] [char](1) NOT NULL,
-	[RequestDate] [smalldatetime] NOT NULL,
-	[Result] [char](1) NOT NULL,
-	[ResultDesc] [varchar](1000) NULL,
-	[ResultUser] [char](20) NULL,
-	[ResultDate] [smalldatetime] NULL,
-	[ResultNo] [int] NOT NULL,
-	[ResultType] [char](1) NOT NULL,
-	[Tel] [varchar](20) NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BetaPcbangIP]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BetaPcbangIP]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BetaPcbangIP](
-	[AccountID] [char](20) NOT NULL,
-	[IP] [varchar](15) NOT NULL,
-	[Result] [char](1) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[account]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[account]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[account](
-	[c_id] [varchar](50) NOT NULL,
-	[c_sheadera] [varchar](255) NOT NULL,
-	[c_sheaderb] [varchar](255) NOT NULL,
-	[c_sheaderc] [varchar](255) NOT NULL,
-	[c_headera] [varchar](255) NOT NULL,
-	[c_headerb] [varchar](255) NOT NULL,
-	[c_headerc] [varchar](255) NOT NULL,
-	[d_cdate] [smalldatetime] NULL,
-	[d_udate] [smalldatetime] NULL,
-	[c_status] [char](10) NOT NULL,
-	[m_body] [varchar](4000) NULL,
-	[acc_status] [varchar](50) NULL,
-	[salary] [smalldatetime] NULL,
-	[last_salary] [smalldatetime] NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[A3Web_HTML]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[A3Web_HTML]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[A3Web_HTML](
-	[Bil] [int] IDENTITY(1,1) NOT NULL,
-	[Author] [varchar](50) NULL,
-	[Category] [varchar](50) NULL,
-	[Subject] [varchar](50) NULL,
-	[HTML] [varchar](4000) NULL,
-	[Date] [smalldatetime] NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BetaPresent]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BetaPresent]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BetaPresent](
-	[AccountID] [char](20) NOT NULL,
-	[Present] [char](1) NOT NULL,
-	[PresentType] [char](1) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BetaTester]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BetaTester]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BetaTester](
-	[AccountID] [char](20) NOT NULL,
-	[Motive] [varchar](200) NULL,
-	[Result] [char](1) NOT NULL,
-	[UserName] [char](20) NOT NULL,
-	[SCN] [char](15) NOT NULL,
-	[ResultDate] [smalldatetime] NULL,
-	[ResultUser] [char](20) NULL,
-	[ResultNo] [int] NOT NULL,
-	[ResultDesc] [varchar](2000) NULL,
-	[AuthType] [char](1) NOT NULL,
-	[RegistDate] [smalldatetime] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BetaTester1]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BetaTester1]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BetaTester1](
-	[BetaID] [int] NOT NULL,
-	[BetaRandNum] [int] NULL,
-	[AccountID] [char](20) NOT NULL,
-	[Scn] [varchar](20) NULL,
-	[Zipcode] [varchar](10) NULL,
-	[Region] [varchar](10) NULL,
-	[Age] [varchar](5) NULL,
-	[Sex] [tinyint] NULL,
-	[Result] [char](1) NULL,
-	[BetaNum] [tinyint] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BetaTester2]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BetaTester2]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BetaTester2](
-	[BetaID] [int] NOT NULL,
-	[BetaRandNum] [int] NULL,
-	[AccountID] [char](20) NOT NULL,
-	[Scn] [varchar](20) NULL,
-	[ZipCode] [varchar](10) NULL,
-	[Region] [varchar](41) NULL,
-	[Age] [varchar](5) NULL,
-	[Sex] [tinyint] NULL,
-	[Result] [char](1) NULL,
-	[BetaNum] [tinyint] NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BetaTester3]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BetaTester3]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BetaTester3](
-	[BetaID] [int] NOT NULL,
-	[BetaRandNum] [int] NULL,
-	[AccountID] [char](20) NOT NULL,
-	[Scn] [varchar](20) NULL,
-	[ZipCode] [varchar](10) NULL,
-	[Region] [varchar](41) NULL,
-	[Age] [varchar](5) NULL,
-	[Sex] [tinyint] NULL,
-	[Result] [char](1) NULL,
-	[BetaNum] [tinyint] NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BetaTester4]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BetaTester4]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BetaTester4](
-	[BetaID] [int] NOT NULL,
-	[BetaRandNum] [int] NULL,
-	[AccountID] [char](20) NOT NULL,
-	[Scn] [varchar](20) NULL,
-	[ZipCode] [varchar](10) NULL,
-	[Region] [varchar](41) NULL,
-	[Age] [varchar](5) NULL,
-	[Sex] [tinyint] NULL,
-	[Result] [char](1) NULL,
-	[BetaNum] [tinyint] NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BetaWebLoginLog]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BetaWebLoginLog]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BetaWebLoginLog](
-	[BetaWebLoginLogID] [int] NOT NULL,
-	[AccountID] [char](20) NOT NULL,
-	[IpAddr] [char](15) NOT NULL,
-	[LoginDate] [smalldatetime] NOT NULL,
-	[LoginCheck] [tinyint] NOT NULL,
-	[AccessDeny] [bit] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[BlackList]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[BlackList]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[BlackList](
-	[BlackListID] [int] NOT NULL,
-	[AccountID] [char](20) NOT NULL,
-	[BlockStartDate] [smalldatetime] NOT NULL,
-	[BlockEndDate] [smalldatetime] NOT NULL,
-	[AccountStatus] [char](1) NOT NULL,
-	[Status] [char](1) NOT NULL,
-	[Content] [varchar](1000) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Count]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Count]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[Count](
-	[count] [int] NOT NULL
-) ON [PRIMARY]
-END
-GO
-/****** Object:  Table [dbo].[DenyChar]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[DenyChar]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[DenyChar](
-	[DenyCharID] [char](20) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[FaultMailAccount]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[FaultMailAccount]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[FaultMailAccount](
-	[AccountID] [char](20) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[CharInfo]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[CharInfo]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[CharInfo](
-	[AccountID] [varchar](8000) NULL,
-	[ServerIdx] [int] NULL,
-	[CharName] [varchar](8000) NULL,
-	[Class] [int] NULL,
-	[Nation] [int] NULL,
-	[Default] [varchar](8000) NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Member]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Member]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[Member](
-	[MemberName] [varchar](50) NULL,
-	[MemberRank] [int] NULL,
-	[Type] [int] NULL,
-	[OrderLevel] [int] NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[ClanInfo]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[ClanInfo]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[ClanInfo](
-	[ClanID] [char](2) NULL,
-	[ServerID] [char](1) NULL,
-	[ClanName] [char](10) NULL,
-	[Nation] [char](10) NULL,
-	[MarkID] [char](10) NULL,
-	[CDate] [smalldatetime] NULL,
-	[DDate] [smalldatetime] NULL,
-	[ClanPasswd] [char](10) NULL,
-	[ClanRank] [char](10) NULL,
-	[ClanStatus] [char](1) NULL,
-	[StorageID] [char](10) NULL,
-	[AgitID] [char](10) NULL,
-	[WinCount] [char](10) NULL,
-	[LoseCount] [char](10) NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[ClanMember]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[ClanMember]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[ClanMember](
-	[ClanID] [int] NOT NULL,
-	[ServerID] [int] NOT NULL,
-	[CharName] [varchar](50) NOT NULL,
-	[Level] [int] NOT NULL,
-	[Class] [int] NOT NULL,
-	[Rank] [int] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[cdg_icdata]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[cdg_icdata]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[cdg_icdata](
-	[item1] [int] NOT NULL DEFAULT ((0)),
-	[item2] [int] NOT NULL DEFAULT ((0)),
-	[item3] [int] NOT NULL DEFAULT ((0)),
-	[item4] [int] NOT NULL DEFAULT ((0)),
-	[item5] [int] NOT NULL DEFAULT ((0)),
-	[item6] [int] NOT NULL DEFAULT ((0)),
-	[item7] [int] NOT NULL DEFAULT ((0)),
-	[item8] [int] NOT NULL DEFAULT ((0)),
-	[item9] [int] NOT NULL DEFAULT ((0)),
-	[item10] [int] NOT NULL DEFAULT ((0)),
-	[item11] [int] NOT NULL DEFAULT ((0)),
-	[item12] [int] NOT NULL DEFAULT ((0)),
-	[item13] [int] NOT NULL DEFAULT ((0)),
-	[item14] [int] NOT NULL DEFAULT ((0)),
-	[item15] [int] NOT NULL DEFAULT ((0)),
-	[item16] [int] NOT NULL DEFAULT ((0))
-) ON [PRIMARY]
-END
-GO
-/****** Object:  Table [dbo].[cdg_mondrops]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[cdg_mondrops]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[cdg_mondrops](
-	[monsterid] [int] NOT NULL DEFAULT ((0)),
-	[itemcode] [int] NOT NULL DEFAULT ((0)),
-	[dropcount] [bigint] NOT NULL DEFAULT ((0)),
-	[monstername] [varchar](20) NULL DEFAULT ('')
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[captcha]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[captcha]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[captcha](
-	[captcha_id] [bigint] IDENTITY(1,1) NOT NULL,
-	[captcha_time] [int] NOT NULL,
-	[ip_address] [varchar](50) NOT NULL,
-	[word] [varchar](50) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[A3Web_Comment]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[A3Web_Comment]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[A3Web_Comment](
-	[bil] [int] IDENTITY(1,1) NOT NULL,
-	[bil_post] [int] NOT NULL,
-	[author] [varchar](50) NOT NULL,
-	[html] [varchar](max) NOT NULL,
-	[date] [smalldatetime] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[GameBroadcast]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[GameBroadcast]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[GameBroadcast](
-	[GameBroadcastID] [int] NOT NULL,
-	[AccountID] [char](20) NOT NULL,
-	[RequestDate] [smalldatetime] NOT NULL,
-	[Job] [varchar](200) NOT NULL,
-	[Motive] [varchar](2000) NOT NULL,
-	[Intro] [varchar](2000) NOT NULL,
-	[FilePath] [varchar](200) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[GameLoginLog]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[GameLoginLog]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[GameLoginLog](
-	[LoginIdx] [int] NOT NULL,
-	[AccountID] [char](20) NOT NULL,
-	[LoginIP] [varchar](15) NOT NULL,
-	[LoginDate] [smalldatetime] NOT NULL,
-	[PayMode] [char](3) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[GameServer]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[GameServer]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[GameServer](
-	[ServerIdx] [tinyint] NOT NULL,
-	[ServerName] [char](16) NOT NULL,
-	[CntRegist] [int] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[GameServerMessage]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[GameServerMessage]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[GameServerMessage](
-	[AccountID] [ntext] NULL,
-	[StatusID] [ntext] NULL,
-	[mbody] [ntext] NULL,
-	[Message] [ntext] NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-END
-GO
-/****** Object:  Table [dbo].[GroupSeat]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[GroupSeat]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[GroupSeat](
-	[GroupSeatID] [int] NOT NULL,
-	[Master] [char](20) NOT NULL,
-	[SeatName] [varchar](40) NOT NULL,
-	[SeatType] [char](1) NOT NULL,
-	[SeatPassword] [varchar](15) NOT NULL,
-	[ServerIdx] [tinyint] NOT NULL,
-	[CntRegist] [tinyint] NOT NULL,
-	[Name] [char](20) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[InnerAccount]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[InnerAccount]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[InnerAccount](
-	[AccountID] [char](20) NOT NULL,
-	[Desc] [varchar](500) NOT NULL,
-	[CreateDate] [smalldatetime] NOT NULL,
-	[Creater] [char](8) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[ItemStorage0]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[ItemStorage0]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[ItemStorage0](
-	[c_id] [char](20) NOT NULL,
-	[c_sheadera] [varchar](255) NOT NULL,
-	[c_sheaderb] [varchar](255) NOT NULL,
-	[c_sheaderc] [varchar](255) NOT NULL,
-	[c_headera] [varchar](255) NOT NULL,
-	[c_headerb] [varchar](255) NOT NULL,
-	[c_headerc] [varchar](255) NOT NULL,
-	[d_cdate] [datetime] NULL,
-	[d_udate] [datetime] NULL,
-	[c_status] [char](1) NOT NULL,
-	[m_body] [text] NOT NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Job]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[Job]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[Job](
-	[JobID] [char](1) NOT NULL,
-	[JobName] [varchar](100) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[LoginLog]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[LoginLog]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[LoginLog](
-	[SCN] [char](13) NOT NULL,
-	[LoginDate] [datetime] NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[LotteryTicket]    Script Date: 04/29/2012 23:03:16 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[dbo].[LotteryTicket]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)
-BEGIN
-CREATE TABLE [dbo].[LotteryTicket](
-	[LotteryTicketID] [bigint] NOT NULL,
-	[IsUsed] [char](1) NOT NULL,
-	[TicketNo] [char](12) NOT NULL
-) ON [PRIMARY]
-END
-GO
-SET ANSI_PADDING OFF
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB0_Charac0_sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB0]'))
+ALTER TABLE [LETTERDB0] CHECK CONSTRAINT [FK_LETTERDB0_Charac0_sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Merc_Hsstonetable_hstable]') AND parent_object_id = OBJECT_ID(N'[Merc]'))
+ALTER TABLE [Merc]  WITH CHECK ADD  CONSTRAINT [FK_Merc_Hsstonetable_hstable] FOREIGN KEY([MasterName])
+REFERENCES [Hsstonetable] ([MasterName])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Merc_Hsstonetable_hstable]') AND parent_object_id = OBJECT_ID(N'[Merc]'))
+ALTER TABLE [Merc] CHECK CONSTRAINT [FK_Merc_Hsstonetable_hstable]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_RcvResult_Account]') AND parent_object_id = OBJECT_ID(N'[RcvResult]'))
+ALTER TABLE [RcvResult]  WITH CHECK ADD  CONSTRAINT [FK_RcvResult_Account] FOREIGN KEY([AccountName])
+REFERENCES [Account] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_RcvResult_Account]') AND parent_object_id = OBJECT_ID(N'[RcvResult]'))
+ALTER TABLE [RcvResult] CHECK CONSTRAINT [FK_RcvResult_Account]
+GO
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Account_alphabet]') AND parent_object_id = OBJECT_ID(N'[Account]'))
+ALTER TABLE [Account]  WITH CHECK ADD  CONSTRAINT [CK_Account_alphabet] CHECK  ((NOT [c_id] like '%[^A-Z0-9]%'))
+GO
+IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Account_alphabet]') AND parent_object_id = OBJECT_ID(N'[Account]'))
+ALTER TABLE [Account] CHECK CONSTRAINT [CK_Account_alphabet]
+GO
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[Only_Characters]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
+ALTER TABLE [Charac0]  WITH CHECK ADD  CONSTRAINT [Only_Characters] CHECK  ((NOT [c_id] like '%[^A-Z0-9]%'))
+GO
+IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[Only_Characters]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
+ALTER TABLE [Charac0] CHECK CONSTRAINT [Only_Characters]
+GO
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Hstable_AlphaNumSpace]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
+ALTER TABLE [Hstable]  WITH CHECK ADD  CONSTRAINT [CK_Hstable_AlphaNumSpace] CHECK  ((NOT [HSName] like '%[^A-Z0-9]%'))
+GO
+IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Hstable_AlphaNumSpace]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
+ALTER TABLE [Hstable] CHECK CONSTRAINT [CK_Hstable_AlphaNumSpace]
 GO
