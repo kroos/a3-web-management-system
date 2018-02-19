@@ -1,6 +1,6 @@
 USE [ASD]
 GO
-/****** Object:  UserDefinedFunction [GetAccountName]    Script Date: 16/02/2018 11:43:53 PM ******/
+/****** Object:  UserDefinedFunction [GetAccountName]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -23,7 +23,7 @@ END
 END
 
 GO
-/****** Object:  Table [A3Web_Comment]    Script Date: 16/02/2018 11:43:53 PM ******/
+/****** Object:  Table [A3Web_Comment]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -47,7 +47,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [A3Web_HTML]    Script Date: 16/02/2018 11:43:53 PM ******/
+/****** Object:  Table [A3Web_HTML]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -72,7 +72,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Account]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Account]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -105,7 +105,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AccountAuth]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [AccountAuth]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -124,7 +124,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AccountExt]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [AccountExt]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -143,7 +143,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AccountFailAuth]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [AccountFailAuth]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -163,7 +163,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AdultCheck]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [AdultCheck]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -181,7 +181,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Answer]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Answer]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,7 +199,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AuthLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [AuthLog]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -219,7 +219,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Ban_IP]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Ban_IP]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -235,7 +235,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [BlackList]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [BlackList]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -257,7 +257,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Captcha]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Captcha]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -270,13 +270,17 @@ CREATE TABLE [Captcha](
 	[captcha_id] [bigint] IDENTITY(1,1) NOT NULL,
 	[captcha_time] [int] NULL,
 	[ip_address] [varchar](50) COLLATE Latin1_General_CI_AS NULL,
-	[word] [varchar](50) COLLATE Latin1_General_CI_AS NULL
+	[word] [varchar](50) COLLATE Latin1_General_CI_AS NULL,
+ CONSTRAINT [PK_Captcha] PRIMARY KEY CLUSTERED 
+(
+	[captcha_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Charac0]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Charac0]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -297,8 +301,8 @@ CREATE TABLE [Charac0](
 	[d_udate] [smalldatetime] NULL,
 	[c_status] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[m_body] [varchar](4000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[rb] [int] NOT NULL,
-	[times_rb] [int] NOT NULL,
+	[rb] [int] NOT NULL CONSTRAINT [DF_charac0_rb]  DEFAULT ((0)),
+	[times_rb] [int] NOT NULL CONSTRAINT [DF_charac0_times_rb]  DEFAULT ((0)),
  CONSTRAINT [PK_Charac0] PRIMARY KEY CLUSTERED 
 (
 	[c_id] ASC
@@ -308,7 +312,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [CharInfo]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [CharInfo]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -327,7 +331,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Clan]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Clan]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -337,26 +341,30 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Clan]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [Clan](
-	[ClanID] [char](2) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[ServerID] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[ClanName] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[Nation] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[MarkID] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[ClanID] [char](2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ServerID] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ClanName] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Nation] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[MarkID] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 	[CDate] [smalldatetime] NULL,
 	[DDate] [smalldatetime] NULL,
-	[ClanPasswd] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[ClanRank] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[ClanStatus] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[StorageID] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[AgitID] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[WinCount] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[LoseCount] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
+	[ClanPasswd] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ClanRank] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ClanStatus] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[StorageID] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[AgitID] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[WinCount] [int] NOT NULL,
+	[LoseCount] [int] NOT NULL,
+ CONSTRAINT [PK_Clan] PRIMARY KEY CLUSTERED 
+(
+	[ClanID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Count]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Count]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -368,7 +376,7 @@ CREATE TABLE [Count](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [DenyChar]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [DenyChar]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -384,7 +392,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [FaultMailAccount]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [FaultMailAccount]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -400,7 +408,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [FRIEND0]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [FRIEND0]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -418,7 +426,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameBroadcast]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [GameBroadcast]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -440,7 +448,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameLoginLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [GameLoginLog]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -460,7 +468,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameServer]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [GameServer]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -478,7 +486,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameServerMessage]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [GameServerMessage]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -493,7 +501,7 @@ CREATE TABLE [GameServerMessage](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [GroupSeat]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [GroupSeat]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -516,7 +524,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Hsstonetable]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Hsstonetable]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -542,7 +550,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Hstable]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Hstable]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -573,7 +581,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [InnerAccount]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [InnerAccount]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -592,7 +600,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ItemStorage]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [ItemStorage]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -618,7 +626,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Job]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Job]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -635,7 +643,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB0]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [LETTERDB0]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -662,7 +670,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LoginLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [LoginLog]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -679,7 +687,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LotteryTicket]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [LotteryTicket]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -701,7 +709,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Lotto]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Lotto]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -723,7 +731,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LottoEvent]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [LottoEvent]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -740,7 +748,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Merc]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [Merc]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -761,7 +769,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [OutAccount]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [OutAccount]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -787,7 +795,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [PcbangList]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [PcbangList]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -822,7 +830,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [QuestList]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [QuestList]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -840,7 +848,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [QuestResponse]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [QuestResponse]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -858,7 +866,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [RandChar]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [RandChar]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -876,7 +884,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [rbstat]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [rbstat]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -899,7 +907,7 @@ CREATE TABLE [rbstat](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [RcvResult]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [RcvResult]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -918,7 +926,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ReservedChar]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [ReservedChar]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -942,7 +950,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ReservedPresent]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [ReservedPresent]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -961,7 +969,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [RestoreRequest]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [RestoreRequest]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -982,7 +990,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [SerialList]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [SerialList]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1008,7 +1016,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [StatusLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [StatusLog]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1031,7 +1039,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [temp_account]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [temp_account]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1051,7 +1059,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [UpdateLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [UpdateLog]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1071,7 +1079,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [UserTicket]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [UserTicket]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1088,7 +1096,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [WebLoginLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [WebLoginLog]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1109,7 +1117,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [WebLoginRecentLog]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [WebLoginRecentLog]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1129,7 +1137,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [WebLoginReport]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [WebLoginReport]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1147,7 +1155,7 @@ CREATE TABLE [WebLoginReport](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [ZipCode]    Script Date: 16/02/2018 11:43:54 PM ******/
+/****** Object:  Table [ZipCode]    Script Date: 20/02/2018 2:10:49 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1168,18 +1176,6 @@ CREATE TABLE [ZipCode](
 END
 GO
 SET ANSI_PADDING OFF
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_charac0_rb]') AND type = 'D')
-BEGIN
-ALTER TABLE [Charac0] ADD  CONSTRAINT [DF_charac0_rb]  DEFAULT ((0)) FOR [rb]
-END
-
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_charac0_times_rb]') AND type = 'D')
-BEGIN
-ALTER TABLE [Charac0] ADD  CONSTRAINT [DF_charac0_times_rb]  DEFAULT ((0)) FOR [times_rb]
-END
-
 GO
 IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_MERC_rb]') AND type = 'D')
 BEGIN
@@ -1297,11 +1293,11 @@ GO
 IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Account_alphabet]') AND parent_object_id = OBJECT_ID(N'[Account]'))
 ALTER TABLE [Account] CHECK CONSTRAINT [CK_Account_alphabet]
 GO
-IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[Only_Characters]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
-ALTER TABLE [Charac0]  WITH CHECK ADD  CONSTRAINT [Only_Characters] CHECK  ((NOT [c_id] like '%[^A-Z0-9]%'))
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[ck_No_Special_Characters]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
+ALTER TABLE [Charac0]  WITH NOCHECK ADD  CONSTRAINT [ck_No_Special_Characters] CHECK NOT FOR REPLICATION ((NOT [c_id] like '%[^A-Z0-9]%'))
 GO
-IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[Only_Characters]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
-ALTER TABLE [Charac0] CHECK CONSTRAINT [Only_Characters]
+IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[ck_No_Special_Characters]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
+ALTER TABLE [Charac0] CHECK CONSTRAINT [ck_No_Special_Characters]
 GO
 IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Hstable_AlphaNumSpace]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
 ALTER TABLE [Hstable]  WITH CHECK ADD  CONSTRAINT [CK_Hstable_AlphaNumSpace] CHECK  ((NOT [HSName] like '%[^A-Z0-9]%'))
