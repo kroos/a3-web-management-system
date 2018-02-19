@@ -25,7 +25,9 @@ startblock('form');
 					<p class="mbr-text pb-3 mbr-fonts-style display-5"><font color="#FF0000"><blink><?=@$info?></blink></font></p>
 
 					<?=form_open('', array('class' => 'mbr-form', 'autocomplete' => 'off', 'id' => 'productForm'))?>
-
+				<?php if($query->num_rows() <= 0): ?>
+					<p class="mbr-text pb-3 mbr-fonts-style display-5">Please create a character.</p>
+				<?php else: ?>
 					<?php $var = 0 ?>
 					<div class="container">
 						<div class="row">
@@ -94,6 +96,7 @@ startblock('form');
 							</span>
 						<?php endif ?>
 
+				<?php endif ?>
 					<?=form_close() ?>
 
 				</div>

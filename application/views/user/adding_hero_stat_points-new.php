@@ -25,7 +25,9 @@ startblock('form');
 				<p class="mbr-text pb-3 mbr-fonts-style display-5"><font color="#FF0000"><blink><?=@$info?></blink></font></p>
 
 				<?=form_open('', array('class' => 'mbr-form', 'autocomplete' => 'off', 'id' => 'productForm'))?>
-
+<?php if($query->num_rows() <= 0):?>
+<p class="mbr-text pb-3 mbr-fonts-style display-5">Please create a character.</p>
+<?php else: ?>
 				<div id="accordion">
 					<?php foreach($query->result() as $char):?>
 					<div class="card">
@@ -62,6 +64,7 @@ startblock('form');
 		</div>
 	</div> -->
 
+				<?php endif ?>
 				<?=form_close() ?>
 
 			</div>

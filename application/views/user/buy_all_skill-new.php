@@ -13,9 +13,9 @@ startblock('form');
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="title col-12 col-lg-8">
-					<h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">Acquire Super Shue</h2>
+					<h2 class="mbr-section-title align-center pb-3 mbr-fonts-style display-2">Buying Full Skills</h2>
 
-					<h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">Please select your character which will be equip with super shue<br />Please Logout Before Submit This Form</h3>
+					<h3 class="mbr-section-subtitle align-center mbr-light pb-3 mbr-fonts-style display-5">Please select your character<br />Please Logout Before Submit This Form</h3>
 				</div>
 			</div>
 		</div>
@@ -26,7 +26,9 @@ startblock('form');
 					<p class="mbr-text pb-3 mbr-fonts-style display-5"><font color="#FF0000"><blink><?=@$info?></blink></font></p>
 
 					<?=form_open('', array('class' => 'mbr-form', 'autocomplete' => 'off', 'id' => 'productForm'))?>
-
+<?php if($query->num_rows() <= 0):?>
+<p class="mbr-text pb-3 mbr-fonts-style display-5">Please create a character.</p>
+<?php else: ?>
 <?php foreach($query->result() as $char):?>
 							<div class="form-check row">
 								<?=form_radio('character', $char->c_id, set_radio('character', $char->c_id, FALSE), 'id="exampleRadios1'.$char->c_id.'" class="form-check-input"')?>
@@ -41,6 +43,7 @@ startblock('form');
 								<button type="submit" class="btn btn-primary btn-form display-4">BUY SKILL</button>
 							</span>
 
+				<?php endif ?>
 					<?=form_close() ?>
 
 				</div>

@@ -26,7 +26,9 @@ startblock('form');
 					<p class="mbr-text pb-3 mbr-fonts-style display-5"><font color="#FF0000"><blink><?=@$info?></blink></font></p>
 
 					<?=form_open('', array('class' => 'mbr-form', 'autocomplete' => 'off', 'id' => 'productForm'))?>
-
+<?php if($query->num_rows() <= 0):?>
+<p class="mbr-text pb-3 mbr-fonts-style display-5">Please create a character.</p>
+<?php else: ?>
 <?php foreach($query->result() as $char):?>
 
 							<div class="form-check row">
@@ -42,7 +44,7 @@ startblock('form');
 								<button type="submit" class="btn btn-primary btn-form display-4">GET SUPER SHUE</button>
 								<!-- <input type="submit" name="sign-in" value="SIGN-IN" class="btn btn-primary btn-form display-4"> -->
 							</span>
-
+<?php endif ?>
 					<?=form_close() ?>
 
 				</div>
