@@ -270,7 +270,7 @@ class A3 extends CI_Controller {
 
 	public function popup_board_of_mercenaries()
 		{
-					$this->load->database('HSDB', TRUE);
+					// $this->load->database('HSDB', TRUE);
 					$data['query'] = $this->hsdb_hstable_merc_view->board_of_mercenaries(50);
 					// $this->load->view('popup_board_of_mercenaries', $data);
 					$this->load->view('popup_board_of_mercenaries.new.php', $data);

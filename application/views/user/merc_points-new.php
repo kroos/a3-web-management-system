@@ -36,7 +36,7 @@ startblock('form');
 
 <?php if(merc_attrib('POINTS',  $merc->row()->Ability) != 0):?>
 <p class="mbr-text pb-3 mbr-fonts-style display-5">
-	Remaining Points = <?=merc_attrib('POINTS', $merc->row()->Ability)?>
+	Remaining Points = <span id="rpoint"><?=merc_attrib('POINTS', $merc->row()->Ability)?></span>
 </p>
 <?php endif?>
 
@@ -52,7 +52,7 @@ startblock('form');
 							<br />
 							<?=form_error('str')?>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-2" id="strpoint">
 							<?=merc_attrib('STR', $merc->row()->Ability)?>
 						</div>
 					</div>
@@ -65,7 +65,7 @@ startblock('form');
 							<br />
 							<?=form_error('int')?>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-2" id="intpoint">
 							<?=merc_attrib('INT', $merc->row()->Ability)?>
 						</div>
 					</div>
@@ -78,7 +78,7 @@ startblock('form');
 							<br />
 							<?=form_error('dex')?>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-2" id="dexpoint">
 							<?=merc_attrib('DEX', $merc->row()->Ability)?>
 						</div>
 					</div>
@@ -89,7 +89,7 @@ startblock('form');
 							<br />
 							<?=form_error('vit')?>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-2" id="vitpoint">
 							<?=merc_attrib('VIT', $merc->row()->Ability)?>
 						</div>
 					</div>
@@ -100,7 +100,7 @@ startblock('form');
 							<br />
 							<?=form_error('mana')?>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-2" id="manapoint">
 							<?=merc_attrib('MANA', $merc->row()->Ability)?>
 						</div>
 					</div>
@@ -129,6 +129,71 @@ endblock();
 
 startblock('jscript');
 ?>
+////////////////////////////////////////////////////////////////////////////////////
+// latest
+$(document).on('keyup', '#str1, #int1, #dex1, #mana1, #vit1', function () {
+	var str = $('#str1');
+	var int = $('#int1');
+	var dex = $('#dex1');
+	var mana = $('#mana1');
+	var vit = $('#vit1');
+
+	var strpoint = $('#strpoint');
+	var intpoint = $('#intpoint');
+	var dexpoint = $('#dexpoint');
+	var manapoint = $('#manapoint');
+	var vitpoint = $('#vitpoint');
+
+	var rpoint = $('#rpoint');
+
+	var str2 = ((<?=merc_attrib('STR', $merc->row()->Ability)?> * 100) + ( $(str).val() * 100 ))/100;
+	var int2 = ((<?=merc_attrib('INT', $merc->row()->Ability)?> * 100) + ( $(int).val() * 100 ))/100;
+	var dex2 = ((<?=merc_attrib('DEX', $merc->row()->Ability)?> * 100) + ( $(dex).val() * 100 ))/100;
+	var vit2 = ((<?=merc_attrib('VIT', $merc->row()->Ability)?> * 100) + ( $(vit).val() * 100 ))/100;
+	var mana2 = ((<?=merc_attrib('MANA', $merc->row()->Ability)?> * 100) + ( $(mana).val() * 100 ))/100;
+
+	var rpoint2 = ((<?=merc_attrib('POINTS', $merc->row()->Ability)?>*100 )/100 ) - ( ( ( $(str).val()*100 )/100 ) + ( ( $(int).val()*100 )/100 ) + ( ( $(dex).val()*100 )/100 ) + ( ( $(mana).val()*100 )/100 ) + ( ( $(vit).val()*100 )/100 ) );
+
+	// attribute point
+	if( str2 < 0 || str2 >= 65535 ){
+		$(strpoint).text( str2.toFixed(0) ).css({"color": "red"});
+	}else{
+		$(strpoint).text( str2.toFixed(0) ).css({"color": "green"});
+	}
+
+	if( int2 < 0 || int2 >= 65535 ){
+		$(intpoint).text( int2.toFixed(0) ).css({"color": "red"});
+	}else{
+		$(intpoint).text( int2.toFixed(0) ).css({"color": "green"});
+	}
+
+	if( dex2 < 0 || dex2 >= 65535 ){
+		$(dexpoint).text( dex2.toFixed(0) ).css({"color": "red"});
+	}else{
+		$(dexpoint).text( dex2.toFixed(0) ).css({"color": "green"});
+	}
+
+	if( vit2 < 0 || vit2 >= 65535 ){
+		$(vitpoint).text( vit2.toFixed(0) ).css({"color": "red"});
+	}else{
+		$(vitpoint).text( vit2.toFixed(0) ).css({"color": "green"});
+	}
+
+	if( mana2 < 0 || mana2 >= 65535 ){
+		$(manapoint).text( mana2.toFixed(0) ).css({"color": "red"});
+	}else{
+		$(manapoint).text( mana2.toFixed(0) ).css({"color": "green"});
+	}
+
+	// remaining point
+	if( rpoint2 < 0 || rpoint2 > <?=merc_attrib('POINTS', $merc->row()->Ability)?> ) {
+		$(rpoint).text( rpoint2.toFixed(0) ).css({"color": "red"});
+	} else {
+		$(rpoint).text( rpoint2.toFixed(0) ).css({"color": "green"});
+	}
+
+});
+
 ////////////////////////////////////////////////////////////////////////////////////
 // ckeditor
 //CKEDITOR.replace( 'news_reply' );

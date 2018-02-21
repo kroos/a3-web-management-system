@@ -27,12 +27,12 @@ startblock('form');
 			<div class="media-container-column col-lg-8" data-form-type="formoid">
 
 				<p class="mbr-text pb-3 mbr-fonts-style display-5"><font color="#FF0000"><blink><?=@$info?></blink></font></p>
+				<?=form_open('', array('class' => 'mbr-form', 'autocomplete' => 'off', 'id' => 'productForm'))?>
 
 <?php if($this->charac0->charac_cid($this->uri->segment(3, 0))->num_rows() == 1):?>
-<p class="mbr-text pb-3 mbr-fonts-style display-5" id="rpoint" >Remaining Points = <span id="rpoint"><?=char_attrib('POINTS', $char->row()->c_headera)?></span></p>
+<p class="mbr-text pb-3 mbr-fonts-style display-5" >Remaining Points = <span id="rpoint"><?=char_attrib('POINTS', $char->row()->c_headera)?></span></p>
 <?php endif?>
 
-				<?=form_open('', array('class' => 'mbr-form', 'autocomplete' => 'off', 'id' => 'productForm'))?>
 
 <?php if($this->charac0->charac_cid($this->uri->segment(3, 0))->num_rows() == 1):?>
 
@@ -61,7 +61,7 @@ startblock('form');
 							<br />
 							<?=form_error('int')?>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-2" id="intpoint">
 							<?=char_attrib('INT', $char->row()->c_headera)?>
 						</div>
 					</div>
@@ -74,7 +74,7 @@ startblock('form');
 							<br />
 							<?=form_error('dex')?>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-2" id="dexpoint">
 							<?=char_attrib('DEX', $char->row()->c_headera)?>
 						</div>
 					</div>
@@ -85,7 +85,7 @@ startblock('form');
 							<br />
 							<?=form_error('vit')?>
 						</div>
-						<div class="col-sm-2">
+						<div class="col-sm-2" id="vitpoint">
 							<?=char_attrib('VIT', $char->row()->c_headera)?>
 						</div>
 					</div>
@@ -96,10 +96,8 @@ startblock('form');
 							<br />
 							<?=form_error('mana')?>
 						</div>
-						<div class="col-sm-2">
-							<span id="total">
+						<div class="col-sm-2" id="manapoint">
 								<?=char_attrib('MANA', $char->row()->c_headera)?>
-							</span>
 						</div>
 					</div>
 
@@ -126,38 +124,67 @@ endblock();
 startblock('jscript');
 ?>
 ////////////////////////////////////////////////////////////////////////////////////
-// keyup on input rate to sum up all the price
+// latest
+$(document).on('keyup', '#str1, #int1, #dex1, #mana1, #vit1', function () {
+	var str = $('#str1');
+	var int = $('#int1');
+	var dex = $('#dex1');
+	var mana = $('#mana1');
+	var vit = $('#vit1');
 
-// helper total amount
-function update_tamount() {
-	var myNodelist = $(".total_price");
-	var ssum = 0;
-	for (var i = myNodelist.length - 1; i >= 0; i--) {
-		// myNodelist[i].style.backgroundColor = "red";
-		ssum = ((ssum * 100) + (myNodelist[i].innerHTML * 100)) / 100;	//make sure the process is accurate
-		// console.log(ssum);
+	var strpoint = $('#strpoint');
+	var intpoint = $('#intpoint');
+	var dexpoint = $('#dexpoint');
+	var manapoint = $('#manapoint');
+	var vitpoint = $('#vitpoint');
+
+	var rpoint = $('#rpoint');
+
+	var str2 = ((<?=char_attrib('STR', $char->row()->c_headera)?> * 100) + ( $(str).val() * 100 ))/100;
+	var int2 = ((<?=char_attrib('INT', $char->row()->c_headera)?> * 100) + ( $(int).val() * 100 ))/100;
+	var dex2 = ((<?=char_attrib('DEX', $char->row()->c_headera)?> * 100) + ( $(dex).val() * 100 ))/100;
+	var vit2 = ((<?=char_attrib('VIT', $char->row()->c_headera)?> * 100) + ( $(vit).val() * 100 ))/100;
+	var mana2 = ((<?=char_attrib('MANA', $char->row()->c_headera)?> * 100) + ( $(mana).val() * 100 ))/100;
+
+	var rpoint2 = ((<?=char_attrib('POINTS', $char->row()->c_headera)?>*100 )/100 ) - ( ( ( $(str).val()*100 )/100 ) + ( ( $(int).val()*100 )/100 ) + ( ( $(dex).val()*100 )/100 ) + ( ( $(mana).val()*100 )/100 ) + ( ( $(vit).val()*100 )/100 ) );
+
+	// attribute point
+	if( str2 < 0 || str2 >= 65535 ){
+		$(strpoint).text( str2.toFixed(0) ).css({"color": "red"});
+	}else{
+		$(strpoint).text( str2.toFixed(0) ).css({"color": "green"});
 	}
-	$('#total_amount').text( ssum.toFixed(2) );
-}
 
-// helper NaN
-function num(obj) {
-	var mystring = obj.value;
-	if( !isNaN(mystring) == false ){
-		mystring = 0;
+	if( int2 < 0 || int2 >= 65535 ){
+		$(intpoint).text( int2.toFixed(0) ).css({"color": "red"});
+	}else{
+		$(intpoint).text( int2.toFixed(0) ).css({"color": "green"});
 	}
-	return mystring;
-}
 
-$(document).on('keyup', '#str1', function () {
-	var rpoint = $(this).parent().parent().parent().parent().children().children('#rpoint');
-	var strpoint = $(this).parent().parent().parent().children().children('#strpoint');
+	if( dex2 < 0 || dex2 >= 65535 ){
+		$(dexpoint).text( dex2.toFixed(0) ).css({"color": "red"});
+	}else{
+		$(dexpoint).text( dex2.toFixed(0) ).css({"color": "green"});
+	}
 
-	// $(total_price).text( (($(rate).val() * 10) * ($(quan).val() * 10)) / 100 );
-	// $(total_price).text( (((num( this ) * 10) * ($(quan).val() * 10)) / 100).toFixed(2) );
+	if( vit2 < 0 || vit2 >= 65535 ){
+		$(vitpoint).text( vit2.toFixed(0) ).css({"color": "red"});
+	}else{
+		$(vitpoint).text( vit2.toFixed(0) ).css({"color": "green"});
+	}
 
-	$(rpoint).text( ((<?=char_attrib('POINTS', $char->row()->c_headera)?> * 100) - ( $(this).val() * 100 ))/100 ).css({"color": "green"});
-	$(strpoint).text( ((<?=char_attrib('STR', $char->row()->c_headera)?> * 100) + ( $(this).val() * 100 ))/100 ).css({"color": "green"});
+	if( mana2 < 0 || mana2 >= 65535 ){
+		$(manapoint).text( mana2.toFixed(0) ).css({"color": "red"});
+	}else{
+		$(manapoint).text( mana2.toFixed(0) ).css({"color": "green"});
+	}
+
+	// remaining point
+	if( rpoint2 < 0 || rpoint2 > <?=char_attrib('POINTS', $char->row()->c_headera)?> ) {
+		$(rpoint).text( rpoint2.toFixed(0) ).css({"color": "red"});
+	} else {
+		$(rpoint).text( rpoint2.toFixed(0) ).css({"color": "green"});
+	}
 
 });
 

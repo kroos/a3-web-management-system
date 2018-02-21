@@ -229,7 +229,7 @@ $config = array	(
 							(
 								'field' => 'lore',
 								'label' => 'Lore Points',
-								'rules' => 'trim|required|min_length[1]|max_length[8]|is_natural_no_zero|greater_than_equal_to[0]'
+								'rules' => 'trim|required|is_natural_no_zero|greater_than_equal_to[0]'
 							)
 					),
 					'user/rebirth' => array
