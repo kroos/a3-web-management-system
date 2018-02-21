@@ -1057,7 +1057,7 @@ class User extends CI_Controller
 			{
 				//process
 				$hsid = $this->uri->segment(3, 0);
-				$this->load->database('HSDB', TRUE);
+				// $this->load->database('HSDB', TRUE);
 				$data['merc'] = $this->hstable->hstable_hsid($hsid);
 				$char = $data['merc']->row()->MasterName;
 				$security = $this->charac0->charac_cid($char);

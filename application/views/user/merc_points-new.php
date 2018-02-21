@@ -46,6 +46,7 @@ startblock('form');
 	<?php if($merc->row()->Type == 0 || $merc->row()->Type == 1 || $merc->row()->Type == 3):?>
 
 					<div class="form-group row">
+						<input name="int" value="0" id="int1" type="hidden">
 						<?=form_label('Strength : ', 'str1', array('class' => 'col-sm-2 col-form-label mbr-fonts-style display-7')) ?>
 						<div class="col-sm-8">
 							<?=form_input(array('name' => 'str', 'value' => set_value('str'), 'class' => 'form-control', 'id' => 'str1', 'placeholder' => 'Strength'))?>
@@ -57,7 +58,7 @@ startblock('form');
 						</div>
 					</div>
 	<?php else:?>
-		<?=form_hidden('str', 0)?>
+		<input name="str" value="0" id="str1" type="hidden">
 					<div class="form-group row">
 						<?=form_label('Intelligence : ', 'int1', array('class' => 'col-sm-2 col-form-label mbr-fonts-style display-7')) ?>
 						<div class="col-sm-8">
@@ -191,7 +192,7 @@ $(document).on('keyup', '#str1, #int1, #dex1, #mana1, #vit1', function () {
 	} else {
 		$(rpoint).text( rpoint2.toFixed(0) ).css({"color": "green"});
 	}
-
+	console.log(str2);
 });
 
 ////////////////////////////////////////////////////////////////////////////////////

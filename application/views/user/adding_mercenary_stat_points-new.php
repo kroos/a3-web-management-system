@@ -43,12 +43,12 @@ startblock('form');
 						<div id="collapseOne<?=$char->c_id?>" class="collapse" aria-labelledby="<?=$char->c_id?>" data-parent="#accordion">
 							<div class="card-body">
 								Your <?=$char->c_id?> is a <?=char_type($char->c_sheaderb)?><br />
-								<?php if($this->hstable->hstable_merc($char->c_id)->num_rows() == 0):?>
+								<?php if($this->hstable->hstable_merc($char->c_id)->num_rows() < 1 ):?>
 									You do not have any mercenary for <?=$char->c_id?><br />
 								<?php else:?>
 										<?php foreach($this->hstable->hstable_merc($char->c_id)->result() as $merc):?>
 										<?php $merc1 = $merc->HSName?>
-										<?=$char->c_id?> mercenary : <?=anchor('user/merc_points/'.$merc->HSID, 'Distribute '.$merc1.' Points', array('class' => 'btn btn-primary', 'role' => 'button'))?>
+										<p><?=$char->c_id?> mercenary : <?=anchor('user/merc_points/'.$merc->HSID, 'Distribute '.$merc1.' Points', array('class' => 'btn btn-primary', 'role' => 'button'))?></p>
 										<?php endforeach?>
 								<?php endif?>
 							</div>
