@@ -1,6 +1,10 @@
 USE [ASD]
 GO
-/****** Object:  UserDefinedFunction [GetAccountName]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  User [a3serial]    Script Date: 25/02/2018 11:31:51 AM ******/
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = N'a3serial')
+CREATE USER [a3serial] FOR LOGIN [a3serial] WITH DEFAULT_SCHEMA=[db_owner]
+GO
+/****** Object:  UserDefinedFunction [GetAccountName]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -23,7 +27,7 @@ END
 END
 
 GO
-/****** Object:  Table [A3Web_Comment]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [A3Web_Comment]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -35,8 +39,8 @@ BEGIN
 CREATE TABLE [A3Web_Comment](
 	[bil] [int] IDENTITY(1,1) NOT NULL,
 	[bil_post] [int] NOT NULL,
-	[author] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[html] [varchar](max) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[author] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[html] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[date] [smalldatetime] NOT NULL,
  CONSTRAINT [PK_A3Web_Comment_1] PRIMARY KEY CLUSTERED 
 (
@@ -47,7 +51,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [A3Web_HTML]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [A3Web_HTML]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -58,10 +62,10 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[A3Web_HT
 BEGIN
 CREATE TABLE [A3Web_HTML](
 	[Bil] [int] IDENTITY(1,1) NOT NULL,
-	[Author] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[Category] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[Subject] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[HTML] [varchar](4000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Author] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[Category] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[Subject] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[HTML] [varchar](4000) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
 	[Date] [smalldatetime] NULL,
  CONSTRAINT [PK_A3Web_HTML] PRIMARY KEY CLUSTERED 
 (
@@ -72,7 +76,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Account]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Account]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -82,18 +86,18 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Account]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [Account](
-	[c_id] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheadera] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheaderb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheaderc] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headera] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headerb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headerc] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_id] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_sheadera] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_sheaderb] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_sheaderc] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_headera] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_headerb] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_headerc] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[d_cdate] [smalldatetime] NULL,
 	[d_udate] [smalldatetime] NULL,
-	[c_status] [char](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[m_body] [varchar](4000) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[acc_status] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[c_status] [char](10) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[m_body] [varchar](4000) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[acc_status] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
 	[salary] [smalldatetime] NULL,
 	[last_salary] [smalldatetime] NULL,
  CONSTRAINT [PK_Account_unique] PRIMARY KEY CLUSTERED 
@@ -105,7 +109,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AccountAuth]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [AccountAuth]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -124,7 +128,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AccountExt]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [AccountExt]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -143,7 +147,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AccountFailAuth]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [AccountFailAuth]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -163,7 +167,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AdultCheck]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [AdultCheck]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -181,7 +185,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Answer]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Answer]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -199,7 +203,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AuthLog]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [AuthLog]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -219,7 +223,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Ban_IP]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Ban_IP]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -235,7 +239,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [BlackList]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [BlackList]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -257,7 +261,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Captcha]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Captcha]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -280,7 +284,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Charac0]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Charac0]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -290,17 +294,17 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Charac0]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [Charac0](
-	[c_id] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheadera] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheaderb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_id] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_sheadera] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_sheaderb] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[c_sheaderc] [int] NOT NULL,
-	[c_headera] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headerb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headerc] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_headera] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_headerb] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_headerc] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[d_cdate] [smalldatetime] NULL,
 	[d_udate] [smalldatetime] NULL,
-	[c_status] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[m_body] [varchar](4000) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_status] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[m_body] [varchar](4000) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[rb] [int] NOT NULL CONSTRAINT [DF_charac0_rb]  DEFAULT ((0)),
 	[times_rb] [int] NOT NULL CONSTRAINT [DF_charac0_times_rb]  DEFAULT ((0)),
  CONSTRAINT [PK_Charac0] PRIMARY KEY CLUSTERED 
@@ -312,7 +316,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [CharInfo]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [CharInfo]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -322,17 +326,17 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[CharInfo]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [CharInfo](
-	[ServerIdx] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[Nation] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[AccountID] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[CharName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[None] [varchar](50) COLLATE Latin1_General_CI_AS NULL
+	[ServerIdx] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[Nation] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[AccountID] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[CharName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[None] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Clan]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Clan]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -342,18 +346,18 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Clan]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [Clan](
-	[ClanID] [char](2) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[ServerID] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[ClanName] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[Nation] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[MarkID] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ClanID] [char](2) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[ServerID] [char](1) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[ClanName] [varchar](10) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Nation] [varchar](10) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[MarkID] [varchar](10) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[CDate] [smalldatetime] NULL,
 	[DDate] [smalldatetime] NULL,
-	[ClanPasswd] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[ClanRank] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[ClanStatus] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[StorageID] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[AgitID] [varchar](10) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[ClanPasswd] [varchar](10) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[ClanRank] [varchar](10) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[ClanStatus] [char](1) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[StorageID] [varchar](10) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[AgitID] [varchar](10) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[WinCount] [int] NOT NULL,
 	[LoseCount] [int] NOT NULL,
  CONSTRAINT [PK_Clan] PRIMARY KEY CLUSTERED 
@@ -365,7 +369,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ClanInfo]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [ClanInfo]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -375,26 +379,14 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ClanInfo]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [ClanInfo](
-	[MasterName] [varchar](50) COLLATE Latin1_General_CI_AS NOT NULL,
-	[ClanName] [varchar](50) COLLATE Latin1_General_CI_AS NOT NULL
+	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[ClanName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Count]    Script Date: 22/02/2018 2:55:32 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Count]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [Count](
-	[count] [int] NOT NULL
-) ON [PRIMARY]
-END
-GO
-/****** Object:  Table [DenyChar]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [DenyChar]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -410,7 +402,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [FaultMailAccount]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [FaultMailAccount]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -426,7 +418,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [FRIEND0]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [FRIEND0]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -436,9 +428,9 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[FRIEND0]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [FRIEND0](
-	[CharName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[GroupInfo] [varchar](1024) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[FriendInfo] [varchar](1024) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[CharName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[GroupInfo] [varchar](1024) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[FriendInfo] [varchar](1024) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
  CONSTRAINT [PK_FRIEND0] PRIMARY KEY CLUSTERED 
 (
 	[CharName] ASC
@@ -448,7 +440,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameBroadcast]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [GameBroadcast]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -470,7 +462,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameLoginLog]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [GameLoginLog]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -490,7 +482,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameServer]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [GameServer]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -508,7 +500,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameServerMessage]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [GameServerMessage]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -523,7 +515,7 @@ CREATE TABLE [GameServerMessage](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [GroupSeat]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [GroupSeat]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -546,7 +538,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Hsstonetable]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Hsstonetable]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -556,13 +548,13 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Hsstonetable]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [Hsstonetable](
-	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[CreateDate] [smalldatetime] NULL,
 	[SaveDate] [smalldatetime] NULL,
-	[Slot0] [varchar](256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[Slot1] [varchar](256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[Slot2] [varchar](256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[Slot3] [varchar](256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[Slot0] [varchar](256) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[Slot1] [varchar](256) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[Slot2] [varchar](256) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[Slot3] [varchar](256) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
  CONSTRAINT [PK_Hsstonetable] PRIMARY KEY CLUSTERED 
 (
 	[MasterName] ASC
@@ -572,7 +564,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Hstable]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Hstable]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -583,27 +575,27 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Hstable]
 BEGIN
 CREATE TABLE [Hstable](
 	[HSID] [int] IDENTITY(1,1) NOT NULL,
-	[HSName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[HSName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[Type] [tinyint] NOT NULL,
 	[HSLevel] [smallint] NOT NULL,
 	[HSExp] [int] NOT NULL,
-	[Ability] [varchar](1024) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Ability] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[CreateDate] [smalldatetime] NOT NULL,
-	[SaveDate] [smalldatetime] NOT NULL,
-	[HSState] [tinyint] NULL,
+	[SaveDate] [smalldatetime] NULL,
+	[HSState] [tinyint] NOT NULL,
 	[DelDate] [smalldatetime] NULL,
-	[HSBody] [varchar](1024) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[HSBody] [varchar](1024) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
  CONSTRAINT [PK_Hstable] PRIMARY KEY CLUSTERED 
 (
 	[HSID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [InnerAccount]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [InnerAccount]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -622,7 +614,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ItemStorage0]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [ItemStorage0]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -632,17 +624,17 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ItemStorage0]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [ItemStorage0](
-	[c_id] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheadera] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheaderb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheaderc] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headera] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headerb] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headerc] [varchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_id] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_sheadera] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_sheaderb] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_sheaderc] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_headera] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_headerb] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[c_headerc] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[d_cdate] [datetime] NULL,
 	[d_udate] [datetime] NULL,
-	[c_status] [char](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[m_body] [varchar](max) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[c_status] [char](1) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[m_body] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
  CONSTRAINT [PK_ItemStorage] PRIMARY KEY CLUSTERED 
 (
 	[c_id] ASC
@@ -652,7 +644,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Job]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Job]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -669,7 +661,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB0]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB0]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -680,19 +672,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB0](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB0] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB1]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB1]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -703,19 +699,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB1](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB1] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB10]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB10]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -726,19 +726,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB10](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB10] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB11]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB11]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -749,19 +753,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB11](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB11] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB12]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB12]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -772,19 +780,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB12](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB12] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB13]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB13]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -795,19 +807,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB13](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB13] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB14]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB14]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -818,19 +834,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB14](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB14] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB15]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB15]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -841,19 +861,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB15](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB15] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB2]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB2]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -864,19 +888,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB2](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB2] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB3]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB3]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -887,19 +915,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB3](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB3] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB4]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB4]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -910,19 +942,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB4](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB4] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB5]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB5]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -933,19 +969,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB5](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB5] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB6]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB6]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -956,19 +996,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB6](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB6] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB7]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB7]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -979,13 +1023,13 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB7](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
  CONSTRAINT [PK_LETTERDB7] PRIMARY KEY CLUSTERED 
 (
 	[LetterIdx] ASC
@@ -995,7 +1039,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB8]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB8]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1006,19 +1050,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB8](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB8] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB9]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LETTERDB9]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1029,19 +1077,23 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LETTERDB
 BEGIN
 CREATE TABLE [LETTERDB9](
 	[LetterIdx] [int] IDENTITY(1,1) NOT NULL,
-	[Receiver] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[Sender] [char](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
+	[Receiver] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Sender] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SendDate] [smalldatetime] NOT NULL,
 	[Reading] [tinyint] NOT NULL,
 	[Keeping] [tinyint] NOT NULL,
-	[Title] [varchar](20) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL,
-	[LetterMsg] [varchar](1024) COLLATE Chinese_Taiwan_Stroke_CS_AS NOT NULL
-) ON [PRIMARY]
+	[Title] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[LetterMsg] [varchar](max) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LETTERDB9] PRIMARY KEY CLUSTERED 
+(
+	[LetterIdx] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LoginLog]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LoginLog]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1058,7 +1110,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LotteryTicket]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LotteryTicket]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1069,8 +1121,8 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LotteryT
 BEGIN
 CREATE TABLE [LotteryTicket](
 	[LotteryTicketID] [bigint] NOT NULL,
-	[IsUsed] [varchar](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[TicketNo] [varchar](12) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[IsUsed] [varchar](1) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[TicketNo] [varchar](12) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
  CONSTRAINT [PK_LotteryTicket] PRIMARY KEY CLUSTERED 
 (
 	[LotteryTicketID] ASC
@@ -1080,7 +1132,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Lotto]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Lotto]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1091,18 +1143,22 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Lotto]')
 BEGIN
 CREATE TABLE [Lotto](
 	[LottoEventID] [smallint] NOT NULL,
-	[AccountID] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[AccountID] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[SelectNum1] [tinyint] NOT NULL,
 	[SelectNum2] [tinyint] NOT NULL,
 	[SelectNum3] [tinyint] NOT NULL,
 	[SelectNum4] [tinyint] NOT NULL,
-	[SelectNum5] [tinyint] NOT NULL
+	[SelectNum5] [tinyint] NOT NULL,
+ CONSTRAINT [PK_Lotto] PRIMARY KEY CLUSTERED 
+(
+	[LottoEventID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LottoEvent]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [LottoEvent]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1113,13 +1169,17 @@ IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[LottoEve
 BEGIN
 CREATE TABLE [LottoEvent](
 	[LottoEventID] [smallint] NOT NULL,
-	[EventName] [varchar](30) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL
+	[EventName] [varchar](30) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+ CONSTRAINT [PK_LottoEvent] PRIMARY KEY CLUSTERED 
+(
+	[LottoEventID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Merc]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [Merc]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1129,18 +1189,22 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Merc]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [Merc](
-	[HSName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	[HSName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[Type] [int] NOT NULL,
 	[HSLevel] [int] NOT NULL,
 	[rb] [int] NULL,
-	[reset_rb] [int] NULL
+	[reset_rb] [int] NULL,
+ CONSTRAINT [PK_Merc] PRIMARY KEY CLUSTERED 
+(
+	[HSName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [OutAccount]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [OutAccount]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1166,7 +1230,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [PcbangList]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [PcbangList]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1201,7 +1265,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [QuestList]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [QuestList]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1219,7 +1283,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [QuestResponse]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [QuestResponse]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1237,7 +1301,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [RandChar]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [RandChar]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1255,30 +1319,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [rbstat]    Script Date: 22/02/2018 2:55:32 AM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[rbstat]') AND type in (N'U'))
-BEGIN
-CREATE TABLE [rbstat](
-	[c_id] [nvarchar](20) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheadera] [nvarchar](255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheaderb] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_sheaderc] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headera] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headerb] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[c_headerc] [nvarchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[d_cdate] [smalldatetime] NULL,
-	[d_udate] [smalldatetime] NULL,
-	[c_status] [nvarchar](1) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[m_body] [ntext] COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[number_rb] [int] NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-END
-GO
-/****** Object:  Table [RcvResult]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [RcvResult]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1288,16 +1329,20 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[RcvResult]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [RcvResult](
-	[AccountName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[PCName] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[Serial] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	[DateTimeLog] [datetime] NOT NULL
+	[AccountName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[PCName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Serial] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[DateTimeLog] [datetime] NOT NULL,
+ CONSTRAINT [PK_RcvResult] PRIMARY KEY CLUSTERED 
+(
+	[AccountName] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ReservedChar]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [ReservedChar]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1321,7 +1366,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ReservedPresent]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [ReservedPresent]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1340,7 +1385,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [RestoreRequest]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [RestoreRequest]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1361,7 +1406,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [SerialList]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [SerialList]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1371,12 +1416,12 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[SerialList]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [SerialList](
-	[SerialNo] [char](20) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
-	[ItemInfo] [varchar](255) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
-	[Parameter1] [varchar](255) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
-	[Parameter2] [varchar](255) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
-	[Type] [char](1) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
-	[UsedFlag] [char](1) COLLATE Chinese_Taiwan_Stroke_CI_AS NOT NULL,
+	[SerialNo] [char](20) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[ItemInfo] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Parameter1] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Parameter2] [varchar](255) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Type] [char](1) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[UsedFlag] [char](1) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[ExpireDate] [datetime] NOT NULL,
  CONSTRAINT [PK_SerialList] PRIMARY KEY CLUSTERED 
 (
@@ -1387,7 +1432,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [StatusLog]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [StatusLog]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1410,7 +1455,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [temp_account]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [temp_account]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1420,17 +1465,17 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[temp_account]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [temp_account](
-	[username] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[password] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[email] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-	[passkey] [varchar](50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+	[username] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[password] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[email] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[passkey] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
 	[date] [smalldatetime] NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [UpdateLog]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [UpdateLog]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1450,7 +1495,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [UserTicket]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [UserTicket]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1467,7 +1512,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [WebLoginLog]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [WebLoginLog]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1488,7 +1533,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [WebLoginRecentLog]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [WebLoginRecentLog]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1508,7 +1553,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [WebLoginReport]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [WebLoginReport]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1526,7 +1571,7 @@ CREATE TABLE [WebLoginReport](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [ZipCode]    Script Date: 22/02/2018 2:55:32 AM ******/
+/****** Object:  Table [ZipCode]    Script Date: 25/02/2018 11:31:52 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1581,19 +1626,12 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_A3Web_HTML_Charac0]') AND parent_object_id = OBJECT_ID(N'[A3Web_HTML]'))
 ALTER TABLE [A3Web_HTML] CHECK CONSTRAINT [FK_A3Web_HTML_Charac0]
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Charac0_Account]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
-ALTER TABLE [Charac0]  WITH CHECK ADD  CONSTRAINT [FK_Charac0_Account] FOREIGN KEY([c_sheadera])
-REFERENCES [Account] ([c_id])
-GO
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Charac0_Account]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
-ALTER TABLE [Charac0] CHECK CONSTRAINT [FK_Charac0_Account]
-GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_CharInfo_Charac0]') AND parent_object_id = OBJECT_ID(N'[CharInfo]'))
-ALTER TABLE [CharInfo]  WITH CHECK ADD  CONSTRAINT [FK_CharInfo_Charac0] FOREIGN KEY([CharName])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ClanInfo_Charac0]') AND parent_object_id = OBJECT_ID(N'[ClanInfo]'))
+ALTER TABLE [ClanInfo]  WITH CHECK ADD  CONSTRAINT [FK_ClanInfo_Charac0] FOREIGN KEY([MasterName])
 REFERENCES [Charac0] ([c_id])
 GO
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_CharInfo_Charac0]') AND parent_object_id = OBJECT_ID(N'[CharInfo]'))
-ALTER TABLE [CharInfo] CHECK CONSTRAINT [FK_CharInfo_Charac0]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ClanInfo_Charac0]') AND parent_object_id = OBJECT_ID(N'[ClanInfo]'))
+ALTER TABLE [ClanInfo] CHECK CONSTRAINT [FK_ClanInfo_Charac0]
 GO
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_FRIEND0_Charac0]') AND parent_object_id = OBJECT_ID(N'[FRIEND0]'))
 ALTER TABLE [FRIEND0]  WITH CHECK ADD  CONSTRAINT [FK_FRIEND0_Charac0] FOREIGN KEY([CharName])
@@ -1602,33 +1640,258 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_FRIEND0_Charac0]') AND parent_object_id = OBJECT_ID(N'[FRIEND0]'))
 ALTER TABLE [FRIEND0] CHECK CONSTRAINT [FK_FRIEND0_Charac0]
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ItemStorage0_account]') AND parent_object_id = OBJECT_ID(N'[ItemStorage0]'))
-ALTER TABLE [ItemStorage0]  WITH CHECK ADD  CONSTRAINT [FK_ItemStorage0_account] FOREIGN KEY([c_id])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Hsstonetable_Charac0]') AND parent_object_id = OBJECT_ID(N'[Hsstonetable]'))
+ALTER TABLE [Hsstonetable]  WITH CHECK ADD  CONSTRAINT [FK_Hsstonetable_Charac0] FOREIGN KEY([MasterName])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Hsstonetable_Charac0]') AND parent_object_id = OBJECT_ID(N'[Hsstonetable]'))
+ALTER TABLE [Hsstonetable] CHECK CONSTRAINT [FK_Hsstonetable_Charac0]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Hstable_Charac0]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
+ALTER TABLE [Hstable]  WITH CHECK ADD  CONSTRAINT [FK_Hstable_Charac0] FOREIGN KEY([MasterName])
+REFERENCES [Charac0] ([c_id])
+ON UPDATE CASCADE
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Hstable_Charac0]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
+ALTER TABLE [Hstable] CHECK CONSTRAINT [FK_Hstable_Charac0]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ItemStorage0_Account]') AND parent_object_id = OBJECT_ID(N'[ItemStorage0]'))
+ALTER TABLE [ItemStorage0]  WITH CHECK ADD  CONSTRAINT [FK_ItemStorage0_Account] FOREIGN KEY([c_id])
 REFERENCES [Account] ([c_id])
 GO
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ItemStorage0_account]') AND parent_object_id = OBJECT_ID(N'[ItemStorage0]'))
-ALTER TABLE [ItemStorage0] CHECK CONSTRAINT [FK_ItemStorage0_account]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ItemStorage0_Account]') AND parent_object_id = OBJECT_ID(N'[ItemStorage0]'))
+ALTER TABLE [ItemStorage0] CHECK CONSTRAINT [FK_ItemStorage0_Account]
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB7_Charac0_receive]') AND parent_object_id = OBJECT_ID(N'[LETTERDB7]'))
-ALTER TABLE [LETTERDB7]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB7_Charac0_receive] FOREIGN KEY([Receiver])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB0_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB0]'))
+ALTER TABLE [LETTERDB0]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB0_Charac0_Receiver] FOREIGN KEY([Receiver])
 REFERENCES [Charac0] ([c_id])
 GO
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB7_Charac0_receive]') AND parent_object_id = OBJECT_ID(N'[LETTERDB7]'))
-ALTER TABLE [LETTERDB7] CHECK CONSTRAINT [FK_LETTERDB7_Charac0_receive]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB0_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB0]'))
+ALTER TABLE [LETTERDB0] CHECK CONSTRAINT [FK_LETTERDB0_Charac0_Receiver]
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB7_Charac0_send]') AND parent_object_id = OBJECT_ID(N'[LETTERDB7]'))
-ALTER TABLE [LETTERDB7]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB7_Charac0_send] FOREIGN KEY([Sender])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB0_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB0]'))
+ALTER TABLE [LETTERDB0]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB0_Charac0_Sender] FOREIGN KEY([Sender])
 REFERENCES [Charac0] ([c_id])
 GO
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB7_Charac0_send]') AND parent_object_id = OBJECT_ID(N'[LETTERDB7]'))
-ALTER TABLE [LETTERDB7] CHECK CONSTRAINT [FK_LETTERDB7_Charac0_send]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB0_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB0]'))
+ALTER TABLE [LETTERDB0] CHECK CONSTRAINT [FK_LETTERDB0_Charac0_Sender]
 GO
-IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Merc_Hsstonetable_hstable]') AND parent_object_id = OBJECT_ID(N'[Merc]'))
-ALTER TABLE [Merc]  WITH CHECK ADD  CONSTRAINT [FK_Merc_Hsstonetable_hstable] FOREIGN KEY([MasterName])
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB1_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB1]'))
+ALTER TABLE [LETTERDB1]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB1_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB1_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB1]'))
+ALTER TABLE [LETTERDB1] CHECK CONSTRAINT [FK_LETTERDB1_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB1_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB1]'))
+ALTER TABLE [LETTERDB1]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB1_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB1_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB1]'))
+ALTER TABLE [LETTERDB1] CHECK CONSTRAINT [FK_LETTERDB1_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB10_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB10]'))
+ALTER TABLE [LETTERDB10]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB10_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB10_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB10]'))
+ALTER TABLE [LETTERDB10] CHECK CONSTRAINT [FK_LETTERDB10_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB10_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB10]'))
+ALTER TABLE [LETTERDB10]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB10_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB10_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB10]'))
+ALTER TABLE [LETTERDB10] CHECK CONSTRAINT [FK_LETTERDB10_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB11_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB11]'))
+ALTER TABLE [LETTERDB11]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB11_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB11_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB11]'))
+ALTER TABLE [LETTERDB11] CHECK CONSTRAINT [FK_LETTERDB11_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB11_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB11]'))
+ALTER TABLE [LETTERDB11]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB11_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB11_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB11]'))
+ALTER TABLE [LETTERDB11] CHECK CONSTRAINT [FK_LETTERDB11_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB12_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB12]'))
+ALTER TABLE [LETTERDB12]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB12_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB12_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB12]'))
+ALTER TABLE [LETTERDB12] CHECK CONSTRAINT [FK_LETTERDB12_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB12_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB12]'))
+ALTER TABLE [LETTERDB12]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB12_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB12_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB12]'))
+ALTER TABLE [LETTERDB12] CHECK CONSTRAINT [FK_LETTERDB12_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB13_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB13]'))
+ALTER TABLE [LETTERDB13]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB13_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB13_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB13]'))
+ALTER TABLE [LETTERDB13] CHECK CONSTRAINT [FK_LETTERDB13_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB13_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB13]'))
+ALTER TABLE [LETTERDB13]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB13_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB13_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB13]'))
+ALTER TABLE [LETTERDB13] CHECK CONSTRAINT [FK_LETTERDB13_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB14_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB14]'))
+ALTER TABLE [LETTERDB14]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB14_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB14_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB14]'))
+ALTER TABLE [LETTERDB14] CHECK CONSTRAINT [FK_LETTERDB14_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB14_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB14]'))
+ALTER TABLE [LETTERDB14]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB14_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB14_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB14]'))
+ALTER TABLE [LETTERDB14] CHECK CONSTRAINT [FK_LETTERDB14_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB15_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB15]'))
+ALTER TABLE [LETTERDB15]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB15_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB15_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB15]'))
+ALTER TABLE [LETTERDB15] CHECK CONSTRAINT [FK_LETTERDB15_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB15_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB15]'))
+ALTER TABLE [LETTERDB15]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB15_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB15_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB15]'))
+ALTER TABLE [LETTERDB15] CHECK CONSTRAINT [FK_LETTERDB15_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB2_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB2]'))
+ALTER TABLE [LETTERDB2]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB2_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB2_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB2]'))
+ALTER TABLE [LETTERDB2] CHECK CONSTRAINT [FK_LETTERDB2_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB2_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB2]'))
+ALTER TABLE [LETTERDB2]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB2_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB2_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB2]'))
+ALTER TABLE [LETTERDB2] CHECK CONSTRAINT [FK_LETTERDB2_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB3_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB3]'))
+ALTER TABLE [LETTERDB3]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB3_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB3_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB3]'))
+ALTER TABLE [LETTERDB3] CHECK CONSTRAINT [FK_LETTERDB3_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB3_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB3]'))
+ALTER TABLE [LETTERDB3]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB3_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB3_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB3]'))
+ALTER TABLE [LETTERDB3] CHECK CONSTRAINT [FK_LETTERDB3_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB4_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB4]'))
+ALTER TABLE [LETTERDB4]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB4_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB4_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB4]'))
+ALTER TABLE [LETTERDB4] CHECK CONSTRAINT [FK_LETTERDB4_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB4_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB4]'))
+ALTER TABLE [LETTERDB4]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB4_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB4_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB4]'))
+ALTER TABLE [LETTERDB4] CHECK CONSTRAINT [FK_LETTERDB4_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB5_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB5]'))
+ALTER TABLE [LETTERDB5]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB5_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB5_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB5]'))
+ALTER TABLE [LETTERDB5] CHECK CONSTRAINT [FK_LETTERDB5_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB5_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB5]'))
+ALTER TABLE [LETTERDB5]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB5_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB5_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB5]'))
+ALTER TABLE [LETTERDB5] CHECK CONSTRAINT [FK_LETTERDB5_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB6_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB6]'))
+ALTER TABLE [LETTERDB6]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB6_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB6_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB6]'))
+ALTER TABLE [LETTERDB6] CHECK CONSTRAINT [FK_LETTERDB6_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB6_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB6]'))
+ALTER TABLE [LETTERDB6]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB6_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB6_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB6]'))
+ALTER TABLE [LETTERDB6] CHECK CONSTRAINT [FK_LETTERDB6_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB7_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB7]'))
+ALTER TABLE [LETTERDB7]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB7_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB7_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB7]'))
+ALTER TABLE [LETTERDB7] CHECK CONSTRAINT [FK_LETTERDB7_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB7_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB7]'))
+ALTER TABLE [LETTERDB7]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB7_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB7_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB7]'))
+ALTER TABLE [LETTERDB7] CHECK CONSTRAINT [FK_LETTERDB7_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB8_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB8]'))
+ALTER TABLE [LETTERDB8]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB8_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB8_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB8]'))
+ALTER TABLE [LETTERDB8] CHECK CONSTRAINT [FK_LETTERDB8_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB8_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB8]'))
+ALTER TABLE [LETTERDB8]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB8_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB8_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB8]'))
+ALTER TABLE [LETTERDB8] CHECK CONSTRAINT [FK_LETTERDB8_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB9_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB9]'))
+ALTER TABLE [LETTERDB9]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB9_Charac0_Receiver] FOREIGN KEY([Receiver])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB9_Charac0_Receiver]') AND parent_object_id = OBJECT_ID(N'[LETTERDB9]'))
+ALTER TABLE [LETTERDB9] CHECK CONSTRAINT [FK_LETTERDB9_Charac0_Receiver]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB9_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB9]'))
+ALTER TABLE [LETTERDB9]  WITH CHECK ADD  CONSTRAINT [FK_LETTERDB9_Charac0_Sender] FOREIGN KEY([Sender])
+REFERENCES [Charac0] ([c_id])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_LETTERDB9_Charac0_Sender]') AND parent_object_id = OBJECT_ID(N'[LETTERDB9]'))
+ALTER TABLE [LETTERDB9] CHECK CONSTRAINT [FK_LETTERDB9_Charac0_Sender]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Merc_Hsstonetable]') AND parent_object_id = OBJECT_ID(N'[Merc]'))
+ALTER TABLE [Merc]  WITH CHECK ADD  CONSTRAINT [FK_Merc_Hsstonetable] FOREIGN KEY([MasterName])
 REFERENCES [Hsstonetable] ([MasterName])
 GO
-IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Merc_Hsstonetable_hstable]') AND parent_object_id = OBJECT_ID(N'[Merc]'))
-ALTER TABLE [Merc] CHECK CONSTRAINT [FK_Merc_Hsstonetable_hstable]
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Merc_Hsstonetable]') AND parent_object_id = OBJECT_ID(N'[Merc]'))
+ALTER TABLE [Merc] CHECK CONSTRAINT [FK_Merc_Hsstonetable]
 GO
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_RcvResult_Account]') AND parent_object_id = OBJECT_ID(N'[RcvResult]'))
 ALTER TABLE [RcvResult]  WITH CHECK ADD  CONSTRAINT [FK_RcvResult_Account] FOREIGN KEY([AccountName])
@@ -1638,20 +1901,20 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_Rcv
 ALTER TABLE [RcvResult] CHECK CONSTRAINT [FK_RcvResult_Account]
 GO
 IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Account_alphabet]') AND parent_object_id = OBJECT_ID(N'[Account]'))
-ALTER TABLE [Account]  WITH CHECK ADD  CONSTRAINT [CK_Account_alphabet] CHECK  ((NOT [c_id] like '%[^A-Z0-9]%'))
+ALTER TABLE [Account]  WITH CHECK ADD  CONSTRAINT [CK_Account_alphabet] CHECK  ((NOT [c_id] like '%[^A-Za-z0-9]%'))
 GO
 IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Account_alphabet]') AND parent_object_id = OBJECT_ID(N'[Account]'))
 ALTER TABLE [Account] CHECK CONSTRAINT [CK_Account_alphabet]
 GO
 IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[ck_No_Special_Characters]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
-ALTER TABLE [Charac0]  WITH NOCHECK ADD  CONSTRAINT [ck_No_Special_Characters] CHECK NOT FOR REPLICATION ((NOT [c_id] like '%[^A-Z0-9]%'))
+ALTER TABLE [Charac0]  WITH NOCHECK ADD  CONSTRAINT [ck_No_Special_Characters] CHECK  ((NOT [c_id] like '%[^A-Za-z0-9]%'))
 GO
 IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[ck_No_Special_Characters]') AND parent_object_id = OBJECT_ID(N'[Charac0]'))
 ALTER TABLE [Charac0] CHECK CONSTRAINT [ck_No_Special_Characters]
 GO
-IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Hstable_AlphaNumSpace]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
-ALTER TABLE [Hstable]  WITH CHECK ADD  CONSTRAINT [CK_Hstable_AlphaNumSpace] CHECK  ((NOT [HSName] like '%[^A-Z0-9]%'))
+IF NOT EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Hstable]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
+ALTER TABLE [Hstable]  WITH CHECK ADD  CONSTRAINT [CK_Hstable] CHECK  ((NOT [HSName] like '%[^A-Za-z0-9]%'))
 GO
-IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Hstable_AlphaNumSpace]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
-ALTER TABLE [Hstable] CHECK CONSTRAINT [CK_Hstable_AlphaNumSpace]
+IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Hstable]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
+ALTER TABLE [Hstable] CHECK CONSTRAINT [CK_Hstable]
 GO

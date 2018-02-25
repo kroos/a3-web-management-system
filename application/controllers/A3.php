@@ -97,85 +97,81 @@ class A3 extends CI_Controller {
 					$verify = $this->input->post('verify', TRUE);
 					$email = $this->input->post('email', TRUE);
 
-					if ($this->input->post('create_acc', TRUE))
+					//we need to check the capthca
+					$expiration = time()-1800; // Two hour limit
+					//delete captcha 2 hours ago
+					$this->captcha->delete_captcha($expiration);
+
+					//check the new 1
+					$check = $this->captcha->captcha($verify, $expiration)->num_rows();
+
+					if ($check == 0)
 						{
-							//we need to check the capthca
-							$expiration = time()-1800; // Two hour limit
-							//delete captcha 2 hours ago
-							$this->captcha->delete_captcha($expiration);
+							$data['info'] = 'You must submit the word that appears in the image';
+							$this->load->view('register', $data);
+						}
+						else
+						{
+							$passkey = md5(uniqid(rand()));
+							$date = mssqldate();
+							$subject = $this->config->item('homepage').' Activation Link For '.$username.' Account';
+							$message = "<html>
+										<head>
+										<meta http-equiv='Content-Language' content='en-us'>
+										<meta name='GENERATOR' content='Microsoft FrontPage 6.0'>
+										<meta name='ProgId' content='FrontPage.Editor.Document'>
+										<meta http-equiv='Content-Type' content='text/html; charset=windows-1252'>
+										<title>".$this->config->item('homepage')." Activation Link.</title>
+										</head>
+										<body>
+										<p align='center'>Your username : $username</p>";
+							$message .= "<p align='center'>This is your password : $password1</p>";
+							$message .=	"<p align='center'><a href='".$this->config->item('forum_url')."'>".$this->config->item('homepage')." Forum</a></p>
+										<p align='center'><a href='".site_url()."'>".$this->config->item('homepage')." Account Management Tools</a></p>
+										<p align='center'><a href='".site_url("a3/activate/$passkey")."'>Click Here To Activate Your Account.</a></p>
+										<p align='center'>You are receiving this e-mail because a user with an IP address of ".$_SERVER['REMOTE_ADDR']." signed up on <a href='http://".site_url()."'>".$this->config->item('homepage')." Account Management Tools</a> using your e-mail address. If this was not you, simply ignore this e-mail, and no further messages will be sent.</p>
+										</body></html>";
 
-							//check the new 1
-							$check = $this->captcha->captcha($verify, $expiration)->num_rows();
+							$this->myphpmailer->IsSMTP();
+							$this->myphpmailer->SMTPAuth = TRUE;									//Set the encryption system to use - ssl (deprecated) or tls
+							$this->myphpmailer->SMTPSecure = $this->config->item('smtp_secure');	//tls or ssl (deprecated)
+							$this->myphpmailer->Host = $this->config->item('smtp_server');			//smtp server
+							$this->myphpmailer->Port = $this->config->item('smtp_port');			//change this port if you are using different port than mine
+							$this->myphpmailer->Username = $this->config->item('mailer_username');	//email account username
+							$this->myphpmailer->Password = $this->config->item('mailer_password');	//email account password
+							$this->myphpmailer->SMTPDebug = $this->config->item('mailer_debug');	//debug = 0 (no debug), 1 = errors and messages, 2 = messages only
+							$this->myphpmailer->Debugoutput = 'html';								//Ask for HTML-friendly debug output
+							$this->myphpmailer->IsHTML(TRUE);
 
-							if ($check == 0)
-								{
-									$data['info'] = 'You must submit the word that appears in the image';
-									$this->load->view('register', $data);
-								}
-								else
-								{
-									$passkey = md5(uniqid(rand()));
-									$date = mssqldate();
-									$subject = $this->config->item('homepage').' Activation Link For '.$username.' Account';
-									$message = "<html>
-												<head>
-												<meta http-equiv='Content-Language' content='en-us'>
-												<meta name='GENERATOR' content='Microsoft FrontPage 6.0'>
-												<meta name='ProgId' content='FrontPage.Editor.Document'>
-												<meta http-equiv='Content-Type' content='text/html; charset=windows-1252'>
-												<title>".$this->config->item('homepage')." Activation Link.</title>
-												</head>
-												<body>
-												<p align='center'>Your username : $username</p>";
-									$message .= "<p align='center'>This is your password : $password1</p>";
-									$message .=	"<p align='center'><a href='".$this->config->item('forum_url')."'>".$this->config->item('homepage')." Forum</a></p>
-												<p align='center'><a href='".site_url()."'>".$this->config->item('homepage')." Account Management Tools</a></p>
-												<p align='center'><a href='".site_url("a3/activate/$passkey")."'>Click Here To Activate Your Account.</a></p>
-												<p align='center'>You are receiving this e-mail because a user with an IP address of ".$_SERVER['REMOTE_ADDR']." signed up on <a href='http://".site_url()."'>".$this->config->item('homepage')." Account Management Tools</a> using your e-mail address. If this was not you, simply ignore this e-mail, and no further messages will be sent.</p>
-												</body></html>";
+							//Set who the message is to be sent from
+							$this->myphpmailer->setFrom($this->config->item('from'), $this->config->item('from_name')); 
 
-									$this->myphpmailer->IsSMTP();
-									$this->myphpmailer->SMTPAuth = TRUE;									//Set the encryption system to use - ssl (deprecated) or tls
-									$this->myphpmailer->SMTPSecure = $this->config->item('smtp_secure');	//tls or ssl (deprecated)
-									$this->myphpmailer->Host = $this->config->item('smtp_server');			//smtp server
-									$this->myphpmailer->Port = $this->config->item('smtp_port');			//change this port if you are using different port than mine
-									$this->myphpmailer->Username = $this->config->item('mailer_username');	//email account username
-									$this->myphpmailer->Password = $this->config->item('mailer_password');	//email account password
-									$this->myphpmailer->SMTPDebug = $this->config->item('mailer_debug');	//debug = 0 (no debug), 1 = errors and messages, 2 = messages only
-									$this->myphpmailer->Debugoutput = 'html';								//Ask for HTML-friendly debug output
-									$this->myphpmailer->IsHTML(TRUE);
+							//Set an alternative reply-to address
+							$this->myphpmailer->addReplyTo($this->config->item('addreplyto_email'), $this->config->item('addreplyto_name'));
 
-									//Set who the message is to be sent from
-									$this->myphpmailer->setFrom($this->config->item('from'), $this->config->item('from_name')); 
+							//process myphpmailer
+							$this->myphpmailer->AddAddress($email, $username);														//recipient
+ 							$this->myphpmailer->Subject = $subject;
+							$this->myphpmailer->MsgHTML($message);
+							$this->myphpmailer->AltBody = "To view the message, please use an HTML compatible email viewer!";	// optional, comment out and test
 
-									//Set an alternative reply-to address
-									$this->myphpmailer->addReplyTo($this->config->item('addreplyto_email'), $this->config->item('addreplyto_name'));
-
-									//process myphpmailer
-									$this->myphpmailer->AddAddress($email, $username);														//recipient
- 									$this->myphpmailer->Subject = $subject;
-									$this->myphpmailer->MsgHTML($message);
-									$this->myphpmailer->AltBody = "To view the message, please use an HTML compatible email viewer!";	// optional, comment out and test
-
-									if (!$this->myphpmailer->Send()) {
-										$data['info'] = $this->myphpmailer->ErrorInfo.'<br />Activation email cant be send right now<br />Please try again later';
-									}else{
-										$data['info'] = 'Success sending email';
-										$query = $this->temp_account->insert_temp_account($username, $password1, $email, $passkey);
-										if($query)
-											{
-												$data['info'] = 'Please check activation email<br />If the email is not in the inbox, please check your JUNK folder and add it into white list';
-											}
-											else
-											{
-												$data['info'] = 'Please check activation email<br />Please try again later. We are sorry for the inconvenience';
-											}
+							if (!$this->myphpmailer->Send()) {
+								$data['info'] = $this->myphpmailer->ErrorInfo.'<br />Activation email cant be send right now<br />Please try again later';
+							}else{
+								$data['info'] = 'Success sending email';
+								$query = $this->temp_account->insert_temp_account($username, $password1, $email, $passkey);
+								if($query)
+									{
+										$data['info'] = 'Please check activation email<br />If the email is not in the inbox, please check your JUNK folder and add it into white list';
 									}
-								}
+									else
+									{
+										$data['info'] = 'Please check activation email<br />Please try again later. We are sorry for the inconvenience';
+									}
+							}
 						}
 				}
 			//form
-			// $this->load->view('register', $data);
 			$this->load->view('register.new.php', $data);
 		}
 
