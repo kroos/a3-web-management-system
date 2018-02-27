@@ -1114,7 +1114,7 @@ class User extends CI_Controller
 																	}
 																	else
 																	{
-																		$ability = merc_stat($strn, $intn, $dexn, $vitn, $manan, $pointsn, $data['merc']->row()->Ability);
+																		$ability = merc_stat($strn, $intn, $dexn, $vitn, $manan, $balance, $data['merc']->row()->Ability);
 																		//echo $data['merc']->row()->Ability.' from db<br />';
 																		//echo $ability.' from form<br />';;
 																		$m = $this->hstable->update_ability($hsid, $ability);
@@ -1126,7 +1126,7 @@ class User extends CI_Controller
 																			{
 																				$data['info'] = 'Success distribute points';
 																				$this->account->update_activity();
-																				sleep(3);
+																				// sleep(3);
 																				redirect('user/adding_mercenary_stat_points', 'location');
 																			}
 																	}
