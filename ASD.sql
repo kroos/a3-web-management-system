@@ -1,10 +1,10 @@
 USE [ASD]
 GO
-/****** Object:  User [a3serial]    Script Date: 25/02/2018 11:31:51 AM ******/
+/****** Object:  User [a3serial]    Script Date: 27/02/2018 5:16:08 PM ******/
 IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = N'a3serial')
 CREATE USER [a3serial] FOR LOGIN [a3serial] WITH DEFAULT_SCHEMA=[db_owner]
 GO
-/****** Object:  UserDefinedFunction [GetAccountName]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  UserDefinedFunction [GetAccountName]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -27,7 +27,7 @@ END
 END
 
 GO
-/****** Object:  Table [A3Web_Comment]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [A3Web_Comment]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -51,7 +51,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [A3Web_HTML]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [A3Web_HTML]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -76,7 +76,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Account]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Account]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -109,7 +109,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AccountAuth]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [AccountAuth]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -128,7 +128,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AccountExt]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [AccountExt]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -147,7 +147,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AccountFailAuth]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [AccountFailAuth]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -167,7 +167,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AdultCheck]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [AdultCheck]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -185,7 +185,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Answer]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Answer]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -203,7 +203,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [AuthLog]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [AuthLog]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -223,7 +223,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Ban_IP]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Ban_IP]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -239,7 +239,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [BlackList]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [BlackList]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -261,7 +261,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Captcha]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Captcha]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -284,7 +284,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Charac0]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Charac0]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -316,7 +316,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [CharInfo]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [CharInfo]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -326,17 +326,18 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[CharInfo]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [CharInfo](
-	[ServerIdx] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
-	[Nation] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
-	[AccountID] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
-	[CharName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL,
+	[AccountID] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[ServerIdx] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[CharName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Type] [char](1) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Nation] [char](1) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[None] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NULL
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Clan]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Clan]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -369,7 +370,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ClanInfo]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [ClanInfo]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -379,14 +380,56 @@ GO
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ClanInfo]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [ClanInfo](
+	[ClanID] [int] NOT NULL,
+	[ServerID] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[ClanName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[Nation] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
-	[ClanName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL
+	[MarkID] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[CDate] [smalldatetime] NULL,
+	[DDate] [smalldatetime] NULL,
+	[ClanPasswd] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[ClanRank] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[ClanStatus] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[StorageID] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[AgitID] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
+	[WinCount] [int] NOT NULL,
+	[LoseCount] [int] NOT NULL,
+ CONSTRAINT [PK_ClanInfo] PRIMARY KEY CLUSTERED 
+(
+	[ClanID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [DenyChar]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [ClanMember]    Script Date: 27/02/2018 5:16:09 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[ClanMember]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [ClanMember](
+	[ClanID] [int] NOT NULL,
+	[ServerID] [varchar](50) COLLATE Latin1_General_CI_AS NOT NULL,
+	[CharName] [varchar](50) COLLATE Latin1_General_CI_AS NOT NULL,
+	[Level] [int] NOT NULL,
+	[Class] [varchar](50) COLLATE Latin1_General_CI_AS NOT NULL,
+	[Rank] [varchar](50) COLLATE Latin1_General_CI_AS NOT NULL,
+ CONSTRAINT [PK_ClanMember] PRIMARY KEY CLUSTERED 
+(
+	[ClanID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [DenyChar]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -402,7 +445,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [FaultMailAccount]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [FaultMailAccount]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -418,7 +461,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [FRIEND0]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [FRIEND0]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -440,7 +483,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameBroadcast]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [GameBroadcast]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -462,7 +505,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameLoginLog]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [GameLoginLog]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -482,7 +525,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameServer]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [GameServer]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -500,7 +543,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [GameServerMessage]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [GameServerMessage]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -515,7 +558,7 @@ CREATE TABLE [GameServerMessage](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 END
 GO
-/****** Object:  Table [GroupSeat]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [GroupSeat]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -538,7 +581,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Hsstonetable]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Hsstonetable]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -564,7 +607,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Hstable]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Hstable]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -595,7 +638,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [InnerAccount]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [InnerAccount]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -614,7 +657,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ItemStorage0]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [ItemStorage0]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -644,7 +687,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Job]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Job]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -661,7 +704,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB0]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB0]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -688,7 +731,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB1]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB1]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -715,7 +758,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB10]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB10]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -742,7 +785,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB11]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB11]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -769,7 +812,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB12]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB12]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -796,7 +839,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB13]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB13]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -823,7 +866,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB14]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB14]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -850,7 +893,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB15]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB15]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -877,7 +920,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB2]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB2]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -904,7 +947,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB3]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB3]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -931,7 +974,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB4]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB4]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -958,7 +1001,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB5]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB5]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -985,7 +1028,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB6]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB6]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1012,7 +1055,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB7]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB7]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1039,7 +1082,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB8]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB8]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1066,7 +1109,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LETTERDB9]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LETTERDB9]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1093,7 +1136,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LoginLog]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LoginLog]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1110,7 +1153,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LotteryTicket]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LotteryTicket]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1132,7 +1175,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Lotto]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Lotto]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1158,7 +1201,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [LottoEvent]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [LottoEvent]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1179,7 +1222,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [Merc]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [Merc]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1193,8 +1236,8 @@ CREATE TABLE [Merc](
 	[MasterName] [varchar](50) COLLATE SQL_Latin1_General_CP1251_CS_AS NOT NULL,
 	[Type] [int] NOT NULL,
 	[HSLevel] [int] NOT NULL,
-	[rb] [int] NULL,
-	[reset_rb] [int] NULL,
+	[rb] [int] NULL CONSTRAINT [DF_MERC_rb]  DEFAULT ((0)),
+	[reset_rb] [int] NULL CONSTRAINT [DF_MERC_reset_rb]  DEFAULT ((0)),
  CONSTRAINT [PK_Merc] PRIMARY KEY CLUSTERED 
 (
 	[HSName] ASC
@@ -1204,7 +1247,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [OutAccount]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [OutAccount]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1230,7 +1273,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [PcbangList]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [PcbangList]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1265,7 +1308,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [QuestList]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [QuestList]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1283,7 +1326,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [QuestResponse]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [QuestResponse]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1301,7 +1344,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [RandChar]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [RandChar]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1319,7 +1362,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [RcvResult]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [RcvResult]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1342,7 +1385,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ReservedChar]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [ReservedChar]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1366,7 +1409,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [ReservedPresent]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [ReservedPresent]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1385,7 +1428,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [RestoreRequest]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [RestoreRequest]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1406,7 +1449,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [SerialList]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [SerialList]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1432,7 +1475,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [StatusLog]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [StatusLog]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1455,7 +1498,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [temp_account]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [temp_account]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1475,7 +1518,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [UpdateLog]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [UpdateLog]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1495,7 +1538,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [UserTicket]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [UserTicket]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1512,7 +1555,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [WebLoginLog]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [WebLoginLog]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1533,7 +1576,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [WebLoginRecentLog]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [WebLoginRecentLog]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1553,7 +1596,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [WebLoginReport]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [WebLoginReport]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1571,7 +1614,7 @@ CREATE TABLE [WebLoginReport](
 ) ON [PRIMARY]
 END
 GO
-/****** Object:  Table [ZipCode]    Script Date: 25/02/2018 11:31:52 AM ******/
+/****** Object:  Table [ZipCode]    Script Date: 27/02/2018 5:16:09 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1592,18 +1635,6 @@ CREATE TABLE [ZipCode](
 END
 GO
 SET ANSI_PADDING OFF
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_MERC_rb]') AND type = 'D')
-BEGIN
-ALTER TABLE [Merc] ADD  CONSTRAINT [DF_MERC_rb]  DEFAULT ((0)) FOR [rb]
-END
-
-GO
-IF NOT EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_MERC_reset_rb]') AND type = 'D')
-BEGIN
-ALTER TABLE [Merc] ADD  CONSTRAINT [DF_MERC_reset_rb]  DEFAULT ((0)) FOR [reset_rb]
-END
-
 GO
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_A3Web_Comment_A3Web_HTML]') AND parent_object_id = OBJECT_ID(N'[A3Web_Comment]'))
 ALTER TABLE [A3Web_Comment]  WITH CHECK ADD  CONSTRAINT [FK_A3Web_Comment_A3Web_HTML] FOREIGN KEY([bil_post])
@@ -1632,6 +1663,13 @@ REFERENCES [Charac0] ([c_id])
 GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ClanInfo_Charac0]') AND parent_object_id = OBJECT_ID(N'[ClanInfo]'))
 ALTER TABLE [ClanInfo] CHECK CONSTRAINT [FK_ClanInfo_Charac0]
+GO
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ClanMember_ClanInfo]') AND parent_object_id = OBJECT_ID(N'[ClanMember]'))
+ALTER TABLE [ClanMember]  WITH CHECK ADD  CONSTRAINT [FK_ClanMember_ClanInfo] FOREIGN KEY([ClanID])
+REFERENCES [ClanInfo] ([ClanID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_ClanMember_ClanInfo]') AND parent_object_id = OBJECT_ID(N'[ClanMember]'))
+ALTER TABLE [ClanMember] CHECK CONSTRAINT [FK_ClanMember_ClanInfo]
 GO
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[FK_FRIEND0_Charac0]') AND parent_object_id = OBJECT_ID(N'[FRIEND0]'))
 ALTER TABLE [FRIEND0]  WITH CHECK ADD  CONSTRAINT [FK_FRIEND0_Charac0] FOREIGN KEY([CharName])
@@ -1917,4 +1955,128 @@ ALTER TABLE [Hstable]  WITH CHECK ADD  CONSTRAINT [CK_Hstable] CHECK  ((NOT [HSN
 GO
 IF  EXISTS (SELECT * FROM sys.check_constraints WHERE object_id = OBJECT_ID(N'[dbo].[CK_Hstable]') AND parent_object_id = OBJECT_ID(N'[Hstable]'))
 ALTER TABLE [Hstable] CHECK CONSTRAINT [CK_Hstable]
+GO
+/****** Object:  Trigger [tr_charac0]    Script Date: 27/02/2018 5:16:09 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[tr_charac0]'))
+EXEC dbo.sp_executesql @statement = N'CREATE TRIGGER [tr_charac0]
+   ON  [Charac0]
+   AFTER INSERT
+AS 
+
+IF EXISTS (SELECT c_id FROM inserted WHERE (c_id LIKE ''%ƒ%'') OR (c_id LIKE ''%„%'') OR (c_id LIKE ''%…%'') OR (c_id LIKE ''%†%'') OR (c_id LIKE ''%‡%'') OR (c_id LIKE ''%ˆ%'') OR (c_id LIKE ''%‰%'') OR (c_id LIKE ''%Š%'') OR (c_id LIKE ''%‹%'') OR (c_id LIKE ''%Œ%'') OR (c_id LIKE ''%%'') OR (c_id LIKE ''%Ž%'') OR (c_id LIKE ''%%'') OR (c_id LIKE ''%%'') OR (c_id LIKE ''%‘%'') OR (c_id LIKE ''%’%'') OR (c_id LIKE ''%“%'') OR (c_id LIKE ''%”%'') OR (c_id LIKE ''%•%'') OR (c_id LIKE ''%–%'') OR (c_id LIKE ''%—%'') OR (c_id LIKE ''%˜%'') OR (c_id LIKE ''%™%'') OR (c_id LIKE ''%š%'') OR (c_id LIKE ''%›%'') OR (c_id LIKE ''%œ%'') OR (c_id LIKE ''%%'') OR (c_id LIKE ''%ž%'') OR (c_id LIKE ''%Ÿ%'') OR (c_id LIKE ''% %'') OR (c_id LIKE ''%¡%'') OR (c_id LIKE ''%¢%'') OR (c_id LIKE ''%£%'') OR (c_id LIKE ''%¤%'') OR (c_id LIKE ''%¥%'') OR (c_id LIKE ''%¦%'') OR (c_id LIKE ''%§%'') OR (c_id LIKE ''%¨%'') OR (c_id LIKE ''%©%'') OR (c_id LIKE ''%ª%'') OR (c_id LIKE ''%«%'') OR (c_id LIKE ''%¬%'') OR (c_id LIKE ''%­%'') OR (c_id LIKE ''%®%'') OR (c_id LIKE ''%¯%'') OR (c_id LIKE ''%°%'') OR (c_id LIKE ''%±%'') OR (c_id LIKE ''%²%'') OR (c_id LIKE ''%³%'') OR (c_id LIKE ''%´%'') OR (c_id LIKE ''%µ%'') OR (c_id LIKE ''%¶%'') OR (c_id LIKE ''%·%'') OR (c_id LIKE ''%¸%'') OR (c_id LIKE ''%¹%'') OR (c_id LIKE ''%º%'') OR (c_id LIKE ''%»%'') OR (c_id LIKE ''%ü%'') OR (c_id LIKE ''%½%'') OR (c_id LIKE ''%¾%'') OR (c_id LIKE ''%¿%'') OR (c_id LIKE ''%À%'') OR (c_id LIKE ''%Á%'') OR (c_id LIKE ''%Â%'') OR (c_id LIKE ''%Ã%'') OR (c_id LIKE ''%Ä%'') OR (c_id LIKE ''%Å%'') OR (c_id LIKE ''%Æ%'') OR (c_id LIKE ''%Ç%'') OR (c_id LIKE ''%È%'') OR (c_id LIKE ''%É%'') OR (c_id LIKE ''%Ê%'') OR (c_id LIKE ''%Ë%'') OR (c_id LIKE ''%Ì%'') OR (c_id LIKE ''%Í%'') OR (c_id LIKE ''%Î%'') OR (c_id LIKE ''%Ï%'') OR (c_id LIKE ''%Ð%'') OR (c_id LIKE ''%Ñ%'') OR (c_id LIKE ''%Ò%'') OR (c_id LIKE ''%Ó%'') OR (c_id LIKE ''%Ô%'') OR (c_id LIKE ''%Õ%'') OR (c_id LIKE ''%Ö%'') OR (c_id LIKE ''%×%'') OR (c_id LIKE ''%Ø%'') OR (c_id LIKE ''%Ù%'') OR (c_id LIKE ''%Ú%'') OR (c_id LIKE ''%Û%'') OR (c_id LIKE ''%Ü%'') OR (c_id LIKE ''%Ý%'') OR (c_id LIKE ''%Þ%'') OR (c_id LIKE ''%ß%'') OR (c_id LIKE ''%à%'') OR (c_id LIKE ''%á%'') OR (c_id LIKE ''%â%'') OR (c_id LIKE ''%ã%'') OR (c_id LIKE ''%ä%'') OR (c_id LIKE ''%å%'') OR (c_id LIKE ''%æ%'') OR (c_id LIKE ''%ç%'') OR (c_id LIKE ''%è%'') OR (c_id LIKE ''%é%'') OR (c_id LIKE ''%ê%'') OR (c_id LIKE ''%ë%'') OR (c_id LIKE ''%ì%'') OR (c_id LIKE ''%í%'') OR (c_id LIKE ''%î%'') OR (c_id LIKE ''%ï%'') OR (c_id LIKE ''%ð%'') OR (c_id LIKE ''%ñ%'') OR (c_id LIKE ''%ò%'') OR (c_id LIKE ''%ó%'') OR (c_id LIKE ''%ô%'') OR (c_id LIKE ''%õ%'') OR (c_id LIKE ''%ö%'') OR (c_id LIKE ''%÷%'') OR (c_id LIKE ''%ø%'') OR (c_id LIKE ''%ù%'') OR (c_id LIKE ''%ú%'') OR (c_id LIKE ''%û%'') OR (c_id LIKE ''%ü%'') OR (c_id LIKE ''%ý%'') OR (c_id LIKE ''%þ%'') OR (c_id LIKE ''%ÿ%''))
+
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for trigger here
+
+--	UPDATE charac0
+--	Set c_status = ''X''
+--	WHERE (c_id LIKE ''%ƒ%'') OR (c_id LIKE ''%„%'') OR (c_id LIKE ''%…%'') OR (c_id LIKE ''%†%'') OR (c_id LIKE ''%‡%'') OR (c_id LIKE ''%ˆ%'') OR (c_id LIKE ''%‰%'') OR (c_id LIKE ''%Š%'') OR (c_id LIKE ''%‹%'') OR (c_id LIKE ''%Œ%'') OR (c_id LIKE ''%%'') OR (c_id LIKE ''%Ž%'') OR (c_id LIKE ''%%'') OR (c_id LIKE ''%%'') OR (c_id LIKE ''%‘%'') OR (c_id LIKE ''%’%'') OR (c_id LIKE ''%“%'') OR (c_id LIKE ''%”%'') OR (c_id LIKE ''%•%'') OR (c_id LIKE ''%–%'') OR (c_id LIKE ''%—%'') OR (c_id LIKE ''%˜%'') OR (c_id LIKE ''%™%'') OR (c_id LIKE ''%š%'') OR (c_id LIKE ''%›%'') OR (c_id LIKE ''%œ%'') OR (c_id LIKE ''%%'') OR (c_id LIKE ''%ž%'') OR (c_id LIKE ''%Ÿ%'') OR (c_id LIKE ''% %'') OR (c_id LIKE ''%¡%'') OR (c_id LIKE ''%¢%'') OR (c_id LIKE ''%£%'') OR (c_id LIKE ''%¤%'') OR (c_id LIKE ''%¥%'') OR (c_id LIKE ''%¦%'') OR (c_id LIKE ''%§%'') OR (c_id LIKE ''%¨%'') OR (c_id LIKE ''%©%'') OR (c_id LIKE ''%ª%'') OR (c_id LIKE ''%«%'') OR (c_id LIKE ''%¬%'') OR (c_id LIKE ''%­%'') OR (c_id LIKE ''%®%'') OR (c_id LIKE ''%¯%'') OR (c_id LIKE ''%°%'') OR (c_id LIKE ''%±%'') OR (c_id LIKE ''%²%'') OR (c_id LIKE ''%³%'') OR (c_id LIKE ''%´%'') OR (c_id LIKE ''%µ%'') OR (c_id LIKE ''%¶%'') OR (c_id LIKE ''%·%'') OR (c_id LIKE ''%¸%'') OR (c_id LIKE ''%¹%'') OR (c_id LIKE ''%º%'') OR (c_id LIKE ''%»%'') OR (c_id LIKE ''%ü%'') OR (c_id LIKE ''%½%'') OR (c_id LIKE ''%¾%'') OR (c_id LIKE ''%¿%'') OR (c_id LIKE ''%À%'') OR (c_id LIKE ''%Á%'') OR (c_id LIKE ''%Â%'') OR (c_id LIKE ''%Ã%'') OR (c_id LIKE ''%Ä%'') OR (c_id LIKE ''%Å%'') OR (c_id LIKE ''%Æ%'') OR (c_id LIKE ''%Ç%'') OR (c_id LIKE ''%È%'') OR (c_id LIKE ''%É%'') OR (c_id LIKE ''%Ê%'') OR (c_id LIKE ''%Ë%'') OR (c_id LIKE ''%Ì%'') OR (c_id LIKE ''%Í%'') OR (c_id LIKE ''%Î%'') OR (c_id LIKE ''%Ï%'') OR (c_id LIKE ''%Ð%'') OR (c_id LIKE ''%Ñ%'') OR (c_id LIKE ''%Ò%'') OR (c_id LIKE ''%Ó%'') OR (c_id LIKE ''%Ô%'') OR (c_id LIKE ''%Õ%'') OR (c_id LIKE ''%Ö%'') OR (c_id LIKE ''%×%'') OR (c_id LIKE ''%Ø%'') OR (c_id LIKE ''%Ù%'') OR (c_id LIKE ''%Ú%'') OR (c_id LIKE ''%Û%'') OR (c_id LIKE ''%Ü%'') OR (c_id LIKE ''%Ý%'') OR (c_id LIKE ''%Þ%'') OR (c_id LIKE ''%ß%'') OR (c_id LIKE ''%à%'') OR (c_id LIKE ''%á%'') OR (c_id LIKE ''%â%'') OR (c_id LIKE ''%ã%'') OR (c_id LIKE ''%ä%'') OR (c_id LIKE ''%å%'') OR (c_id LIKE ''%æ%'') OR (c_id LIKE ''%ç%'') OR (c_id LIKE ''%è%'') OR (c_id LIKE ''%é%'') OR (c_id LIKE ''%ê%'') OR (c_id LIKE ''%ë%'') OR (c_id LIKE ''%ì%'') OR (c_id LIKE ''%í%'') OR (c_id LIKE ''%î%'') OR (c_id LIKE ''%ï%'') OR (c_id LIKE ''%ð%'') OR (c_id LIKE ''%ñ%'') OR (c_id LIKE ''%ò%'') OR (c_id LIKE ''%ó%'') OR (c_id LIKE ''%ô%'') OR (c_id LIKE ''%õ%'') OR (c_id LIKE ''%ö%'') OR (c_id LIKE ''%÷%'') OR (c_id LIKE ''%ø%'') OR (c_id LIKE ''%ù%'') OR (c_id LIKE ''%ú%'') OR (c_id LIKE ''%û%'') OR (c_id LIKE ''%ü%'') OR (c_id LIKE ''%ý%'') OR (c_id LIKE ''%þ%'') OR (c_id LIKE ''%ÿ%'')
+
+END
+' 
+GO
+/****** Object:  Trigger [tr_HSTABLE_delete_data_MERC_UPDATE]    Script Date: 27/02/2018 5:16:09 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[tr_HSTABLE_delete_data_MERC_UPDATE]'))
+EXEC dbo.sp_executesql @statement = N'CREATE TRIGGER [tr_HSTABLE_delete_data_MERC_UPDATE] ON  [Hstable] FOR UPDATE
+AS BEGIN
+	SET NOCOUNT ON;
+IF UPDATE (DelDate)
+BEGIN
+DECLARE @HSName varchar(50)
+DECLARE @MasterName varchar(50)
+
+-- IF EXISTS (SELECT * FROM inserted)
+
+Set @HSName = (select HSName FROM inserted)
+Set @MasterName = (select MasterName FROM inserted)
+
+BEGIN
+	SET NOCOUNT ON;
+ DELETE FROM MERC WHERE HSName = @HSName AND MasterName = @MasterName
+END
+END
+END
+-- ###############################################################################################
+
+-- ALTER TRIGGER [dbo].[tr_SCHEDULE_Modified]
+--    ON [dbo].[SCHEDULE]
+--    AFTER UPDATE
+-- AS BEGIN
+--     SET NOCOUNT ON;
+--     IF UPDATE (QtyToRepair) 
+--     BEGIN
+--         UPDATE SCHEDULE 
+--         SET modified = GETDATE()
+--            , ModifiedUser = SUSER_NAME()
+--            , ModifiedHost = HOST_NAME()
+--         FROM SCHEDULE S INNER JOIN Inserted I 
+--         ON S.OrderNo = I.OrderNo and S.PartNumber = I.PartNumber
+--         WHERE S.QtyToRepair <> I.QtyToRepair
+--     END 
+-- END' 
+GO
+/****** Object:  Trigger [tr_HSTABLE_INSERT]    Script Date: 27/02/2018 5:16:09 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[tr_HSTABLE_INSERT]'))
+EXEC dbo.sp_executesql @statement = N'
+CREATE TRIGGER [tr_HSTABLE_INSERT]
+   ON  [Hstable]
+   FOR INSERT
+AS 
+
+DECLARE @HSName varchar(50)
+DECLARE @MasterName varchar(50)
+DECLARE @Type int
+DECLARE @HSLevel int
+
+IF EXISTS (SELECT * FROM inserted)
+
+Set @HSName = (select HSName from inserted)
+Set @MasterName = (select MasterName from inserted)
+Set @Type = (select Type from inserted)
+Set @HSLevel = (select HSLevel from inserted)
+
+BEGIN
+INSERT INTO dbo.MERC (HSName, MasterName, Type, HSLevel, rb, reset_rb) values (@HSName, @MasterName, @Type, @HSLevel, ''0'', ''0'')
+END
+' 
+GO
+/****** Object:  Trigger [tr_HSTABLE_UPDATE_LEVEL_MERC]    Script Date: 27/02/2018 5:16:09 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[tr_HSTABLE_UPDATE_LEVEL_MERC]'))
+EXEC dbo.sp_executesql @statement = N'
+CREATE TRIGGER [tr_HSTABLE_UPDATE_LEVEL_MERC] ON  [Hstable] FOR UPDATE
+AS 
+IF UPDATE (HSLevel)
+
+DECLARE @HSName varchar(50)
+DECLARE @HSLEVEL int
+
+-- IF EXISTS (SELECT * FROM inserted)
+
+Set @HSName = (select HSName FROM inserted)
+Set @HSLEVEL = (select HSLEVEL FROM inserted)
+
+BEGIN
+	SET NOCOUNT ON;
+UPDATE dbo.MERC SET HSLEVEL = @HSLEVEL WHERE HSName = @HSName
+END' 
 GO

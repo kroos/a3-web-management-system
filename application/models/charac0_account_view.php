@@ -3,10 +3,10 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Charac0_account_view extends CI_Model 
 	{
-		function __construct()
-			{
-				parent::__construct();
-			}
+		// function __construct()
+		// 	{
+		// 		parent::__construct();
+		// 	}
 #############################################################################################################################
 //CRUD for charac0_account_view
 //SELECT
