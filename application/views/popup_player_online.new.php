@@ -20,6 +20,7 @@ startblock('news');
 							<thead>
 								<th>Heroes</th>
 								<th>Level</th>
+								<th>Nation</th>
 								<th>Rebirth Level</th>
 								<th>Rank</th>
 								<th>Date Login</th>
@@ -49,7 +50,7 @@ startblock('news');
 												$rank2 = 'God';
 												break;
 										};
-							
+
 											echo "<tr>";
 											echo "<td>$heroes2</td>";
 											echo "<td>$level2</td>";

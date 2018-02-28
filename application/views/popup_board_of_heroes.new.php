@@ -20,17 +20,19 @@ startblock('news');
 							<thead>
 								<th>Heroes</th>
 								<th>Level</th>
+								<th>Nation</th>
 								<th>Rebirth Level</th>
 								<th>Rank</th>
 								<th>Date Login</th>
 							</thead>
 							<?php
-							foreach ($query2->result() as $rows)
+							foreach ($query->result() as $rows)
 								{
 									$heroes2 = $rows->c_id;
 									$level2 = $rows->c_sheaderc;
 									$rblevel2 = $rows->rb;
 									$timesrb2 = $rows->times_rb;
+									$nat = $rows->Nation;
 									$date2 = $rows->d_udate;
 									$date3 = date_my ($date2);
 							
@@ -49,10 +51,15 @@ startblock('news');
 												$rank2 = 'God';
 												break;
 										};
-							
+									if ($nat == 0) {
+										$nati = 'Temoz';
+									} else {
+										$nati = 'Quanato';
+									}
 											echo "<tr>";
 											echo "<td>$heroes2</td>";
 											echo "<td>$level2</td>";
+											echo "<td>$nati</td>";
 											echo "<td>$rblevel2</td>";
 											echo "<td>$rank2</td>";
 											echo "<td>$date3</td>";

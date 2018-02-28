@@ -260,6 +260,7 @@ class A3 extends CI_Controller {
 		{
 					$secret_password = $this->config->item('secret_password');
 					$data['query'] = $this->charac0_account_view->board_of_heroes($secret_password, 50);
+					// echo $this->db->last_query();
 					// $this->load->view('popup_board_of_heroes', $data);
 					$this->load->view('popup_board_of_heroes.new.php', $data);
 		}
