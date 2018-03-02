@@ -2068,15 +2068,15 @@ AS
 IF UPDATE (HSLevel)
 
 DECLARE @HSName varchar(50)
-DECLARE @HSLEVEL int
+DECLARE @HSLevel int
 
 -- IF EXISTS (SELECT * FROM inserted)
 
 Set @HSName = (select HSName FROM inserted)
-Set @HSLEVEL = (select HSLEVEL FROM inserted)
+Set @HSLevel = (select HSLevel FROM inserted)
 
 BEGIN
 	SET NOCOUNT ON;
-UPDATE dbo.MERC SET HSLEVEL = @HSLEVEL WHERE HSName = @HSName
+UPDATE dbo.MERC SET HSLevel = @HSLevel WHERE HSName = @HSName
 END' 
 GO
