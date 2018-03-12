@@ -47,12 +47,17 @@
 	<link rel="stylesheet" href="<?=base_url()?>assets/bootstrap-validator/css/bootstrapValidator.min.css" />
 
 	<!-- datatables : https://datatables.net/extensions/responsive/examples/styling/bootstrap.html -->
-	<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" ></script>
+<!-- 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" ></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js" ></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js" ></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js" ></script>
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" />
-	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" /> -->
+	<script type="text/javascript" src="<?=base_url()?>assets/datatables.net/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>assets/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+	<link rel="stylesheet" href="<?=base_url()?>assets/datatables.net-bs4/css/dataTables.bootstrap4.css" />
+
+
 
 	<!-- javascript chart : http://www.chartjs.org/ -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
