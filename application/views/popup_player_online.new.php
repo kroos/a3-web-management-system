@@ -20,7 +20,6 @@ startblock('news');
 							<thead>
 								<th>Heroes</th>
 								<th>Level</th>
-								<th>Nation</th>
 								<th>Rebirth Level</th>
 								<th>Rank</th>
 								<th>Date Login</th>
