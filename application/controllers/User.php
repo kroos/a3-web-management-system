@@ -786,7 +786,7 @@ class User extends CI_Controller
 										if ( $mercrblvl == NULL )
 											{
 												//insert data into the MERC table
-												$this->merc->insert_merc($u->row()->HSID, $u->row()->HSName, $u->row()->MasterName, $u->row()->Type, $u->row()->HSLevel);
+												// $this->merc->insert_merc($u->row()->HSID, $u->row()->HSName, $u->row()->MasterName, $u->row()->Type, $u->row()->HSLevel);
 
 												//--------------------check merc level rebirth----------------------------
 												$mercrblvl = $h->row()->rb;

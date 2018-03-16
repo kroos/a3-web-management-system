@@ -684,7 +684,8 @@ class Admin extends CI_Controller
 
 						$h = $this->charac0->charac($char);
 						$o = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('SKILLEX', '4294967295;4294967295;4294967295', $h->row()->m_body));
-						if (!$o)
+						$m = $this->charac0->update_mbody_gm($h->row()->c_id, mbody_insert('SKILL', '4294967295;4294967295;4294967295', $h->row()->m_body));
+						if (!$o || !$m)
 							{
 								$data['info'] = 'Please try again';
 							}

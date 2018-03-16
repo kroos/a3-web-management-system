@@ -11,18 +11,18 @@ class Merc extends CI_Model
 //CRUD for merc
 		function merc_getAll($char, $hsid)
 			{
-				return $this->db->get_where('MERC', array('MasterName' => $char, 'HSID' => $hsid));
+				return $this->db->get_where('Merc', array('MasterName' => $char, 'HSID' => $hsid));
 			}
 
 //UPDATE
 		function update_rebirth($hsid, $mastername, $rb)
 			{
-				return $this->db->where(array('HSID' => $hsid, 'MasterName' => $mastername))->update('MERC', array('rb' => $rb));
+				return $this->db->where(array('HSID' => $hsid, 'MasterName' => $mastername))->update('Merc', array('rb' => $rb));
 			}
 
 			function update_reset_rebirth($hsid, $mastername, $reset_rb)
 			{
-				return $this->db->where(array('HSID' => $hsid, 'MasterName' => $mastername))->update('MERC', array('reset_rb' => $reset_rb, 'rb' => 0));
+				return $this->db->where(array('HSID' => $hsid, 'MasterName' => $mastername))->update('Merc', array('reset_rb' => $reset_rb, 'rb' => 0));
 			}
 
 //INSERT
@@ -38,13 +38,13 @@ class Merc extends CI_Model
 									'rb' => 0,
 									'reset_rb' => 0,
 								);
-				return $this->db->insert('MERC', $array);
+				return $this->db->insert('Merc', $array);
 			}
 
 //DELETE
 		function delete_merc($master)
 			{
-				$this->db->delete('MERC', array('MasterName' => $master));
+				$this->db->delete('Merc', array('MasterName' => $master));
 			}
 
 #############################################################################################################################
