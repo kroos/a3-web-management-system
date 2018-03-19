@@ -26,7 +26,7 @@ startblock('form');
 
 <?php
 $options = array(
-					'' => 'Please select shue aaccording to the character',
+					'' => 'Please select shue according to the character',
 					'1012;76684069;4290773247;4293968751' => 'Warrior Super Super Shue',
 					'1013;76290853;4290773247;4294155503' => 'Holy Knight Super Super Shue',
 					'1015;76028709;4290773247;4294160367' => 'Archer Super Super Shue',
@@ -107,6 +107,14 @@ $("#productForm").bootstrapValidator({
 	}
 })
 
+////////////////////////////////////////////////////////////////////////////////////
+// autocomplete
+	$( "#lp" ).autocomplete({
+		source: 'charsearch'
+		// minLength: 2
+	});
+
+////////////////////////////////////////////////////////////////////////////////////
 
 <?php
 endblock();

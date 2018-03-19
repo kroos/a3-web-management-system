@@ -723,6 +723,29 @@ class Admin extends CI_Controller
 				$this->load->view('admin/altering_level-new', $data);
 			}
 
+		public function merc_alter_level()
+		{
+			$data['info'] = NULL;
+			if ($this->form_validation->run() == TRUE) {
+				$merc = $this->input->post('merc', TRUE);
+				$level = $this->input->post('level', TRUE);
+				$rs = $this->hstable->GetWhere(array('HSName' => $merc), NULL, NULL);
+				// echo $rs->num_rows();
+				if ($rs->num_rows() > 0) {
+					$hsid = $rs->row()->HSID;
+					$ty = $this->hstable->update(array('HSExp' => $level), array('HSID' => $hsid));
+					if (!$ty) {
+						$data['info'] = 'Success alter level. You need to login and hit any monster for the mercenary to level up.';
+					} else {
+						$data['info'] = 'Please try again later';
+					}
+				} else {
+					$data['info'] = 'Mercenary not found. Please check again mercenary\'s name. It\'s case sensitive.';
+				}
+			}
+			$this->load->view('admin/merc_alter_level', $data);
+		}
+
 		public function inserting_lore()
 			{
 				$data['info'] = NULL;
@@ -1086,6 +1109,46 @@ class Admin extends CI_Controller
 						//form processor
 					}
 			}
+
+		public function mercsearch()
+		{
+			//get search term
+			$searchTerm = $_GET['term'];
+			// $top = $_GET['limit'];
+			$top = 10;
+
+			//get matched data from hstable table
+			$sql = "SELECT TOP(".$this->db->escape_str($top).") * FROM HSTABLE WHERE HSName LIKE '%".$this->db->escape_like_str($searchTerm)."%' ORDER BY HSName";
+			$gh = $this->db->query($sql);
+			// echo $this->db->last_query();
+
+			foreach ($gh->result() as $row) {
+				$data[] = $row->HSName;
+			}
+
+			//return json data
+			echo json_encode($data);
+		}
+
+		public function charsearch()
+		{
+			//get search term
+			$searchTerm = $_GET['term'];
+			// $top = $_GET['limit'];
+			$top = 10;
+
+			//get matched data from hstable table
+			$sql = "SELECT TOP(".$this->db->escape_str($top).") * FROM Charac0 WHERE c_id LIKE '%".$this->db->escape_like_str($searchTerm)."%' ORDER BY c_id";
+			$gh = $this->db->query($sql);
+			// echo $this->db->last_query();
+
+			foreach ($gh->result() as $row) {
+				$data[] = $row->c_id;
+			}
+
+			//return json data
+			echo json_encode($data);
+		}
 
 #############################################################################################################################
 //form validation data process

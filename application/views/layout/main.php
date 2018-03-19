@@ -20,6 +20,9 @@
 	<link rel="stylesheet" href="<?=base_url()?>assets/socicon/css/styles.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/theme/css/style.css">
 	<link rel="stylesheet" href="<?=base_url()?>assets/gallery/style.css">
+	<link rel="stylesheet" href="<?=base_url()?>assets/jquery-ui/css/jquery-ui.css" />
+	<link rel="stylesheet" href="<?=base_url()?>assets/jquery-ui/css/jquery-ui.structure.css" />
+	<link rel="stylesheet" href="<?=base_url()?>assets/jquery-ui/css/jquery-ui.theme.css" />
 
 	<link rel="stylesheet" href="<?=base_url()?>assets/mobirise/css/mbr-additional.css" type="text/css">
 
@@ -152,6 +155,7 @@ include('footer.php');
 		<script type="text/javascript" src="<?=base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="<?=base_url() ?>assets/select2/js/select2.min.js" ></script>
 		<script type="text/javascript" src="<?=base_url() ?>assets/minicolors/jquery.minicolors.min.js"></script>
+		<script type="text/javascript" src="<?=base_url() ?>assets/jquery-ui/js/jquery-ui.js"></script>
 
 
 		<div id="scrollToTop" class="scrollToTop mbr-arrow-up"><a style="text-align: center;"><i></i></a></div>

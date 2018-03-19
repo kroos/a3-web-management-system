@@ -601,6 +601,21 @@ $config = array	(
 								'rules' => 'trim|required|is_natural_no_zero|greater_than_equal_to[0]'
 							)
 					),
+					'admin/merc_alter_level' => array
+					(
+						array
+							(
+								'field' => 'merc',
+								'label' => 'Mercenary',
+								'rules' => 'trim|required|min_length[2]|max_length[12]'
+							),
+						array
+							(
+								'field' => 'level',
+								'label' => 'Level',
+								'rules' => 'trim|required|is_natural_no_zero|greater_than_equal_to[0]'
+							)
+					),
 					'admin/inserting_lore' => array
 					(
 						array

@@ -233,6 +233,12 @@ $("#productForm").bootstrapValidator({
 	}
 })
 
+////////////////////////////////////////////////////////////////////////////////////
+// autocomplete
+	$( "#lp" ).autocomplete({
+		source: 'charsearch'
+		// minLength: 2
+	});
 
 <?php
 endblock();

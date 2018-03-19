@@ -29,6 +29,11 @@ class Hstable extends CI_Model
 				return $this->db->get_where('HSTABLE', array('HSID' => $id, 'HSState' => 0));
 			}
 
+		function GetWhere($where, $limit, $offset) {
+			return $this->db->get_where('HSTABLE', $where, $limit, $offset);
+		}
+
+
 	//UPDATE
 		function update_rebirth($id, $char)
 			{
@@ -44,7 +49,11 @@ class Hstable extends CI_Model
 			{
 				return $this->db->where(array('HSID' => $id))->update('HSTABLE', array('MasterName' => $char));
 			}
-			
+
+		function update($update, $where) {
+			return $this->db->update('HSTABLE', $update, $where);
+		}
+
 	//INSERT
 
 	//DELETE

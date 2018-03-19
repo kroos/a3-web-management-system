@@ -105,6 +105,7 @@
 								<?=anchor('admin/equip_super_super_shue', 'Equip Super Super Shue', 'class="text-info dropdown-item display-4"');?>
 								<?=anchor('admin/learn_episode_5_skill', 'Learn Episode 5 Skill', 'class="text-info dropdown-item display-4"');?>
 								<?=anchor('admin/altering_level', 'Altering Level', 'class="text-info dropdown-item display-4"');?>
+								<?=anchor('admin/merc_alter_level', 'Mercenary Altering Level', 'class="text-info dropdown-item display-4"');?>
 								<?=anchor('admin/inserting_lore', 'Inserting Lore', 'class="text-info dropdown-item display-4"');?>
 								<?=anchor('admin/grace_of_silbadu_insertion', 'Grace Of Silbadu Insertion', 'class="text-info dropdown-item display-4"');?>
 								<?=anchor('admin/inserting_1_box_of_items', 'Inserting 1 Box of Items', 'class="text-info dropdown-item display-4"');?>
