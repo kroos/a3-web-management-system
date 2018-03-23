@@ -92,6 +92,8 @@ endblock();
 
 startblock('jscript');
 ?>
+var csrfHash = $.cookie("a3_cookiecsrf_cookie_a3");
+// var csrfHash1 = $('input[name="<?=$this->security->get_csrf_token_name()?>"]').val();
 ////////////////////////////////////////////////////////////////////////////////////
 // ucwords
 $("#username, #pass3").keyup(function() {
@@ -100,7 +102,8 @@ $("#username, #pass3").keyup(function() {
 
 ////////////////////////////////////////////////////////////////////////////////////
 // bootstrap validator
-$("#productForm").bootstrapValidator({
+$("form")
+.bootstrapValidator({
 	feedbackIcons: {
 		valid: 'fa fa-check fa-lg',
 		invalid: 'fa fa-ban fa-lg',
@@ -112,9 +115,6 @@ $("#productForm").bootstrapValidator({
 				notEmpty: {
 					message: 'Please insert your email '
 				},
-				// emailAddress: {
-				// 	message: 'Please insert your valid email address'
-				// },
 				regexp: {
 					regexp: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 					message: ' Please insert your valid email address'
@@ -127,9 +127,21 @@ $("#productForm").bootstrapValidator({
 					type: 'POST',
 					url: 'remote_user',
 					message: 'Please use another email ',
-					delay: 50
-				},
-			}
+					data: function(validator)
+							{
+								return {
+											<?=$this->security->get_csrf_token_name()?>: validator.getFieldElements('<?=$this->security->get_csrf_token_name()?>').val()
+										};
+							},
+					delay: 1,		// wait 5 seconds
+					onSuccess: function(e, data) {
+						$('input[name="<?=$this->security->get_csrf_token_name()?>"]').val(data.result.csrf_a3);
+					},
+					// onError: function(e, data) {
+					// 	console.log('error');
+					// }
+				}
+			},
 		},
 		username: {
 			message: 'The username is not valid',
@@ -150,7 +162,19 @@ $("#productForm").bootstrapValidator({
 					type: 'POST',
 					url: 'remote_user',
 					message: 'Please use another username',
-					delay: 50
+					data: function(validator)
+							{
+								return {
+											<?=$this->security->get_csrf_token_name()?>: validator.getFieldElements('<?=$this->security->get_csrf_token_name()?>').val()
+										};
+							},
+					delay: 1,		// wait 5 seconds
+					onSuccess: function(e, data) {
+						$('input[name="<?=$this->security->get_csrf_token_name()?>"]').val(data.result.csrf_a3);
+					},
+					// onError: function(e, data) {
+					// 	console.log('error');
+					// }
 				},
 			}
 		},
@@ -190,7 +214,36 @@ $("#productForm").bootstrapValidator({
 		},
 	}
 })
-
+// .on('success.form.bv', '#pass3', function(e) {
+// 	// Prevent form submission
+// 	e.preventDefault();
+// 	
+// 	// Get the form instance
+// 	// var $form = $(e.target);
+// 	
+// 	// Get the BootstrapValidator instance
+// 	// var bv = $form.data('bootstrapValidator');
+// 	
+// 	// Use Ajax to submit form data
+// 	$.get( "remote_user", function( response ) {
+// 	    console.log( response ); // server response
+// 	})
+// })
+// .on('error.form.bv', '#pass3', function(e) {
+// 	// Prevent form submission
+// 	// e.preventDefault();
+// 	
+// 	// Get the form instance
+// 	// var $form = $(e.target);
+// 	
+// 	// Get the BootstrapValidator instance
+// 	// var bv = $form.data('bootstrapValidator');
+// 	
+// 	// Use Ajax to submit form data
+// 	$.get( "remote_user", function( response ) {
+// 	    console.log( response ); // server response
+// 	})
+// })
 
 <?php
 endblock();

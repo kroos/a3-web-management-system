@@ -108,8 +108,18 @@ $("#productForm").bootstrapValidator({
 ////////////////////////////////////////////////////////////////////////////////////
 // autocomplete
 	$( "#lp" ).autocomplete({
-		source: 'charsearch'
-		// minLength: 2
+		// source: 'charsearch'
+		source: function(request, response){
+			$.ajax({
+				url: 'charsearch',
+				data: request,
+				dataType: "json",
+				type: 'GET',
+				success: function(data){
+					response(data);
+				}
+			})
+		}
 	});
 
 ////////////////////////////////////////////////////////////////////////////////////

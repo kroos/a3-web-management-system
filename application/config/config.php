@@ -453,7 +453,7 @@ $config['csrf_token_name'] = 'csrf_a3';
 $config['csrf_cookie_name'] = 'csrf_cookie_a3';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
-$config['csrf_exclude_uris'] = array('a3/remote_user', 'admin/mercsearch', 'admin/charsearch');
+$config['csrf_exclude_uris'] = array();
 
 /*
 |--------------------------------------------------------------------------

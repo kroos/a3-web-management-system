@@ -7,6 +7,7 @@
 	<link rel="shortcut icon" href="<?=base_url()?>assets/images/favicon-16x16.png" type="image/x-icon">
 	<meta name="description" content="This is an Account Management Tools for  <?=$this->config->item('homepage')?> Online Games to modify their character" />
 	<meta name="keywords" content="A3, A3 online, a3 online game, a3 private server, a3 game, free online game, free private server, free a3, free a3 game online, revive, a3 revive, revive online game, free a3 revive" />
+
 	<title><?=$this->config->item('homepage')?> Account Management Tools</title>
 
 	<link rel="stylesheet" href="<?=base_url()?>assets/web/assets/mobirise-icons/mobirise-icons.css">
@@ -28,6 +29,7 @@
 
 	<script src="<?=base_url()?>assets/web/assets/jquery/jquery.min.js"></script>
 
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
 	<!-- select2 https://select2.github.io/ -->
 	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" /> -->

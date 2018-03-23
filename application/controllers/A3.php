@@ -340,14 +340,8 @@ class A3 extends CI_Controller {
 
 		public function remote_user()
 		{
-			$valid = true;
-	
-			// $users = array(
-			// 	'admin'         => 'admin@domain.com',
-			// 	'administrator' => 'administrator@domain.com',
-			// 	'root'          => 'root@domain.com',
-			// );
-	
+			$valid = TRUE;
+
 			$users1 = $this->account->remote();
 			// echo $this->db->last_query();
 
@@ -361,18 +355,23 @@ class A3 extends CI_Controller {
 
 			// if (isset($_POST['username']) && array_key_exists($_POST['username'], $users)) {
 			if (NULL !== $this->input->post('username') && array_key_exists($this->input->post('username'), $users)) {
-				$valid = false;
+				$valid = FALSE;
 			} else if (NULL !== $this->input->post('email')) {
 				$email = $this->input->post('email');
-	
+
 				foreach ($users as $k => $v) {
 					if ($email == $v) {
-						$valid = false;
+						$valid = FALSE;
 						break;
 					}
 				}
 			}
-			echo json_encode(array('valid' => $valid));
+			echo json_encode(
+								array(
+									'valid' => $valid,
+									$this->security->get_csrf_token_name() => $this->security->get_csrf_hash(),
+								)
+							);
 		}
 
 #############################################################################################################################
