@@ -92,7 +92,7 @@ endblock();
 
 startblock('jscript');
 ?>
-var csrfHash = $.cookie("a3_cookiecsrf_cookie_a3");
+// var csrfHash = $.cookie("<?=$this->config->item('cookie_prefix').$this->config->item('csrf_cookie_name')?>");
 // var csrfHash1 = $('input[name="<?=$this->security->get_csrf_token_name()?>"]').val();
 ////////////////////////////////////////////////////////////////////////////////////
 // ucwords
@@ -130,16 +130,14 @@ $("form")
 					data: function(validator)
 							{
 								return {
-											<?=$this->security->get_csrf_token_name()?>: validator.getFieldElements('<?=$this->security->get_csrf_token_name()?>').val()
+											<?=$this->security->get_csrf_token_name()?>: $.cookie("<?=$this->config->item('cookie_prefix').$this->config->item('csrf_cookie_name')?>")
+											//validator.getFieldElements('<?=$this->security->get_csrf_token_name()?>').val()
 										};
 							},
-					delay: 1,		// wait 5 seconds
-					onSuccess: function(e, data) {
-						$('input[name="<?=$this->security->get_csrf_token_name()?>"]').val(data.result.csrf_a3);
-					},
-					// onError: function(e, data) {
-					// 	console.log('error');
-					// }
+					delay: 1,		// wait 0.001 seconds
+					//onSuccess: function(e, data) {
+					//	$('input[name="<?=$this->security->get_csrf_token_name()?>"]').val(data.result.csrf_a3);
+					//},
 				}
 			},
 		},
@@ -162,16 +160,16 @@ $("form")
 					type: 'POST',
 					url: 'remote_user',
 					message: 'Please use another username',
-					data: function(validator)
-							{
+					data: function(validator) {
 								return {
-											<?=$this->security->get_csrf_token_name()?>: validator.getFieldElements('<?=$this->security->get_csrf_token_name()?>').val()
-										};
+											<?=$this->security->get_csrf_token_name()?> : $.cookie("<?=$this->config->item('cookie_prefix').$this->config->item('csrf_cookie_name')?>")
+											// validator.getFieldElements('<?=$this->security->get_csrf_token_name()?>').val()
+								};
 							},
-					delay: 1,		// wait 5 seconds
-					onSuccess: function(e, data) {
-						$('input[name="<?=$this->security->get_csrf_token_name()?>"]').val(data.result.csrf_a3);
-					},
+					delay: 1,		// wait 0.001 seconds
+					// onSuccess: function(e, data) {
+					// 	$('input[name="<?=$this->security->get_csrf_token_name()?>"]').val(data.result.csrf_a3);
+					// },
 					// onError: function(e, data) {
 					// 	console.log('error');
 					// }

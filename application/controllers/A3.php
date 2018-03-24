@@ -75,6 +75,7 @@ class A3 extends CI_Controller {
 
 	public function register()
 		{
+			// echo $this->config->item('cookie_prefix').$this->config->item('csrf_cookie_name');
 			//initiate var for captcha helper
 			$vals = array
 				(

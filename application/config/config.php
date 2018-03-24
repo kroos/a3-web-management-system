@@ -400,7 +400,7 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= 'a3_cookie';
+$config['cookie_prefix']	= 'a3-';
 $config['cookie_domain']	= 'localhost';
 $config['cookie_path']		= '/';
 $config['cookie_secure']	= FALSE;
@@ -450,7 +450,7 @@ $config['global_xss_filtering'] = TRUE;
 */
 $config['csrf_protection'] = TRUE;
 $config['csrf_token_name'] = 'csrf_a3';
-$config['csrf_cookie_name'] = 'csrf_cookie_a3';
+$config['csrf_cookie_name'] = 'csrf-cookie';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = TRUE;
 $config['csrf_exclude_uris'] = array();
