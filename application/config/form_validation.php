@@ -562,6 +562,21 @@ $config = array	(
 								'rules' => 'trim|required|min_length[2]'
 							)
 					),
+					'admin/merc_equipping_equipment_and_passive_skill' => array
+					(
+						array
+							(
+								'field' => 'merc',
+								'label' => 'Mercenary',
+								'rules' => 'trim|required|min_length[2]|max_length[12]'
+							),
+						array
+							(
+								'field' => 'eq',
+								'label' => 'Equipment',
+								'rules' => 'trim|required|min_length[2]'
+							)
+					),
 					'admin/equip_super_super_shue' => array
 					(
 						array

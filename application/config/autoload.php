@@ -65,7 +65,7 @@ $autoload['libraries'] = array('database', 'form_validation', 'myphpmailer');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('template_inheritance', 'url', 'form', 'date', 'captcha', 'MY_date', 'password', 'mbody_string', 'c_sheaderb', 'c_headera', 'ability', 'type', );
+$autoload['helper'] = array('template_inheritance', 'url', 'form', 'date', 'captcha', 'MY_date', 'password', 'mbody_string', 'hsbody_string', 'c_sheaderb', 'c_headera', 'ability', 'type', );
 
 
 /*

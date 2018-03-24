@@ -618,6 +618,96 @@ class Admin extends CI_Controller
 				$this->load->view('admin/char_alter_points-new', $data);
 			}
 
+		public function merc_alter_points()
+		{
+			$data['info'] = NULL;
+			//process
+			if ($this->input->post('search', TRUE))
+				{
+					$this->form_validation->set_rules('merc', 'Mercenary', 'trim|required|alpha_dash|min_length[2]|max_length[12]');
+				}
+				else
+				{
+					if ($this->input->post('alter', TRUE))
+						{
+							$this->form_validation->set_rules('merc', 'Mercenary', 'trim|required');
+							$this->form_validation->set_rules('str', 'Strength', 'trim|required|is_natural|less_than[65535]|max_length[5]');
+							$this->form_validation->set_rules('int', 'Intelligence', 'trim|required|is_natural|less_than[65535]|max_length[5]');
+							$this->form_validation->set_rules('dex', 'Dexterity', 'trim|required|is_natural|less_than[65535]|max_length[5]');
+							$this->form_validation->set_rules('vit', 'Vitality', 'trim|required|is_natural|less_than[65535]|max_length[5]');
+							$this->form_validation->set_rules('mana', 'Mana', 'trim|required|is_natural|less_than[65535]|max_length[5]');
+							$this->form_validation->set_rules('prem', 'Remaining Points', 'trim|required|is_natural|less_than[100000]|max_length[5]');
+						}
+				}
+
+			if ($this->form_validation->run() == TRUE) {
+				$merc = $this->input->post('merc', TRUE);
+
+				if ($this->input->post('search', TRUE)){
+					$h = $this->hstable->GetWhere(array('HSName' => $merc), NULL, NULL);
+					if(!$h) {
+						$data['info'] = 'I cant find the character '.$merc;
+					} else {
+						$data['query'] = $this->hstable->GetWhere(array('HSName' => $merc), NULL, NULL);
+					}
+				}else{
+					if ($this->input->post('alter', TRUE)){
+						$merc = $this->input->post('merc', TRUE);
+
+						$str = $this->input->post('str', TRUE);
+						$int = $this->input->post('int', TRUE);
+						$dex = $this->input->post('dex', TRUE);
+						$mana = $this->input->post('mana', TRUE);
+						$vit = $this->input->post('vit', TRUE);
+						$points = $this->input->post('prem', TRUE);
+
+						$n = $this->hstable->GetWhere(array('HSID' => $merc), NULL, NULL);
+						$ability = $n->row()->Ability;
+
+						$str += merc_attrib('STR', $ability);
+						$int += merc_attrib('INT', $ability);
+						$dex += merc_attrib('DEX', $ability);
+						$vit += merc_attrib('VIT', $ability);
+						$mana += merc_attrib('MANA', $ability);
+						$points += merc_attrib('POINTS', $ability);
+
+						if ($str > 65534) {
+							$data['info'] = $n->row()->HSName.' strength exceed more than 65535, '.$str;
+						} else {
+							if ($int > 65534) {
+								$data['info'] = $n->row()->HSName.' intelligence exceed more than 65535, '.$int;
+							} else {
+								if ($dex > 65534) {
+									$data['info'] = $n->row()->HSName.' dexterity exceed more than 65535, '.$dex;
+								} else {
+									if ($mana > 65534) {
+										$data['info'] = $n->row()->HSName.' mana exceed more than 65535, '.$mana;
+									} else {
+										if ($vit > 65534) {
+											$data['info'] = $n->row()->HSName.' vitality exceed more than 65535, '.$vit;
+										} else {
+											if ($points > 100000) {
+												$data['info'] = $n->row()->HSName.' points remaining exceed more than 100k, '.$points;
+											} else {
+												$r = $this->hstable->update(array('Ability' => merc_stat($str, $int, $dex, $vit, $mana, $points, $ability)), array('HSID' => $merc));
+												if (!$r) {
+													$data['info'] = 'Please try again later';
+												} else {
+													$data['info'] = 'Success alter points for '.$n->row()->HSName;
+												}
+												
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			$this->load->view('admin/merc_alter_points', $data);
+		}
+
 		public function equipping_equipment_and_passive_skill()
 			{
 				$data['info'] = NULL;
@@ -647,6 +737,36 @@ class Admin extends CI_Controller
 				//form
 				$this->load->view('admin/equip_psvskill-new', $data);
 			}
+
+		public function merc_equipping_equipment_and_passive_skill()
+		{
+			$data['info'] = NULL;
+			// process
+			if ($this->form_validation->run() == TRUE) {
+				// form processing
+				$merc = $this->input->post('merc', TRUE);
+				$eq = $this->input->post('eq', TRUE);
+
+				$y = $this->hstable->GetWhere(array('HSName' => $merc), NULL, NULL);
+				// echo $this->db->last_query();
+				$id = $y->row()->HSID;
+				$hsbody = $y->row()->HSBody;
+				// echo $hsbody;
+
+
+				$gh = $this->hstable->update(array('HSBody' => hsbody_insert('WEAR', $eq, $hsbody)), array('HSID' => $id));
+				$gp = $this->hstable->update(array('HSBody' => hsbody_insert('SKILL', '126;126;126;126;126;126;126;126;126;126', $hsbody)), array('HSID' => $id));
+				if (!$gh && !$gp )
+					{
+						$data['info'] = 'Please try again';
+					}
+					else
+					{
+						$data['info'] = 'Success equip passive skill and equip gear for  '.$y->row()->HSName;
+					}
+			}
+			$this->load->view('admin/merc_equipping_equipment_and_passive_skill', $data);
+		}
 
 		public function equip_super_super_shue()
 			{

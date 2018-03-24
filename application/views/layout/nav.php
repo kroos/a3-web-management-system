@@ -96,12 +96,19 @@
 								<?=anchor('admin/account_unbanning', 'Unban Account', 'class="text-info dropdown-item display-4"');?>
 							</div>
 						</div>
-
-						<div class="dropdown open">
-							<a class="text-info dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu">Editing Character</a>
-							<div class="dropdown-menu dropdown-submenu">
+						<!-- <li><?=anchor('admin/database_back_up', 'Database Back Up', 'class="text-info dropdown-item display-4"');?></li> -->
+					</div>
+				</li>
+				<li class="nav-item dropdown open">
+					<a class="nav-link link text-info dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="true">Game Master Editing Character</a>
+					<div class="dropdown-menu">
+						<!-- <div class="dropdown open"> -->
+							<!-- <a class="text-info dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu">Editing Character</a> -->
+							<!-- <div class="dropdown-menu dropdown-submenu"> -->
 								<?=anchor('admin/character_altering_points', 'Character Altering Points', 'class="text-info dropdown-item display-4"');?>
-								<?=anchor('admin/equipping_equipment_and_passive_skill', 'Equipping Equipment And Passive Skill', 'class="text-info dropdown-item display-4"');?>
+								<?=anchor('admin/merc_alter_points', 'Mercenary Altering Points', 'class="text-info dropdown-item display-4"');?>
+								<?=anchor('admin/equipping_equipment_and_passive_skill', 'Equip Equipment And Passive Skill', 'class="text-info dropdown-item display-4"');?>
+								<?=anchor('admin/merc_equipping_equipment_and_passive_skill', 'Mercenary Equip Equipment', 'class="text-info dropdown-item display-4"');?>
 								<?=anchor('admin/equip_super_super_shue', 'Equip Super Super Shue', 'class="text-info dropdown-item display-4"');?>
 								<?=anchor('admin/learn_episode_5_skill', 'Learn Episode 5 Skill', 'class="text-info dropdown-item display-4"');?>
 								<?=anchor('admin/altering_level', 'Altering Level', 'class="text-info dropdown-item display-4"');?>
@@ -116,11 +123,8 @@
 								<?=anchor('admin/altering_PK_timer', 'Altering PK timer', 'class="text-info dropdown-item display-4"');?>
 								<?=anchor('admin/inserting_items_manually', 'Inserting Items Manually', 'class="text-info dropdown-item display-4"');?>
 								<?=anchor('admin/reset_rebirth', 'Character Reset Rebirth', 'class="text-info dropdown-item display-4"');?>
-							</div>
-						</div>
-
-
-						<!-- <li><?=anchor('admin/database_back_up', 'Database Back Up', 'class="text-info dropdown-item display-4"');?></li> -->
+							<!-- </div> -->
+						<!-- </div> -->
 					</div>
 				</li>
 	<?php endif ?>
