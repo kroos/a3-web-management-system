@@ -370,7 +370,7 @@ class A3 extends CI_Controller {
 			echo json_encode(
 								array(
 									'valid' => $valid,
-									$this->security->get_csrf_token_name() => $this->security->get_csrf_hash(),
+									// $this->security->get_csrf_token_name() => $this->security->get_csrf_hash(),
 								)
 							);
 		}

@@ -127,17 +127,17 @@ $("form")
 					type: 'POST',
 					url: 'remote_user',
 					message: 'Please use another email ',
-					data: function(validator)
-							{
+					data: function(validator) {
 								return {
 											<?=$this->security->get_csrf_token_name()?>: $.cookie("<?=$this->config->item('cookie_prefix').$this->config->item('csrf_cookie_name')?>")
 											//validator.getFieldElements('<?=$this->security->get_csrf_token_name()?>').val()
 										};
 							},
 					delay: 1,		// wait 0.001 seconds
-					//onSuccess: function(e, data) {
-					//	$('input[name="<?=$this->security->get_csrf_token_name()?>"]').val(data.result.csrf_a3);
-					//},
+					onSuccess: function(e, data) {
+						//hidden input csrf must be refresh, otherwise submit data wont go through the process
+						$('input[name="<?=$this->security->get_csrf_token_name()?>"]').val($.cookie("<?=$this->config->item('cookie_prefix').$this->config->item('csrf_cookie_name')?>"));
+					},
 				}
 			},
 		},
@@ -167,9 +167,10 @@ $("form")
 								};
 							},
 					delay: 1,		// wait 0.001 seconds
-					// onSuccess: function(e, data) {
-					// 	$('input[name="<?=$this->security->get_csrf_token_name()?>"]').val(data.result.csrf_a3);
-					// },
+					onSuccess: function(e, data) {
+						//hidden input csrf must be refresh, otherwise submit data wont go through the process
+						$('input[name="<?=$this->security->get_csrf_token_name()?>"]').val($.cookie("<?=$this->config->item('cookie_prefix').$this->config->item('csrf_cookie_name')?>"));
+					},
 					// onError: function(e, data) {
 					// 	console.log('error');
 					// }
