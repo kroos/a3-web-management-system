@@ -751,11 +751,16 @@ class Admin extends CI_Controller
 				// echo $this->db->last_query();
 				$id = $y->row()->HSID;
 				$hsbody = $y->row()->HSBody;
-				// echo $hsbody;
-
 
 				$gh = $this->hstable->update(array('HSBody' => hsbody_insert('WEAR', $eq, $hsbody)), array('HSID' => $id));
-				$gp = $this->hstable->update(array('HSBody' => hsbody_insert('SKILL', '126;126;126;126;126;126;126;126;126;126', $hsbody)), array('HSID' => $id));
+				// echo $this->db->last_query();
+
+				$yz = $this->hstable->GetWhere(array('HSName' => $merc), NULL, NULL);
+				$idz = $yz->row()->HSID;
+				$hsbodyz = $yz->row()->HSBody;
+
+				$gp = $this->hstable->update(array('HSBody' => hsbody_insert('SKILL', '126;126;126;126;126;126;126;126;126;126', $hsbodyz)), array('HSID' => $idz));
+				// echo $this->db->last_query();
 				if (!$gh && !$gp )
 					{
 						$data['info'] = 'Please try again';
@@ -855,9 +860,9 @@ class Admin extends CI_Controller
 					$hsid = $rs->row()->HSID;
 					$ty = $this->hstable->update(array('HSExp' => $level), array('HSID' => $hsid));
 					if (!$ty) {
-						$data['info'] = 'Success alter level. You need to login and hit any monster for the mercenary to level up.';
-					} else {
 						$data['info'] = 'Please try again later';
+					} else {
+						$data['info'] = 'Success alter level. You need to login and hit any monster for the mercenary to level up.';
 					}
 				} else {
 					$data['info'] = 'Mercenary not found. Please check again mercenary\'s name. It\'s case sensitive.';

@@ -138,7 +138,7 @@ $("#productForm").bootstrapValidator({
 		validating: 'fa fa-cog fa-spin fa-lg fa-fw'
 	},
 	fields: {
-		char: {
+		merc: {
 			validators: {
 				notEmpty: {
 					message: 'Please insert a character '
@@ -149,13 +149,6 @@ $("#productForm").bootstrapValidator({
 			validators: {
 				notEmpty: {
 					message: 'Please choose equipment '
-				},
-			}
-		},
-		psskill: {
-			validators: {
-				notEmpty: {
-					message: 'Choose passive skill '
 				},
 			}
 		},

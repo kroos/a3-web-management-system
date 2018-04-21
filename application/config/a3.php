@@ -40,7 +40,7 @@ $config['smtp_port'] = 1024;
 // $config['smtp_secure'] = 'ssl';
 
 //debugging
-$config['mailer_debug'] = 2;						//debug = 0 (no debug), 1 = errors and messages, 2 = messages only
+$config['mailer_debug'] = 0;						//debug = 0 (no debug), 1 = errors and messages, 2 = messages only
 
 //email account from sender associated to the pop3 n smtp server settings.
 $config['mailer_username'] = 'YOUR GMAIL USERNAME';
@@ -55,7 +55,7 @@ $config['from_name'] = 'YOUR NAME';
 ##################################################################################################
 //GAMESERVER PORT.
 //this is your server IP, mostly you don't need to change this IP if your webhosting is the same with your gameserver
-$config['srvip'] = 'YOUR GAMESERVER IP';
+$config['srvip'] = '127.0.0.1';
 
 //zoneserver port. if ur webserver is diiferent from your gameserver, dont forget to open this port at your gameserver.
 $config['svrportZone'] = '6689';
