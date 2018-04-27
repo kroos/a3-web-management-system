@@ -49,7 +49,7 @@
 	<!-- bootstrap validator http://formvalidation.io/ -->
 	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.min.css" /> -->
 	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.min.js"></script> -->
-	<link rel="stylesheet" href="<?=base_url()?>assets/bootstrap-validator/css/bootstrapValidator.min.css" />
+	<link rel="stylesheet" href="<?=base_url()?>assets/bootstrap-validator/css/bootstrapValidator.css" />
 
 	<!-- datatables : https://datatables.net/extensions/responsive/examples/styling/bootstrap.html -->
 <!-- 	<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" ></script>
@@ -152,7 +152,7 @@ include('footer.php');
 		<!-- <script src="<?=base_url()?>assets/formoid/formoid.min.js"></script> -->
 
 		<script type="text/javascript" src="<?=base_url() ?>assets/ucwords/ucwords.js"></script>
-		<script type="text/javascript" src="<?=base_url() ?>assets/bootstrap-validator/js/bootstrapValidator.min.js"></script>
+		<script type="text/javascript" src="<?=base_url() ?>assets/bootstrap-validator/js/bootstrapValidator.js"></script>
 		<script type="text/javascript" src="<?=base_url() ?>assets/sweet-alert/js/sweetalert.min.js" ></script>
 		<script type="text/javascript" src="<?=base_url() ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script type="text/javascript" src="<?=base_url() ?>assets/select2/js/select2.min.js" ></script>

@@ -211,7 +211,7 @@ $("").keyup(function() {
 
 ////////////////////////////////////////////////////////////////////////////////////
 // bootstrap validator
-$("#productForm").bootstrapValidator({
+$("#productForm1").bootstrapValidator({
 	feedbackIcons: {
 		valid: 'fa fa-check fa-lg',
 		invalid: 'fa fa-times',

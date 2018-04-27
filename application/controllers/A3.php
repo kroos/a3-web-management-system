@@ -134,14 +134,33 @@ class A3 extends CI_Controller {
 										</body></html>";
 
 							$this->myphpmailer->IsSMTP();
-							$this->myphpmailer->SMTPAuth = TRUE;									//Set the encryption system to use - ssl (deprecated) or tls
-							$this->myphpmailer->SMTPSecure = $this->config->item('smtp_secure');	//tls or ssl (deprecated)
-							$this->myphpmailer->Host = $this->config->item('smtp_server');			//smtp server
-							$this->myphpmailer->Port = $this->config->item('smtp_port');			//change this port if you are using different port than mine
-							$this->myphpmailer->Username = $this->config->item('mailer_username');	//email account username
-							$this->myphpmailer->Password = $this->config->item('mailer_password');	//email account password
-							$this->myphpmailer->SMTPDebug = $this->config->item('mailer_debug');	//debug = 0 (no debug), 1 = errors and messages, 2 = messages only
-							$this->myphpmailer->Debugoutput = 'html';								//Ask for HTML-friendly debug output
+							$this->myphpmailer->SMTPAuth = TRUE;
+							//Set the encryption system to use - ssl (deprecated) or tls
+							//tls or ssl (deprecated)
+							$this->myphpmailer->SMTPSecure = $this->config->item('smtp_secure');
+							//smtp server for gmail, it will be in this format : 'tls://smtp.gmail.com:587';
+							$this->myphpmailer->Host = $this->config->item('smtp_secure').'://'.$this->config->item('smtp_server').':'.$this->config->item('smtp_port');
+							//change this port if you are using different port than mine
+							$this->myphpmailer->Port = $this->config->item('smtp_port');
+							//email account username
+							$this->myphpmailer->Username = $this->config->item('mailer_username');
+							//email account password
+							$this->myphpmailer->Password = $this->config->item('mailer_password');
+
+							//debug = 0 (no debug), 1 = errors and messages, 2 = messages only
+							$this->myphpmailer->SMTPDebug = $this->config->item('mailer_debug');
+
+							// smtp security option
+							$this->mymailer->SMTPOptions = array(
+																	'ssl' => array(
+																						'verify_peer' => false,
+																						'verify_peer_name' => false,
+																						'allow_self_signed' => true
+																					)
+																);
+
+							//Ask for HTML-friendly debug output
+							$this->myphpmailer->Debugoutput = 'html';
 							$this->myphpmailer->IsHTML(TRUE);
 
 							//Set who the message is to be sent from
